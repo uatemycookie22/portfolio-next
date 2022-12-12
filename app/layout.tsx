@@ -1,33 +1,33 @@
 /* eslint-disable @next/next/no-head-element */
 import {ReactNode} from "react";
 import NavBarComponent from "../components/NavBar/NavBarComponent";
+import {MainThemeProvider} from "./theme-provider";
 
 export default function RootLayout({
-  children,
-}: {
-  children: ReactNode;
+	                                   children,
+                                   }: {
+	children: ReactNode;
 }) {
-  return (
-    <html>
-      <head>
-        <title>Lysander Hernandez</title>
-      </head>
-      <body>
+	return (
+		<html>
+		<head>
+			<title>Lysander Hernandez</title>
+		</head>
+		<body>
+		<MainThemeProvider>
+			<header>
 
-      <header>
+				<nav>
+					<NavBarComponent/>
+				</nav>
+			</header>
 
-      <nav>
-          <NavBarComponent />
-      </nav>
-      </header>
+			<main>
+				{children}
+			</main>
 
-
-      <main>
-          {children}
-      </main>
-
-
-      </body>
-    </html>
-  );
+		</MainThemeProvider>
+		</body>
+		</html>
+	);
 }
