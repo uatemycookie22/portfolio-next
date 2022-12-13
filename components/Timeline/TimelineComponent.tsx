@@ -1,6 +1,93 @@
 'use client';
 
-import {useState} from "react";
+import {ReactElement, useState} from "react";
+import {
+	Box,
+	Step,
+	StepConnector, stepConnectorClasses,
+	StepContent,
+	StepIconProps,
+	StepLabel,
+	Stepper,
+	styled,
+	Typography
+} from "@mui/material";
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import SchoolIcon from '@mui/icons-material/School';
+import WorkIcon from '@mui/icons-material/Work';
+import styles from './TimelineComponent.module.scss'
+
+const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
+	[`&.${stepConnectorClasses.active}`]: {
+		[`& .${stepConnectorClasses.line}`]: {
+			width: 10,
+			marginLeft: 7,
+			marginTop: -20,
+			height: '30vh',
+			backgroundImage:
+				'linear-gradient( 272deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+		},
+	},
+	[`&.${stepConnectorClasses.completed}`]: {
+		[`& .${stepConnectorClasses.line}`]: {
+			width: 10,
+			marginLeft: 7,
+			marginTop: -20,
+			height: '30vh',
+			backgroundImage:
+				'linear-gradient( 272deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+		},
+	},
+	[`& .${stepConnectorClasses.line}`]: {
+		marginLeft: 9,
+
+		width: 5,
+		height: '26vh',
+		backgroundColor:
+			theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#ffffff',
+
+		borderRadius: 7,
+	},
+}));
+
+const ColorlibStepIconRoot = styled('div')<{
+	ownerState: { completed?: boolean; active?: boolean };
+}>(({ theme, ownerState }) => ({
+	backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
+	zIndex: 1,
+	color: '#fff',
+	width: 50,
+	height: 50,
+	display: 'flex',
+	borderRadius: '50%',
+	justifyContent: 'center',
+	alignItems: 'center',
+	...(ownerState.active && {
+		marginTop: '-2vh',
+		backgroundImage:
+			'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+		boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+	}),
+	...(ownerState.completed && {
+		marginTop: '-2vh',
+		backgroundImage:
+			'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+	}),
+}));
+
+function CareerStepIcon({ active, completed, className, icon }: StepIconProps) {
+	const icons: { [index: string]: ReactElement } = {
+		1: <SportsEsportsIcon />,
+		2: <SchoolIcon />,
+		3: <WorkIcon />,
+	};
+
+	return (
+		<ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
+			{icons[String(icon)]}
+		</ColorlibStepIconRoot>
+	);
+}
 
 interface TimelineItemProps extends TimelineItem {
 	active: boolean
@@ -8,7 +95,7 @@ interface TimelineItemProps extends TimelineItem {
 
 function  TimelineItemComponent({text, active}: TimelineItemProps) {
 	return (<>
-		<div>{text}</div>
+		<Typography color="text.primary">{text}</Typography>
 	</>)
 }
 
@@ -17,14 +104,34 @@ interface TimelineProps {
 }
 
 interface TimelineItem {
-	text: string
+	text: string,
+	label: string,
 }
 
 export function TimelineComponent({timelineItems}: TimelineProps) {
+	const [activeStepIndex, setActiveStepIndex] = useState(2)
 	const [items, setItems] = useState(timelineItems.map<TimelineItemProps>(item => ({...item, active: false})))
-	const timelineComponents = items.map(item => TimelineItemComponent(item))
 
+	const timelineComponents = items.map((item, i) => (
+		<Step key={item.label}>
+
+		<StepLabel StepIconComponent={CareerStepIcon}>
+			{item.label}
+		</StepLabel>
+
+		<StepContent>
+			<TimelineItemComponent key={i} {...item}/>
+		</StepContent>
+
+		</Step>
+	))
 	return (<>
-		{timelineComponents}
+		<Box color="secondary" sx={{ maxWidth: 400, maxHeight: 1000 }}>
+
+		<Stepper orientation="vertical" activeStep={activeStepIndex} className={styles.Stepper} connector={<ColorlibConnector/>}>
+			{timelineComponents}
+		</Stepper>
+
+		</Box>
 	</>)
 }
