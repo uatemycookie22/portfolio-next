@@ -2,17 +2,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  height: 64px;
 }
 
 .linkButton {
-  min-width: 150px;
+  min-width: 50px;
   width: 100px;
-
-  margin-right: 10px;
 
   border: none;
   border-radius: 10px;
   font-family: Arial, serif;
   box-shadow: none;
   font-size: .8rem;
+}
+
+@media screen and (max-width: 480px) {
+  .linkButton {
+    height: 64px;
+  }
+}
+
+.linkGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+
+  gap: min(100px, 1vw);
+
+  height: 100%;
 }

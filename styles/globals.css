@@ -15,7 +15,7 @@ body {
   position: relative;
   top: 56px;
 
-  background: #252525;
+  background: rgba(13, 3, 40, 0.56);
 }
 
 @media screen and (max-width: 480px) {

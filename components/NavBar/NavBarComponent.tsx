@@ -9,23 +9,25 @@ export default function NavBarComponent() {
 
 			<Toolbar className={styles.navToolbar}>
 
-				<Link href="#top">
-					<Button variant="text" className={styles.linkButton} color="secondary">
-						Top
-					</Button>
-				</Link>
+				<div className={styles.linkGroup}>
+					<Link href="#top">
+						<Button variant="text" className={styles.linkButton} color="secondary">
+							Top
+						</Button>
+					</Link>
 
-				<Link href="#ibm">
-					<Button variant="text" className={styles.linkButton} color="secondary">
-						IBM
-					</Button>
-				</Link>
+					<Link href="#ibm">
+						<Button variant="text" className={styles.linkButton} color="secondary">
+							IBM
+						</Button>
+					</Link>
 
-				<Link href="#tritech">
-					<Button variant="text" className={styles.linkButton} color="secondary">
-						TriTech
-					</Button>
-				</Link>
+					<Link href="#tritech">
+						<Button variant="text" className={styles.linkButton} color="secondary">
+							TriTech
+						</Button>
+					</Link>
+				</div>
 
 			</Toolbar>
 
