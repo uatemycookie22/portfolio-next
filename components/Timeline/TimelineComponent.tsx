@@ -25,7 +25,7 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
 			marginTop: -20,
 			height: '30vh',
 			backgroundImage:
-				'linear-gradient( 272deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+				'linear-gradient( 85deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
 		},
 	},
 	[`&.${stepConnectorClasses.completed}`]: {
@@ -35,14 +35,15 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
 			marginTop: -20,
 			height: '30vh',
 			backgroundImage:
-				'linear-gradient( 272deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+				'linear-gradient( 85deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
 		},
 	},
 	[`& .${stepConnectorClasses.line}`]: {
 		marginLeft: 9,
 
 		width: 5,
-		height: '26vh',
+		height: '28vh',
+		maxHeight: '1000px',
 		backgroundColor:
 			theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#ffffff',
 
@@ -63,13 +64,13 @@ const ColorlibStepIconRoot = styled('div')<{
 	justifyContent: 'center',
 	alignItems: 'center',
 	...(ownerState.active && {
-		marginTop: '-2vh',
+		marginTop: 'max(-2vh, -50px)',
 		backgroundImage:
 			'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
 		boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
 	}),
 	...(ownerState.completed && {
-		marginTop: '-2vh',
+		marginTop: 'max(-2vh, -50px)',
 		backgroundImage:
 			'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
 	}),
@@ -109,7 +110,7 @@ interface TimelineItem {
 }
 
 export function TimelineComponent({timelineItems}: TimelineProps) {
-	const [activeStepIndex, setActiveStepIndex] = useState(2)
+	const [activeStepIndex, setActiveStepIndex] = useState(1)
 	const [items, setItems] = useState(timelineItems.map<TimelineItemProps>(item => ({...item, active: false})))
 
 	const timelineComponents = items.map((item, i) => (
@@ -126,7 +127,7 @@ export function TimelineComponent({timelineItems}: TimelineProps) {
 		</Step>
 	))
 	return (<>
-		<Box color="secondary" sx={{ maxWidth: 400, maxHeight: 1000 }}>
+		<Box color="secondary" sx={{ maxWidth: 200, maxHeight: 1500, position: 'absolute' }}>
 
 		<Stepper orientation="vertical" activeStep={activeStepIndex} className={styles.Stepper} connector={<ColorlibConnector/>}>
 			{timelineComponents}

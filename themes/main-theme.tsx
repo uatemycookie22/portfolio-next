@@ -1,6 +1,6 @@
 'use client';
 
-import {createTheme, PaletteMode} from "@mui/material";
+import {PaletteMode} from "@mui/material";
 
 export const getDesignTokens = (mode: PaletteMode) => ({
 	palette: {
@@ -36,7 +36,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
 			{
 				// palette values for dark mode
 				background: {
-					default: '#910a19',
+					default: '#9f0416',
 				},
 
 				text: {

@@ -7,8 +7,23 @@ body {
   background: #252525;
 }
 .mainDiv {
+  display: grid;
+  grid-template-columns: calc(2vw + 130px) 1fr;
+  place-items: center;
+  align-content: center;
+
   position: relative;
-  top: 64px;
+  top: 56px;
 
   background: #252525;
+}
+
+@media screen and (max-width: 480px) {
+  .mainDiv {
+    grid-template-columns: 1fr;
+  }
+}
+
+section {
+  min-height: 100vh;
 }
