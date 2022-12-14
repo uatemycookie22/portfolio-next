@@ -5,6 +5,7 @@ import {AppBar, Button, Link, Toolbar} from "@mui/material";
 
 export default function NavBarComponent() {
 	return (
+		<>
 		<AppBar sx={{bgcolor: 'background.default'}}>
 
 			<Toolbar className={styles.navToolbar}>
@@ -32,5 +33,7 @@ export default function NavBarComponent() {
 			</Toolbar>
 
 		</AppBar>
+		<Toolbar sx={{background: 'rgb(0,0,0,0)'}} />
+		</>
 	)
 }

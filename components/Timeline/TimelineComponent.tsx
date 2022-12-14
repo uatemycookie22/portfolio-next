@@ -1,6 +1,6 @@
 'use client';
 
-import {ReactElement, useState} from "react";
+import {ReactElement, useContext, useEffect, useState} from "react";
 import {
 	Box,
 	Step,
@@ -15,7 +15,8 @@ import {
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import SchoolIcon from '@mui/icons-material/School';
 import WorkIcon from '@mui/icons-material/Work';
-import styles from './TimelineComponent.module.scss'
+import styles from './TimelineComponent.module.scss';
+import {IntersectionRefsContext} from "../../context/intersection-refs";
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
 	[`&.${stepConnectorClasses.active}`]: {
@@ -23,7 +24,7 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
 			width: 10,
 			marginLeft: 7,
 			marginTop: -20,
-			height: '30vh',
+			height: '32vh',
 			backgroundImage:
 				'linear-gradient( 85deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
 		},
@@ -33,7 +34,7 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
 			width: 10,
 			marginLeft: 7,
 			marginTop: -20,
-			height: '30vh',
+			height: '32vh',
 			backgroundImage:
 				'linear-gradient( 85deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
 		},
@@ -110,8 +111,10 @@ interface TimelineItem {
 }
 
 export function TimelineComponent({timelineItems}: TimelineProps) {
-	const [activeStepIndex, setActiveStepIndex] = useState(1)
+	const [activeStepIndex, setActiveStepIndex] = useState(0)
 	const [items, setItems] = useState(timelineItems.map<TimelineItemProps>(item => ({...item, active: false})))
+
+	const intersectingRefs = useContext(IntersectionRefsContext)
 
 	const timelineComponents = items.map((item, i) => (
 		<Step key={item.label}>
@@ -126,6 +129,14 @@ export function TimelineComponent({timelineItems}: TimelineProps) {
 
 		</Step>
 	))
+
+	useEffect(() => {
+		const activeStep = 2 - Math.max(intersectingRefs.refs.reverse().findIndex(ref => ref), 0)
+		console.log(activeStep)
+		console.log(intersectingRefs)
+		setActiveStepIndex(activeStep)
+	}, [setActiveStepIndex, intersectingRefs])
+
 	return (<>
 		<Box color="secondary" sx={{ maxWidth: 200, maxHeight: 1500, position: 'absolute' }}>
 

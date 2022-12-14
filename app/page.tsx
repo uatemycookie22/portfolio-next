@@ -1,5 +1,6 @@
-import '../styles/globals.css'
+import '../styles/globals.scss'
 import {TimelineComponent} from "../components/Timeline/TimelineComponent";
+import IntroComponent from "../components/Intro/IntroComponent";
 
 export default function HomePage() {
 	return (
@@ -7,7 +8,6 @@ export default function HomePage() {
 
 			<div style={{
 				position: 'fixed',
-				top: 64,
 				left: 'min(2vw, 100px)',
 				zIndex: 2,
 			}}>
@@ -29,12 +29,7 @@ export default function HomePage() {
 					width: '100vw',
 					padding: '10px 0 0 min(5vw, 80px)',
 				}}>
-					<section>
-						<h1>How I Started</h1>
-					</section>
-					<section>
-						<h1>College</h1>
-					</section>
+					<IntroComponent />
 				</div>
 
 

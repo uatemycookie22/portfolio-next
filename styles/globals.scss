@@ -1,10 +1,12 @@
+@use 'styles/media.scss' as m;
+
 html,
 body {
 
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
-  background: #252525;
+  background: rgb(17, 9, 33);
 }
 .mainDiv {
   display: grid;
@@ -13,12 +15,9 @@ body {
   align-content: center;
 
   position: relative;
-  top: 56px;
-
-  background: rgba(13, 3, 40, 0.56);
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: m.$mobile-threshold) {
   .mainDiv {
     grid-template-columns: 1fr;
   }

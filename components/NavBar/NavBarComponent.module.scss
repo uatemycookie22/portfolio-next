@@ -1,9 +1,9 @@
+@use 'styles/media.scss' as m;
+
 .navToolbar {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  height: 64px;
 }
 
 .linkButton {
@@ -11,15 +11,15 @@
   width: 100px;
 
   border: none;
-  border-radius: 10px;
+  border-radius: 30px;
   font-family: Arial, serif;
   box-shadow: none;
   font-size: .8rem;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: m.$mobile-threshold) {
   .linkButton {
-    height: 64px;
+    height: 56px;
   }
 }
 

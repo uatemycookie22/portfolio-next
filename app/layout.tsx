@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-head-element */
 import {ReactNode} from "react";
 import NavBarComponent from "../components/NavBar/NavBarComponent";
-import {MainThemeProvider} from "./theme-provider";
+import Providers from "./main-provider";
 
 export default function RootLayout({
 	                                   children,
@@ -14,7 +14,7 @@ export default function RootLayout({
 			<title>Lysander Hernandez</title>
 		</head>
 		<body>
-		<MainThemeProvider>
+		<Providers>
 			<header>
 
 				<nav>
@@ -26,7 +26,7 @@ export default function RootLayout({
 				{children}
 			</main>
 
-		</MainThemeProvider>
+		</Providers>
 		</body>
 		</html>
 	);
