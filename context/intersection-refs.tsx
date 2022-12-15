@@ -3,10 +3,10 @@
 import {createContext, ReactNode, useReducer} from "react";
 
 
-type NullMutableRefs = boolean[]
-type IntersectedRefsState = { refs: NullMutableRefs }
-type IntersectionRefsAction = { type: 'set', payload: NullMutableRefs}
-type IntersectionRefsContextState = { refs: NullMutableRefs, dispatch: (value: IntersectionRefsAction) => void}
+type NullMutableRefs = boolean
+type IntersectedRefsState = { refs: NullMutableRefs[] }
+type IntersectionRefsAction = { type: 'set', payload: NullMutableRefs, index: number}
+type IntersectionRefsContextState = { refs: NullMutableRefs[], dispatch: (value: IntersectionRefsAction) => void}
 
 export const IntersectionRefsContext = createContext<IntersectionRefsContextState>({
 	refs: [], dispatch: () => {},
@@ -15,7 +15,10 @@ export const IntersectionRefsContext = createContext<IntersectionRefsContextStat
 function intersectionRefReducer(state: IntersectedRefsState, action: IntersectionRefsAction) {
 	switch (action.type) {
 		case 'set':
-			return {refs: action.payload}
+			const newRefs = [...state.refs]
+			newRefs[action.index] = action.payload
+
+			return {refs: newRefs}
 		default:
 			throw new Error()
 	}

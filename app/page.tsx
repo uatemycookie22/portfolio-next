@@ -3,6 +3,14 @@ import {TimelineComponent} from "../components/Timeline/TimelineComponent";
 import IntroComponent from "../components/Intro/IntroComponent";
 
 export default function HomePage() {
+	const items = [
+		{label: 'Test 1', text: ''},
+		{label: 'Test 2', text: ''},
+		{label: 'Test 3', text: ''},
+	]
+
+	const sections = items.map((item, i) => <IntroComponent heading={item.label} key={i} index={i} />)
+
 	return (
 		<>
 
@@ -12,11 +20,7 @@ export default function HomePage() {
 				zIndex: 2,
 			}}>
 
-				<TimelineComponent timelineItems={[
-					{label: 'How I Started', text: ''},
-					{label: 'College', text: ''},
-					{label: 'Future', text: ''},
-				]} />
+				<TimelineComponent timelineItems={items} />
 			</div>
 
 			<div className="mainDiv"
@@ -29,10 +33,10 @@ export default function HomePage() {
 					width: '100vw',
 					padding: '10px 0 0 min(5vw, 80px)',
 				}}>
-					<IntroComponent />
+
+					{sections}
+
 				</div>
-
-
 			</div>
 		</>
 
