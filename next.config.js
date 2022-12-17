@@ -4,6 +4,9 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     appDir: true,
+  },
+  sassOptions: {
+    includePaths: ['./styles']
   }
 }
 

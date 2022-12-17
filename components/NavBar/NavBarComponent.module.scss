@@ -78,7 +78,7 @@
   }
 
   .navToolbar {
-    grid-template-columns: 0 0 3fr;
+    display: flex;
     gap: 0;
     justify-content: center;
   }
