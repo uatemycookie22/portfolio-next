@@ -1,9 +1,11 @@
 @use 'styles/media.scss' as m;
+@use 'styles/colors.module' as c;
 
 .navToolbar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-areas: 'left middle right';
+  grid-template-columns: .5fr .5fr 2fr;
+  gap: 15px;
 }
 
 .linkButton {
@@ -24,12 +26,60 @@
 }
 
 .linkGroup {
+  grid-area: right;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   justify-content: center;
 
-  gap: min(100px, 1vw);
+  gap: clamp(0px, 1vw, 100px);
 
   height: 100%;
+  max-width: 500px;
+}
+
+@mixin icon-text {
+  display: flex;
+  color: c.$nav-text-color;
+
+  .icon {
+    margin-right: 10px;
+    color: inherit;
+  }
+
+  .text{
+    color: inherit;
+  }
+
+  .text {
+    color: inherit;
+    white-space: nowrap;
+  }
+}
+
+
+
+.iconText.email  {
+  @include icon-text();
+
+  grid-area: left;
+}
+
+.iconText.phone  {
+  @include icon-text();
+
+  grid-area: middle;
+}
+
+@media screen and (max-width: 825px) {
+  .iconText.phone,
+  .iconText.email {
+    display: none;
+  }
+
+  .navToolbar {
+    grid-template-columns: 0 0 3fr;
+    gap: 0;
+    justify-content: center;
+  }
 }
