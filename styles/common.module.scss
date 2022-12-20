@@ -1,0 +1,5 @@
+@use "./colors.module" as c;
+
+.sectionHeading {
+  color: c.$unt-primary;
+}

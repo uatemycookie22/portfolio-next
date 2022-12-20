@@ -1,6 +1,7 @@
 import '../styles/globals.scss'
 import {TimelineComponent} from "../components/Timeline/TimelineComponent";
 import IntroComponent from "../components/Intro/IntroComponent";
+import EducationComponents from "../components/Education/EducationComponent";
 
 export default function HomePage() {
 	const items = [
@@ -8,9 +9,6 @@ export default function HomePage() {
 		{label: 'Test 2', text: '', id: 'ibm'},
 		{label: 'Test 3', text: '', id: 'tritech'},
 	]
-
-	const sections = items.map((item, i) =>
-		<IntroComponent heading={item.label} key={i} index={i} id={item.id} />)
 
 	return (
 		<>
@@ -35,8 +33,9 @@ export default function HomePage() {
 					padding: '10px 0 0 min(5vw, 80px)',
 				}}>
 
-					{sections}
+					<IntroComponent heading={items[0].label} index={0} id={items[0].id} />
 
+					<EducationComponents heading={items[1].label} index={1} id={items[1].id} />
 				</div>
 			</div>
 		</>
