@@ -29,7 +29,7 @@ export default function HomePage() {
 				<div style={{
 
 					gridArea: 'content',
-					width: '70vw',
+					width: 'calc(100% - min(5vw, 80px))',
 					padding: '10px 0 0 min(5vw, 80px)',
 				}}>
 

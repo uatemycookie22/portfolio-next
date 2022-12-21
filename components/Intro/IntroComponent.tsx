@@ -4,6 +4,7 @@ import IntroTypography from "./IntroTypography/IntroTypography";
 import TimelineConnectorComponent from "../TimelineConnector/TimelineConnectorComponent";
 import colors from "/styles/colors.module.scss";
 import Image from "next/image";
+import EmailSubmission from "../EmailSubmission/EmailSubmissionComponent";
 
 export default function IntroComponent({heading, index, id}: CommonSectionProps) {
 	return (<>
@@ -23,6 +24,9 @@ export default function IntroComponent({heading, index, id}: CommonSectionProps)
 			<TimelineConnectorComponent index={index}>
 				<h1 id={id} style={{color: colors.mainTextColor}}>{heading}</h1>
 			</TimelineConnectorComponent>
+
+			<EmailSubmission />
+
 		</section>
 	</>)
 }

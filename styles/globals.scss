@@ -1,4 +1,5 @@
 @use 'styles/media.scss' as m;
+@use 'styles/colors.module' as c;
 
 html,
 body {
@@ -6,7 +7,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
-  background: rgb(17, 9, 33);
+  background: c.$bg-primary;
 }
 .mainDiv {
   display: grid;
