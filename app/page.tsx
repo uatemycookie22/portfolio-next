@@ -2,6 +2,7 @@ import '../styles/globals.scss'
 import {TimelineComponent} from "../components/Timeline/TimelineComponent";
 import IntroComponent from "../components/Intro/IntroComponent";
 import EducationComponents from "../components/Education/EducationComponent";
+import AboutComponent from "../components/About/AboutComponent";
 
 export default function HomePage() {
 	const items = [
@@ -34,6 +35,8 @@ export default function HomePage() {
 				}}>
 
 					<IntroComponent heading={items[0].label} index={0} id={items[0].id} />
+
+					<AboutComponent />
 
 					<EducationComponents heading={items[1].label} index={1} id={items[1].id} />
 				</div>

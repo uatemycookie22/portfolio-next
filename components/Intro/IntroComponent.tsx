@@ -8,7 +8,7 @@ import EmailSubmission from "../EmailSubmission/EmailSubmissionComponent";
 
 export default function IntroComponent({heading, index, id}: CommonSectionProps) {
 	return (<>
-		<section >
+		<section id={id}>
 			<div className={styles.headshotContainer}>
 				<Image
 					alt="" src="/favicon.ico"
@@ -22,7 +22,7 @@ export default function IntroComponent({heading, index, id}: CommonSectionProps)
 			</div>
 
 			<TimelineConnectorComponent index={index}>
-				<h1 id={id} style={{color: colors.mainTextColor}}>{heading}</h1>
+				<h1  style={{color: colors.mainTextColor}}>{heading}</h1>
 			</TimelineConnectorComponent>
 
 			<EmailSubmission />
