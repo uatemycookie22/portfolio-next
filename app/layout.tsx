@@ -4,11 +4,17 @@ import NavBarComponent from "../components/NavBar/NavBarComponent";
 import Providers from "./main-provider";
 import Head from "next/head";
 
-export default function RootLayout({
-	                                   children,
-                                   }: {
+async function getContact(): Promise<{ contact: Contact }> {
+	const res = await fetch('http://localhost:3000/contact.json')
+
+	return await res.json()
+}
+
+export default async function RootLayout({ children }: {
 	children: ReactNode;
 }) {
+	const { contact } = await getContact()
+
 	return (
 		<html>
 		<Head>
@@ -20,7 +26,7 @@ export default function RootLayout({
 			<header>
 
 				<nav>
-					<NavBarComponent/>
+					<NavBarComponent contact={contact} />
 				</nav>
 			</header>
 

@@ -1,35 +1,24 @@
 'use client';
 import {Typography} from "@mui/material";
 
-export default function EducationTypography() {
+export default function EducationTypography(education: HomeContent['education'] ) {
 	const itemSize = '1.5rem'
 	return (<>
 
 		<Typography sx={{color: 'text.primary', fontSize: '2.5rem'}} variant="h1" gutterBottom>
-
-			University of North Texas
-
-		</Typography>
-
-		<Typography sx={{color: 'text.primary', fontSize: itemSize}} variant="body1" gutterBottom>
-
-
-				College of Engineering - Denton, Texas
-
-
-
-
-
-
-
+			{education.school}
 		</Typography>
 
 		<Typography sx={{color: 'text.primary', fontSize: itemSize}}>
-			B.S. Computer Science
+			{education.college} - {education.location}
 		</Typography>
 
 		<Typography sx={{color: 'text.primary', fontSize: itemSize}}>
-			Expected May 2025
+			{education.major}
+		</Typography>
+
+		<Typography sx={{color: 'text.primary', fontSize: itemSize}}>
+			{education.graduation}
 		</Typography>
 
 	</>)

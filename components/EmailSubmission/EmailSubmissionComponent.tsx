@@ -2,12 +2,25 @@
 
 import {useCallback, useState} from "react";
 import {Alert, Button, Slide, Snackbar, TextField} from "@mui/material";
-import colors from "/styles/colors.module.scss";
+import colors from "@styles/colors.module.scss";
 import {useRouter} from "next/navigation";
 
 const emailRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
 const bodyErrorMessage = 'Must be at least 8 characters.'
 const successMessage = 'Email received'
+
+async function postEmail(emailMessage: string, from: string): Promise<boolean> {
+	const res = await fetch('http://127.0.0.1:8090/api/collections/messages/records', {
+		method: 'POST',
+		headers: {'Content-Type': 'application/json',},
+		body: JSON.stringify({
+			email: from,
+			message: emailMessage,
+		}),
+	})
+
+	return res.ok
+}
 
 export default function EmailSubmission() {
 	const [emailContact, setEmail] = useState('')
@@ -18,19 +31,12 @@ export default function EmailSubmission() {
 	const router = useRouter()
 
 	const sendEmail = useCallback(async () => {
-		const res = await fetch('http://127.0.0.1:8090/api/collections/messages/records', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json',},
-			body: JSON.stringify({
-				email: emailContact,
-				message: emailMessage,
-			}),
-		})
+		const success = await postEmail(emailMessage, emailContact)
 
-		const newErrorMessage = res.ok ? '' : bodyErrorMessage
+		const newErrorMessage = success ? '' : bodyErrorMessage
 		setErrorMessage(newErrorMessage)
 
-		const newStatusMessage = res.ok ? successMessage : ''
+		const newStatusMessage = success ? successMessage : ''
 		setStatusMessage(newStatusMessage)
 
 		setMessage('')

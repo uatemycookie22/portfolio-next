@@ -2,9 +2,18 @@ import AboutTypography from "./AboutTypography/AboutTypography";
 import ImageText from "../ImageText/ImageTextComponent";
 import styles from './AboutComponent.module.scss'
 
-export default function AboutComponent() {
+interface AboutProps {
+	text: [string, string, string]
+}
+
+export default function AboutComponent({ text }: AboutProps) {
+
+	const aboutTypography = text.map(section => (<AboutTypography>
+		{section}
+	</AboutTypography>))
+
 	return (<>
-			<AboutTypography />
+			{aboutTypography}
 			<li className={styles.imageTextList}>
 				<ul>
 					<ImageText src={'/assets/ts.png'}>TypeScript</ImageText>

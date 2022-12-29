@@ -1,10 +1,19 @@
 @use 'styles/media.scss' as m;
 @use 'styles/colors.module' as c;
 
+@mixin navbarButton {
+  border: none;
+  border-radius: 30px;
+  font-family: Arial, serif;
+  box-shadow: none;
+  font-size: .8rem;
+  white-space: nowrap;
+}
+
 .navToolbar {
   display: grid;
   grid-template-areas: 'left middle right';
-  grid-template-columns: .5fr .5fr 2fr;
+  grid-template-columns: .9fr .5fr 1.5fr;
   gap: 15px;
 }
 
@@ -12,11 +21,7 @@
   min-width: 50px;
   width: 100px;
 
-  border: none;
-  border-radius: 30px;
-  font-family: Arial, serif;
-  box-shadow: none;
-  font-size: .8rem;
+  @include navbarButton;
 }
 
 @media screen and (max-width: m.$mobile-threshold) {
@@ -39,25 +44,11 @@
 }
 
 @mixin icon-text {
-  display: flex;
-  color: c.$nav-text-color;
+  @include navbarButton;
 
-  .icon {
-    margin-right: 10px;
-    color: inherit;
-  }
-
-  .text{
-    color: inherit;
-  }
-
-  .text {
-    color: inherit;
-    white-space: nowrap;
-  }
+  width: fit-content;
+  text-transform: lowercase;
 }
-
-
 
 .iconText.email  {
   @include icon-text();

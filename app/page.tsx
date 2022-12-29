@@ -1,15 +1,23 @@
 import '../styles/globals.scss'
-import {TimelineComponent} from "../components/Timeline/TimelineComponent";
-import IntroComponent from "../components/Intro/IntroComponent";
-import EducationComponents from "../components/Education/EducationComponent";
-import AboutComponent from "../components/About/AboutComponent";
 
-export default function HomePage() {
+import IntroComponent from "@components/Intro/IntroComponent";
+import EducationComponents from "@components/Education/EducationComponent";
+import AboutComponent from "@components/About/AboutComponent";
+import TimelineComponent from "@components/Timeline/TimelineComponent";
+
+async function getContent(): Promise<HomeContent> {
+	const res = await fetch('http://localhost:3000/content.json')
+
+	return await res.json()
+}
+
+export default async function HomePage() {
 	const items = [
 		{label: 'Test 1', text: '', id: 'top'},
 		{label: 'Test 2', text: '', id: 'ibm'},
 		{label: 'Test 3', text: '', id: 'tritech'},
 	]
+	const content = await getContent()
 
 	return (
 		<>
@@ -36,9 +44,9 @@ export default function HomePage() {
 
 					<IntroComponent heading={items[0].label} index={0} id={items[0].id} />
 
-					<AboutComponent />
+					<AboutComponent {...content.about} />
 
-					<EducationComponents heading={items[1].label} index={1} id={items[1].id} />
+					<EducationComponents education={content.education} heading={items[1].label} index={1} id={items[1].id } />
 				</div>
 			</div>
 		</>

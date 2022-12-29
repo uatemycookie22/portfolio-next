@@ -2,9 +2,11 @@
 
 import styles from "./NavBarComponent.module.scss"
 import {AppBar, Button, Link, Toolbar} from "@mui/material";
-import {ReactNode} from "react";
+import {ReactNode, useMemo} from "react";
 import EmailIcon from '@mui/icons-material/Email'
 import CallIcon from '@mui/icons-material/Call';
+import colors from "@styles/colors.module.scss"
+import {formatPhoneNumber} from "@utils/formatters";
 
 function NavBarButton({children}: {children: ReactNode}) {
 	return (
@@ -14,41 +16,65 @@ function NavBarButton({children}: {children: ReactNode}) {
 	)
 }
 
-export default function NavBarComponent() {
+type NavbarProps = {
+	contact: Contact
+}
+
+export default function NavBarComponent(props: NavbarProps) {
+	const { phone, email } = props.contact
+
+	const phoneFormatted = useMemo(() => formatPhoneNumber(phone), [phone])
+
 	return (
 		<>
 		<AppBar sx={{bgcolor: 'background.default'}}>
 
 			<Toolbar className={styles.navToolbar}>
 
-				<div className={`${styles.iconText} ${styles.email}`}>
-					<EmailIcon className={styles.icon} />
-					<span className={`${styles.text}`}>
-						hernandezlysander22@gmail.com
+				<a style={{color: colors.navTextColor}} href={`mailto:${email}`}>
+
+					<Button
+						variant="text"
+						color="secondary"
+						size="medium"
+						className={`${styles.iconText} ${styles.email}`}
+						startIcon={<EmailIcon />}>
+					<span>
+						{email}
 					</span>
 
-				</div>
+					</Button>
 
-				<div className={`${styles.iconText} ${styles.phone}`}>
-					<CallIcon className={styles.icon} />
-					<a className={`${styles.text}`} href={`tel:+14696553521`}>+1 (469)-655-3521</a>
-				</div>
+				</a>
+
+				<a style={{color: colors.navTextColor}} href={`tel:${phone}`}>
+
+					<Button
+						variant="text"
+						color="secondary"
+						size="medium"
+						className={`${styles.iconText} ${styles.phone}`}
+						startIcon={<CallIcon />}>
+						{phoneFormatted}
+					</Button>
+
+				</a>
 
 				<div className={styles.linkGroup}>
 
-					<Link href="#top">
+					<Link href={"#top"}>
 						<NavBarButton>
 							Top
 						</NavBarButton>
 					</Link>
 
-					<Link href="#ibm">
+					<Link href={"#ibm"}>
 						<NavBarButton>
 							IBM
 						</NavBarButton>
 					</Link>
 
-					<Link href="#tritech">
+					<Link href={"#tritech"}>
 						<NavBarButton>
 							TriTech
 						</NavBarButton>

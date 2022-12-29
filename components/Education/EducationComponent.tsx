@@ -1,19 +1,21 @@
 import {CommonSectionProps} from "../component_props/main-section-props";
 import EducationTypography from "./EducationTypography/EducationTypography";
-import common from '/styles/common.module.scss'
-import styles from "../Intro/IntroComponent.module.scss";
+import common from '@styles/common.module.scss'
 import Image from "next/image";
 
-export default function EducationComponents({heading, index, id}: CommonSectionProps) {
+
+type EducationProps = Pick<HomeContent, 'education'> & CommonSectionProps
+
+export default function EducationComponents({education}: EducationProps) {
 	return (<>
 		<section>
 			<header className={common.sectionHeading}>
 				Education
 			</header>
 
-			<EducationTypography/>
+			<EducationTypography {...education} />
 
-			<div className={styles.headshotContainer}>
+			<div>
 				<Image
 					alt="" src="/favicon.ico"
 					width={100}
