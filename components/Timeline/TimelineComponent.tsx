@@ -19,7 +19,7 @@ interface TimelineItemProps extends TimelineItem {
 	active: boolean
 }
 
-function  TimelineItemComponent({text, active}: TimelineItemProps) {
+function  TimelineItemComponent({text}: TimelineItemProps) {
 	return (<>
 		<Typography color="text.primary">{text}</Typography>
 	</>)
@@ -34,7 +34,7 @@ interface TimelineItem {
 	label: string,
 }
 
-export function TimelineComponent({timelineItems}: TimelineProps) {
+export default function TimelineComponent({timelineItems}: TimelineProps) {
 	const [activeStepIndex, setActiveStepIndex] = useState(0)
 	const intersectingRefs = useContext(IntersectionRefsContext)
 
