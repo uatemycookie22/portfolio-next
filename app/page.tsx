@@ -6,9 +6,23 @@ import AboutComponent from "@components/About/AboutComponent";
 import TimelineComponent from "@components/Timeline/TimelineComponent";
 
 async function getContent(): Promise<HomeContent> {
-	const res = await fetch('http://localhost:3000/content.json')
+	let content: HomeContent
 
-	return await res.json()
+	try {
+		const res = await fetch('http://localhost:3000/content.json')
+		content =  await res.json()
+	}
+	catch (err) {
+		console.log(err)
+		console.log(`Is the project building?`)
+		content = {
+			about: {text: ["", "", ""]},
+			education: {college: "", graduation: "", location: "", major: "", school: ""},
+			intro: {primary: "", secondary: ""}
+		}
+	}
+
+	return content
 }
 
 export default async function HomePage() {

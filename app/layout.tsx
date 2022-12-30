@@ -3,28 +3,30 @@ import {ReactNode} from "react";
 import NavBarComponent from "../components/NavBar/NavBarComponent";
 import Providers from "./main-provider";
 
-async function getContact(): Promise<{ contact: Contact }> {
-	const res = await fetch('http://localhost:3000/contact.json')
-
-	return await res.json()
-}
-
-export default async function RootLayout({ children }: {
-	children: ReactNode;
-}) {
+async function getContact(): Promise<Contact> {
 	let contact: Contact
 
 	try {
-		contact = (await getContact()).contact
+		const res = await fetch('http://localhost:3000/contact.json')
+		contact =  (await res.json()).contact
 	}
 	catch (err) {
 		console.log(err)
 		console.log(`Is the project building?`)
 		contact = {
-				phone: '',
-				email: '',
-			}
+			phone: '',
+			email: '',
+		}
 	}
+
+	return contact
+}
+
+export default async function RootLayout({ children }: {
+	children: ReactNode;
+}) {
+
+	const contact = await getContact()
 
 	return (
 		<html lang="en">
