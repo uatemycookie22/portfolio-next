@@ -10,7 +10,7 @@ const bodyErrorMessage = 'Must be at least 8 characters.'
 const successMessage = 'Email received'
 
 async function postEmail(emailMessage: string, from: string): Promise<boolean> {
-	const res = await fetch('http://127.0.0.1:8090/api/collections/messages/records', {
+	const res = await fetch(`http://${process.env.NEXT_PUBLIC_PB_URL}/api/collections/messages/records`, {
 		method: 'POST',
 		headers: {'Content-Type': 'application/json',},
 		body: JSON.stringify({
