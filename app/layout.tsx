@@ -7,8 +7,8 @@ async function getContact(): Promise<Contact> {
 	let contact: Contact
 
 	try {
-		const res = await fetch('http://localhost:3000/contact.json')
-		contact =  (await res.json()).contact
+		const res = (await import('public/contact.json')).default
+		contact = res.contact
 	}
 	catch (err) {
 		console.log(err)

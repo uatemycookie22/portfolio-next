@@ -9,8 +9,8 @@ async function getContent(): Promise<HomeContent> {
 	let content: HomeContent
 
 	try {
-		const res = await fetch('http://localhost:3000/content.json')
-		content =  await res.json()
+		const res = (await import('public/content.json')).default
+		content = res as HomeContent
 	}
 	catch (err) {
 		console.log(err)
@@ -58,7 +58,7 @@ export default async function HomePage() {
 
 					<IntroComponent heading={items[0].label} index={0} id={items[0].id} />
 
-					<AboutComponent text={['', '', '']} />
+					<AboutComponent text={content.about.text} />
 
 					<EducationComponents education={content.education} heading={items[1].label} index={1} id={items[1].id } />
 				</div>
