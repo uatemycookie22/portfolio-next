@@ -8,17 +8,17 @@ interface AboutProps {
 
 export default function AboutComponent({ text }: AboutProps) {
 
-	const aboutTypography = text.map(section => (<AboutTypography>
+	const aboutTypography = text.map((section, i) => (<AboutTypography key={i}>
 		{section}
 	</AboutTypography>))
 
 	return (<>
 			{aboutTypography}
-			<li className={styles.imageTextList}>
-				<ul>
+			<ul className={styles.imageTextList}>
+				<li>
 					<ImageText src={'/assets/ts.png'}>TypeScript</ImageText>
 
-				</ul>
-			</li>
+				</li>
+			</ul>
 		</>)
 }

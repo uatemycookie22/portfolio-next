@@ -14,7 +14,7 @@ export default function TimelineConnectorComponent({children, index}: {children:
 	}, [textRef, dispatch, index, textIntersecting])
 	
 	return (
-		<div ref={textRef}>
+		<div ref={textRef as any}>
 			{children}
 		</div>
 	)

@@ -44,7 +44,7 @@ export default async function HomePage() {
 
 					<IntroComponent heading={items[0].label} index={0} id={items[0].id} />
 
-					<AboutComponent {...content.about} />
+					<AboutComponent text={['', '', '']} />
 
 					<EducationComponents education={content.education} heading={items[1].label} index={1} id={items[1].id } />
 				</div>

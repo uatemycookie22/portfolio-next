@@ -2,7 +2,6 @@
 import {ReactNode} from "react";
 import NavBarComponent from "../components/NavBar/NavBarComponent";
 import Providers from "./main-provider";
-import Head from "next/head";
 
 async function getContact(): Promise<{ contact: Contact }> {
 	const res = await fetch('http://localhost:3000/contact.json')
@@ -13,14 +12,22 @@ async function getContact(): Promise<{ contact: Contact }> {
 export default async function RootLayout({ children }: {
 	children: ReactNode;
 }) {
-	const { contact } = await getContact()
+	let contact: Contact
+
+	try {
+		contact = (await getContact()).contact
+	}
+	catch (err) {
+		console.log(err)
+		console.log(`Is the project building?`)
+		contact = {
+				phone: '',
+				email: '',
+			}
+	}
 
 	return (
-		<html>
-		<Head>
-			<title>Lysander Hernandez</title>
-			<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-		</Head>
+		<html lang="en">
 		<body>
 		<Providers>
 			<header>

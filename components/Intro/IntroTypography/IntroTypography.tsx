@@ -48,7 +48,9 @@ export default function IntroTypography() {
 	           width: '5rem',
 	           height: '5rem',
 		         marginLeft: '2rem',
-	         }}>
+	         }}
+						aria-label="scroll down"
+				>
 
 					<ArrowDownwardIcon sx={{
 						color: 'secondary.main',
