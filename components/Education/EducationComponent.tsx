@@ -17,7 +17,7 @@ export default function EducationComponents({education}: EducationProps) {
 
 			<div>
 				<Image
-					alt="" src="/favicon.ico"
+					alt="" src="/assets/js.png"
 					width={100}
 					height={100}
 				/>

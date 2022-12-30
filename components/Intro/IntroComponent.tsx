@@ -11,7 +11,7 @@ export default function IntroComponent({heading, index, id}: CommonSectionProps)
 		<section id={id}>
 			<div className={styles.headshotContainer}>
 				<Image
-					alt="" src="/favicon.ico"
+					alt="" src="/assets/js.png"
 					width={100}
 					height={100}
 				/>
