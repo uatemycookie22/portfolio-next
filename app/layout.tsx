@@ -2,6 +2,7 @@
 import {ReactNode} from "react";
 import NavBarComponent from "../components/NavBar/NavBarComponent";
 import Providers from "./main-provider";
+import '../public/build/tailwind.css';
 
 async function getContact(): Promise<Contact> {
 	let contact: Contact
@@ -33,7 +34,6 @@ export default async function RootLayout({ children }: {
 		<body>
 		<Providers>
 			<header>
-
 				<nav>
 					<NavBarComponent contact={contact} />
 				</nav>
