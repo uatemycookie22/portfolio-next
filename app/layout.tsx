@@ -31,7 +31,7 @@ export default async function RootLayout({ children }: {
 
 	return (
 		<html lang="en">
-		<body>
+		<body className="bg-primary">
 		<Providers>
 			<header>
 				<nav>
