@@ -52,17 +52,17 @@ export default function NavBarComponent(props: NavbarProps) {
 					`}
 						onClick={toggleMenu}
 					>
-					<span className={`h-[3px] bg-white origin-left transition-transform ease-in-out transition ease-in-out
+					<span className={`h-[3px] bg-primary origin-left transition-transform ease-in-out transition ease-in-out
 					${ isMenuOpen ? tw.rotatedW : 'w-full'}
 					${ isMenuOpen ? 'rotate-[45deg]' : ''}
 					`} />
 
-						<span className={`h-[3px] bg-white transition-opacity ease-linear
+						<span className={`h-[3px] bg-primary transition-opacity ease-linear
 					${ isMenuOpen ? tw.rotatedW : 'w-full'}
 					${ isMenuOpen ? 'opacity-0' : ''}
 					`} />
 
-						<span className={`h-[3px] bg-white origin-left transition-transform ease-in-out transition ease-out
+						<span className={`h-[3px] bg-primary origin-left transition-transform ease-in-out transition ease-out
 					${ isMenuOpen ? tw.rotatedW : 'w-full'}
 					${ isMenuOpen ? 'rotate-[-45deg]' : ''}`} />
 					</button>
