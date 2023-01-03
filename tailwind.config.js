@@ -4,6 +4,11 @@ module.exports = {
   content: ["./app/**/*.{tsx,jsx,ts,js}", "./components/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
+    screens: {
+      'sm': '640px',
+      'md': '780px',
+      'lg': '1150px'
+    }
   },
   plugins: [],
 }
