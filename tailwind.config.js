@@ -9,14 +9,16 @@ module.exports = {
     extend: {
       colors: {
         primary: colors.slate["900"],
-        secondary: colors.slate["900"],
-        nav: colors.slate["50"]
+        secondary: colors.slate["50"],
+        interactive: {
+          primary: colors.fuchsia["500"],
+          secondary: colors.fuchsia["600"],
+        }
       },
 
       textColor: {
-        primary: colors.black,
-        secondary: colors.white,
-        nav: colors.black
+        primary: colors.white,
+        secondary: colors.black
       }
     },
     screens: {

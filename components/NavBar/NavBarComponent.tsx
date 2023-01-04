@@ -38,7 +38,7 @@ export default function NavBarComponent(props: NavbarProps) {
 	return (
 		<>
 
-		<div className={`fixed w-full z-50 top-0 bg-nav lg:flex lg:justify-between lg:items-center lg:px-4 px-6 py-3  text-nav
+		<div className={`fixed w-full z-50 top-0 bg-primary lg:flex lg:justify-between lg:items-center lg:px-4 px-6 py-3  text-primary
 		transition duration-300
 		${scrollDirection ? 'top-0' : 'translate-y-[-100%] sm:translate-y-0'}
 		`}>
@@ -52,17 +52,17 @@ export default function NavBarComponent(props: NavbarProps) {
 					`}
 						onClick={toggleMenu}
 					>
-					<span className={`h-[3px] bg-primary origin-left transition-transform ease-in-out transition ease-in-out
+					<span className={`h-[3px] bg-secondary origin-left transition-transform ease-in-out transition ease-in-out
 					${ isMenuOpen ? tw.rotatedW : 'w-full'}
 					${ isMenuOpen ? 'rotate-[45deg]' : ''}
 					`} />
 
-						<span className={`h-[3px] bg-primary transition-opacity ease-linear
+						<span className={`h-[3px] bg-secondary transition-opacity ease-linear
 					${ isMenuOpen ? tw.rotatedW : 'w-full'}
 					${ isMenuOpen ? 'opacity-0' : ''}
 					`} />
 
-						<span className={`h-[3px] bg-primary origin-left transition-transform ease-in-out transition ease-out
+						<span className={`h-[3px] bg-secondary origin-left transition-transform ease-in-out transition ease-out
 					${ isMenuOpen ? tw.rotatedW : 'w-full'}
 					${ isMenuOpen ? 'rotate-[-45deg]' : ''}`} />
 					</button>
@@ -96,14 +96,14 @@ export default function NavBarComponent(props: NavbarProps) {
 				<div className="text-sm">
 
 						<NavBarButton href={`mailto:${email}`}>
-							<span className="text-gray-600 transition duration-300 group-hover:text-nav">
+							<span className="text-gray-300 transition duration-300 group-hover:text-primary">
 								{email}
 							</span>
 						</NavBarButton>
 
 						<NavBarButton href={`tel:${phone}`}>
 							<div className="w-full h-full">
-								<span className="text-gray-600 transition duration-300 group-hover:text-nav">
+								<span className="text-gray-300 transition duration-300 group-hover:text-primary">
 									{phoneFormatted}
 								</span>
 							</div>
