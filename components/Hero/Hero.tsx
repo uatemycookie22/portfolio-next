@@ -24,7 +24,7 @@ export default function Hero() {
 
 						<div className="mt-56 max-w-lg">
 							<h1 className="text-4xl font-bold mb-2">Lysander Hernandez</h1>
-							<p className="text-xl mb-8">I am a web developer specializing in building modern, responsive websites.</p>
+							<p className="text-xl mb-8">I am a computer science student with an early passion for fullstack web development.</p>
 							<a href="#" className="text-sl btn bg-interactive-primary hover:bg-interactive-secondary text-primary font-bold py-2 px-4 rounded-full">
 								View my work
 							</a>
