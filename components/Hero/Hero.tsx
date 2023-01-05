@@ -18,23 +18,25 @@ export default function Hero() {
 		<>
 			<div>
 				<div className=" bg-center bg-no-repeat bg-cover h-min-screen" style={{ backgroundImage: `url(./image.jpg)` }}>
-					<div className="flex flex-col gap-y-16 h-full justify-center px-4 py-6 text-white">
+					<div className="flex flex-col gap-y-16 h-full justify-center px-8 py-6 text-white">
 						<div className="flex justify-center">
 
 
 						<div className="mt-56 max-w-lg">
 							<h1 className="text-4xl font-bold mb-2">Lysander Hernandez</h1>
 							<p className="text-xl mb-8">I am a computer science student with an early passion for fullstack web development.</p>
-							<a href="#" className="text-sl btn bg-interactive-primary hover:bg-interactive-secondary text-primary font-bold py-2 px-4 rounded-full">
+							<a href="#" className="text-sl btn bg-interactive-primary hover:bg-interactive-secondary text-primary font-bold py-2 px-4 rounded-lg">
 								View my work
 							</a>
 						</div>
-							<Image className="hidden md:block" src={'/assets/headshot1.png'} alt={'headshot of Lysander'} width={400} height={400}/>
+							<Image className={`hidden md:block transition-opacity duration-500 delay-200 ease-in-out
+							
+							`} src={'/assets/headshot1.png'} alt={'headshot of Lysander'} width={400} height={400}/>
 						</div>
 
 
 							<div className="bg-none py-8">
-								<div className="container mx-auto px-4">
+								<div className="container mx-auto">
 									<h2 className="text-2xl font-bold mb-4 text-primary text-center">Key Facts</h2>
 									<div className="block lg:grid lg:grid-cols-3 -mx-4">
 										<SimpleCard>
@@ -72,7 +74,7 @@ export default function Hero() {
 
 											<p className="text-primary text-base">
 												I am an ambitious individual with a passion for both web development and machine learning,
-												constantly seeking out new challenges and learning opportunities to further advance their skills and career.
+												constantly seeking out new challenges and learning opportunities to further advance my skills and career.
 											</p>
 
 										</SimpleCard>

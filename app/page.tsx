@@ -2,8 +2,6 @@ import '../styles/globals.scss'
 
 import IntroComponent from "@components/Intro/IntroComponent";
 import EducationComponents from "@components/Education/EducationComponent";
-import AboutComponent from "@components/About/AboutComponent";
-import TimelineComponent from "@components/Timeline/TimelineComponent";
 
 async function getContent(): Promise<HomeContent> {
 	let content: HomeContent
@@ -35,14 +33,15 @@ export default async function HomePage() {
 
 	return (
 		<>
-
+			<IntroComponent heading={items[0].label} index={0} id={items[0].id} />
+			<EducationComponents />
 			<div style={{
 				position: 'fixed',
 				left: 'min(2vw, 100px)',
 				zIndex: 2,
 			}}>
 
-				<TimelineComponent timelineItems={items} />
+				{/*<TimelineComponent timelineItems={items} />*/}
 			</div>
 
 			<div className="mainDiv"
@@ -56,11 +55,6 @@ export default async function HomePage() {
 					padding: '10px 0 0 min(5vw, 80px)',
 				}}>
 
-					<IntroComponent heading={items[0].label} index={0} id={items[0].id} />
-
-					<AboutComponent text={content.about.text} />
-
-					<EducationComponents education={content.education} heading={items[1].label} index={1} id={items[1].id } />
 				</div>
 			</div>
 		</>

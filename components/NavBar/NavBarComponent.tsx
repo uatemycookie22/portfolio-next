@@ -2,16 +2,17 @@
 
 import {ReactNode, useEffect, useMemo, useRef, useState} from "react";
 import {formatPhoneNumber} from "@utils/formatters";
-import Link from "next/link";
-import {UrlObject} from "url";
 
-function NavBarButton({href, children}: {children: ReactNode, href: string | UrlObject}) {
+function NavBarButton({href, children}: {children: ReactNode, href: string | undefined}) {
 	return (
-		<Link href={href} scroll={false} className="block mt-4 lg:inline-block lg:mt-0 mr-6">
-		<button className="transparent py-2 px-4 rounded-full focus:outline-none hover:bg-secondary hover:bg-opacity-5 duration-300 group">
+		<a href={href}
+
+		      className={`block mt-4 lg:inline-block lg:mt-0 mr-6 
+		      btn bg-none text-primary font-bold py-2 px-8 rounded-full
+		      focus:outline-none hover:bg-secondary hover:bg-opacity-5 duration-300`}>
 			{children}
-		</button>
-		</Link>
+
+		</a>
 	)
 }
 
@@ -42,7 +43,7 @@ export default function NavBarComponent(props: NavbarProps) {
 		transition duration-300
 		${scrollDirection ? 'top-0' : 'translate-y-[-100%] sm:translate-y-0'}
 		`}>
-			<div className="flex justify-between items-center">
+			<div className="flex justify-between items-center ml-5">
 				<a href="/" className="text-2xl font-semibold tracking-tight">LH</a>
 
 				<div className="relative z-10 lg:hidden">
@@ -72,13 +73,13 @@ export default function NavBarComponent(props: NavbarProps) {
 			<div className={`${isMenuOpen ? 'block' : 'hidden'} lg:block lg:flex lg:items-center w-full lg:w-auto`}>
 				<div className="text-sm lg:flex-grow">
 
-						<NavBarButton href='/#home'>
+						<NavBarButton href='/#top'>
 							Home
 						</NavBarButton>
 
-						<NavBarButton href='/#about'>
-							About
-						</NavBarButton>
+						{/*<NavBarButton href='/#about'>*/}
+						{/*	About*/}
+						{/*</NavBarButton>*/}
 
 						<NavBarButton href='/#education'>
 							Education
@@ -88,9 +89,9 @@ export default function NavBarComponent(props: NavbarProps) {
 							Experience
 						</NavBarButton>
 
-						<NavBarButton href='/#projects'>
-							Projects
-						</NavBarButton>
+						{/*<NavBarButton href='/#projects'>*/}
+						{/*	Projects*/}
+						{/*</NavBarButton>*/}
 
 				</div>
 				<div className="text-sm">

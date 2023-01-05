@@ -1,17 +1,21 @@
 import {useEffect, useRef, useState} from "react";
 
-export default function useIntersection(style: string) {
+export default function useIntersection(options?: ConstructorParameters<typeof IntersectionObserver>[1]) {
 	const [intersecting, setIntersecting] = useState(false)
 	const elementRef = useRef<Element>(undefined!)
 
 	useEffect(() => {
+		const target = elementRef.current
+		if (!(target instanceof Element)) return
+
 		const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-			entry.target.classList.toggle(style, entry.isIntersecting)
 			setIntersecting(entry.isIntersecting)
-		}))
-		observer.observe(elementRef.current)
-		console.log('Observing')
-	}, [style])
+		}), options)
+
+		observer.observe(target)
+
+		return () => observer.unobserve(target)
+	})
 
 	return [elementRef, intersecting] as [typeof elementRef, boolean]
 }
