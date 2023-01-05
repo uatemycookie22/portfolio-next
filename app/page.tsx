@@ -2,6 +2,7 @@ import '../styles/globals.scss'
 
 import IntroComponent from "@components/Intro/IntroComponent";
 import EducationComponents from "@components/Education/EducationComponent";
+import Experience from "@components/Experience/Experience";
 
 async function getContent(): Promise<HomeContent> {
 	let content: HomeContent
@@ -35,6 +36,7 @@ export default async function HomePage() {
 		<>
 			<IntroComponent heading={items[0].label} index={0} id={items[0].id} />
 			<EducationComponents />
+			<Experience />
 			<div style={{
 				position: 'fixed',
 				left: 'min(2vw, 100px)',

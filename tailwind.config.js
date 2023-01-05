@@ -19,6 +19,10 @@ module.exports = {
       textColor: {
         primary: colors.white,
         secondary: colors.black
+      },
+
+      transitionProperty: {
+        'size': 'width , height'
       }
     },
     screens: {
