@@ -17,3 +17,12 @@
 .pulse {
     animation: pulse 2s infinite;
 }
+
+@layer components {
+    .transform-perspective {
+        transform: scale(1.16);
+        backface-visibility: hidden;
+        filter: blur(0px);
+        -webkit-font-smoothing: subpixel-antialiased;
+    }
+}

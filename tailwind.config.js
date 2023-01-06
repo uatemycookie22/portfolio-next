@@ -22,7 +22,8 @@ module.exports = {
       },
 
       transitionProperty: {
-        'size': 'width , height'
+        'size': 'width , height',
+        'position': 'left, top, height, right'
       }
     },
     screens: {
