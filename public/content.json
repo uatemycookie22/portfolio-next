@@ -30,23 +30,23 @@
   },
 
   "education": {
-    "school": "University of North Texas",
+    "school": "University Name",
     "college": "College of Engineering",
     "major": "Computer Science",
-    "graduation": "Expected May 2025",
-    "location": "Denton, Texas"
+    "graduation": "May 2020",
+    "location": "City, State"
   },
 
   "experience": {
     "jobs": [
       {
         "front": {
-          "companyName": "TriTech Software",
-          "companyLogo": "/assets/tritech.png",
+          "companyName": "Amazon",
+          "companyLogo": "/assets/amazon.png",
           "companyHref": "https://tritechsoft.com/",
-          "location": "Allen, Texas",
-          "duration": "May 2022 - Present",
-          "position": "Intern",
+          "location": "Austin, Texas",
+          "duration": "May 2020 - Present",
+          "position": "SDE",
           "technologiesUsed": [
             {
               "src": "/assets/angular3.png",
@@ -100,9 +100,9 @@
           "companyName": "IBM",
           "companyLogo": "/assets/ibm.png",
           "companyHref": "https://ibm.com/",
-          "location": "Copell, Texas",
-          "duration": "June 2021 - July 2021",
-          "position": "Intern",
+          "location": "City, State",
+          "duration": "June 2014 - July 2021",
+          "position": "Machine Learning Engineer",
           "technologiesUsed": [
             {
               "src": "/assets/html.png",

@@ -44,7 +44,7 @@ export default function NavBarComponent(props: NavbarProps) {
 		${scrollDirection ? 'top-0' : 'translate-y-[-100%] sm:translate-y-0'}
 		`}>
 			<div className="flex justify-between items-center ml-5">
-				<a href="/" className="text-2xl font-semibold tracking-tight">LH</a>
+				<a href="/" className="text-2xl font-semibold tracking-tight">AH</a>
 
 				<div className="relative z-10 lg:hidden">
 					<button

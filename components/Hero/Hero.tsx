@@ -26,7 +26,7 @@ export default function Hero(props: HeroProps) {
 
 
 						<div className="mt-56 max-w-lg">
-							<h1 className="text-4xl font-bold mb-2">Lysander Hernandez</h1>
+							<h1 className="text-4xl font-bold mb-2">A H</h1>
 							<p className="text-xl mb-8">{props.primary}</p>
 							<a href="#" className="text-sl btn bg-interactive-primary hover:bg-interactive-secondary text-primary font-bold py-2 px-4 rounded-lg">
 								View my work
@@ -34,7 +34,7 @@ export default function Hero(props: HeroProps) {
 						</div>
 							<Image className={`hidden md:block transition-opacity duration-500 delay-200 ease-in-out w-auto h-[500px]
 							
-							`} src={'/assets/headshot1.png'} alt={'headshot of Lysander'} width={400} height={533} priority={true}/>
+							`} src={'/assets/woman.png'} alt={'headshot of Lysander'} width={400} height={533} priority={true}/>
 						</div>
 
 

@@ -29,7 +29,7 @@ export default function EducationComponents({ location, major, school, graduatio
 						<div className="flex flex-wrap -mx-4">
 							<div className="w-full px-4 mb-0">
 								<div className="relative flex flex-col sm:flex-row gap-12 justify-center rounded-lg">
-									<Image width={600} height={400} src="/assets/unt.png" alt="University" className="w-full h-auto object-fit sm:w-1/2 max-w-lg rounded-t-lg" />
+									<Image width={600} height={400} src="/assets/princeton.jpg" alt="University" className="w-full h-auto object-fit sm:w-1/2 max-w-lg rounded-t-lg" />
 									<div className={`p-6 transition-opacity duration-500
 										${schoolInfoIntersected ? "opacity-100" : "opacity-0"}
 									`}
