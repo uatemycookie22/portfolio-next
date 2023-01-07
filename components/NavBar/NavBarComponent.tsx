@@ -48,6 +48,7 @@ export default function NavBarComponent(props: NavbarProps) {
 
 				<div className="relative z-10 lg:hidden">
 					<button
+						aria-label="hamburger menu to open navigation drawer"
 						className={`block rounded-md text-nav flex flex-col justify-between cursor-pointer
 					 ${tw.barW} h-[22px] 
 					`}

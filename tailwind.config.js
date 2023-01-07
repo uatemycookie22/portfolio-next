@@ -11,8 +11,8 @@ module.exports = {
         primary: colors.slate["900"],
         secondary: colors.slate["50"],
         interactive: {
-          primary: colors.fuchsia["500"],
-          secondary: colors.fuchsia["600"],
+          primary: colors.fuchsia["600"],
+          secondary: colors.fuchsia["700"],
         }
       },
 

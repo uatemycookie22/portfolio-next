@@ -36,8 +36,10 @@ export default function JobContent(props: JobContentProps) {
 		<div className="h-full w-full place-items-start pb-4  grid grid-rows-[0.5fr_0.5fr]">
 
 			<div className="ml-auto left-auto right-0 mt-2 mr-2 absolute">
-				<a className="text-secondary text-left" href={props.companyHref} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}>
-					<MNewTabIcon className="text-secondary text-3xl" />
+				<a className="text-secondary text-left" href={props.companyHref} target="_blank" rel="noreferrer"
+				   aria-label="Company website in new tab"
+				   onClick={e => e.stopPropagation()}>
+					<MNewTabIcon className="text-secondary text-3xl"/>
 				</a>
 			</div>
 
