@@ -1,5 +1,3 @@
-import '../styles/globals.scss'
-
 import IntroComponent from "@components/Intro/IntroComponent";
 import EducationComponents from "@components/Education/EducationComponent";
 import Experience from "@components/Experience/Experience";

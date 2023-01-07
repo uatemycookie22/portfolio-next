@@ -1,9 +1,7 @@
 import Image from "next/image";
-import MAccessTime from "@components/WrappedIcons/MAccessTimeIcon";
 import SimpleCard from "@components/SimpleCard/SimpleCard";
 import {ReactNode} from "react";
-import MDnsIcon from "@components/WrappedIcons/DnsIcon";
-import MEmojiEventsIcon from "@components/WrappedIcons/EmojiEventsIcon";
+import { MDnsIcon, MEmojiEventsIcon, MAccessTimeIcon } from '@icons'
 
 const CardHeading = ({ children, heading }: { children?: ReactNode, heading?: string }) => (<>
 	<div className="flex justify-between lg:gap-4">
@@ -22,7 +20,7 @@ export default function Hero(props: HeroProps) {
 	return (
 		<>
 			<div>
-				<div className=" bg-center bg-no-repeat bg-cover h-min-screen" style={{ backgroundImage: `url(./image.jpg)` }}>
+				<div className=" bg-center bg-no-repeat bg-cover h-min-screen" style={{ backgroundImage: `none` }}>
 					<div className="flex flex-col gap-y-16 h-full justify-center px-8 py-6 text-white">
 						<div className="flex justify-center">
 
@@ -34,9 +32,9 @@ export default function Hero(props: HeroProps) {
 								View my work
 							</a>
 						</div>
-							<Image className={`hidden md:block transition-opacity duration-500 delay-200 ease-in-out
+							<Image className={`hidden md:block transition-opacity duration-500 delay-200 ease-in-out w-auto h-[500px]
 							
-							`} src={'/assets/headshot1.png'} alt={'headshot of Lysander'} width={400} height={400}/>
+							`} src={'/assets/headshot1.png'} alt={'headshot of Lysander'} width={400} height={533} priority={true}/>
 						</div>
 
 
@@ -47,7 +45,7 @@ export default function Hero(props: HeroProps) {
 										<SimpleCard>
 
 											<CardHeading heading={props.facts[0].heading}>
-												<MAccessTime className="text-4xl text-primary" />
+												<MAccessTimeIcon className="text-4xl text-primary" />
 											</CardHeading>
 
 											<p className="text-primary text-base">

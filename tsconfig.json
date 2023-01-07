@@ -11,7 +11,9 @@
       "@components/*": ["./components/*"],
       "@hooks/*": ["./hooks/*.tsx"],
       "@styles/*": ["./styles/*"],
-      "@utils/*": ["./utils/*.ts"]
+      "@utils/*": ["./utils/*.ts"],
+      "@icons": ["./components/WrappedIcons/index.ts"],
+      "@icons/*": ["./components/WrappedIcons/*.tsx"]
     },
     "allowJs": true,
     "skipLibCheck": true,

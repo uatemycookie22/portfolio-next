@@ -1,6 +1,6 @@
 'use client';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { AccessTime } from '@mui/icons-material';
 
-export default function MAccessTime (props: Parameters<typeof AccessTimeIcon>[0]) {
-	return (<AccessTimeIcon {...props} />)
+export default function MAccessTime (props: Parameters<typeof AccessTime>[0]) {
+	return (<AccessTime {...props} />)
 }

@@ -1,14 +1,14 @@
 'use client';
 
 import Image from "next/image";
-import MNewTabIcon from "@components/WrappedIcons/NewTabIcon";
+import MNewTabIcon from "@components/WrappedIcons/MNewTabIcon";
 
 type ImageProps = Parameters<typeof Image>[0]
 type TechnologyProps = Pick<ImageProps, 'src' | 'alt'>
 const Technology = ({src, alt}: TechnologyProps) => (<>
 	<div className="flex flex-col relative group items-center">
 		<Image width={35} height={35} src={src} alt={alt}
-		       className="object-contain rounded-md"/>
+		       className="object-contain rounded-md w-[35px] h-[35px]"/>
 
 		<span
 			className="scale-0 w-auto absolute top-10 min-w-max text-primary rounded-lg bg-gray-700 p-1 group-hover:scale-100 transition-all duration-50 z-50 hover:hidden">
