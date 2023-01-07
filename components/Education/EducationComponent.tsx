@@ -1,14 +1,18 @@
 'use client';
 
-import {CommonSectionProps} from "../component_props/main-section-props";
 import SchoolProgress from "@components/Education/SchoolProgress/SchoolProgress";
 import useFirstIntersection from "@hooks/use-first-intersection";
 import Image from "next/image";
 
-type EducationProps = Pick<HomeContent, 'education'> & CommonSectionProps
+interface EducationProps {
+	school: string
+	graduation: string
+	major: string
+	location: string
+}
 
 
-export default function EducationComponents() {
+export default function EducationComponents({ location, major, school, graduation}: EducationProps) {
 	const [schoolInfoRef, schoolInfoIntersected] = useFirstIntersection({
 		threshold: 0.5
 	})
@@ -31,10 +35,10 @@ export default function EducationComponents() {
 									`}
 									     ref={(element) => {
 												if (element) schoolInfoRef.current = element}}>
-										<h3 className="text-xl font-bold text-primary mb-2">University of North Texas</h3>
-										<p className="text-primary mb-4">Expected Graduation: May 2025</p>
-										<p className="text-primary mb-4">Major: Computer Science</p>
-										<p className="text-primary mb-4">Location: Denton, Texas</p>
+										<h3 className="text-xl font-bold text-primary mb-2">{school}</h3>
+										<p className="text-primary mb-4">Expected Graduation: {graduation}</p>
+										<p className="text-primary mb-4">Major: {major}</p>
+										<p className="text-primary mb-4">Location: {location}</p>
 										<SchoolProgress />
 									</div>
 								</div>

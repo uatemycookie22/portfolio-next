@@ -1,10 +1,11 @@
-import {CommonSectionProps} from "../component_props/main-section-props";
 import Hero from "@components/Hero/Hero";
 
-export default function IntroComponent({ id }: CommonSectionProps) {
+type IntroComponentProps = Parameters<typeof Hero>[0]
+
+export default function IntroComponent(props: IntroComponentProps) {
 	return (<>
-		<section id={id}>
-			<Hero />
+		<section id={"home"}>
+			<Hero {...props} />
 		</section>
 	</>)
 }

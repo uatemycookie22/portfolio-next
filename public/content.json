@@ -1,7 +1,22 @@
 {
   "intro": {
-    "primary": "",
-    "secondary": ""
+    "primary": "I am a computer science student with an early passion for fullstack web development.",
+    "secondary": "",
+    "facts": [
+      {
+        "heading": "5+ years of experience",
+        "text": "I have over 5 years of experience as a self taught programmer. I also have 2 amazing internships of experience with a strong background in both front-end and back-end web development."
+      },
+      {
+        "heading": "Fullstack skills",
+        "text": "I am skilled in a wide range of programming languages and technologies, including React.js, SCSS, SQL, Spring Boot, and GraphQL.I have experience building fullstack web applications from start to finish, and am comfortable working with both front-end and back-end frameworks."
+      },
+      {
+        "heading": "Ambition",
+        "text": "I am an ambitious individual with a passion for both web development and machine learning, constantly seeking out new challenges and learning opportunities to further advance my skills and career."
+      }
+
+    ]
   },
 
   "about": {
@@ -11,15 +26,109 @@
       "I am excited about the potential for innovation and growth in the web development industry and committed to staying current with the latest technologies and best practices. I want to be a part of shaping the direction of the industry as it progresses rapidly."
     ,
       "I am a web developer with a strong interest in AI and machine learning. aim to use my skills and expertise to make a meaningful impact at the intersection of these fields and drive innovation in the industry."
-
     ]
   },
 
   "education": {
     "school": "University of North Texas",
     "college": "College of Engineering",
-    "major": "B.S. Computer Science",
+    "major": "Computer Science",
     "graduation": "Expected May 2025",
     "location": "Denton, Texas"
-  }
+  },
+
+  "experience": {
+    "jobs": [
+      {
+        "front": {
+          "companyName": "TriTech Software",
+          "companyLogo": "/assets/tritech.png",
+          "companyHref": "https://tritechsoft.com/",
+          "location": "Allen, Texas",
+          "duration": "Pr",
+          "position": "Intern",
+          "technologiesUsed": [
+            {
+              "src": "/assets/angular3.png",
+              "alt": "Angular"
+            },
+            {
+              "src": "/assets/ts.png",
+              "alt": "TypeScript"
+            },
+            {
+              "src": "/assets/rxjs.png",
+              "alt": "RxJs"
+            },
+            {
+              "src": "/assets/jest.png",
+              "alt": "Jest"
+            },
+            {
+              "src": "/assets/kotlin.png",
+              "alt": "Kotlin"
+            },
+            {
+              "src": "/assets/postgresql.png",
+              "alt": "PostgresSQL"
+            },
+            {
+              "src": "/assets/graphql.png",
+              "alt": "GraphQL"
+            },
+            {
+              "src": "/assets/docker.png",
+              "alt": "Docker"
+            },
+            {
+              "src": "/assets/sass.png",
+              "alt": "SCSS"
+            }
+          ]
+        },
+        "back": {
+          "items": [
+            "Contributed 15-35% of the progress each sprint assigned to a team of 7 using Scrum methodology"
+          ]
+        }
+      },
+      {
+        "front": {
+          "companyName": "IBM",
+          "companyLogo": "/assets/ibm.png",
+          "companyHref": "https://ibm.com/",
+          "location": "Copell, Texas",
+          "duration": "Pr",
+          "position": "Intern",
+          "technologiesUsed": [
+            {
+              "src": "/assets/html.png",
+              "alt": "HTML5"
+            },
+            {
+              "src": "/assets/js.png",
+              "alt": "JavaScript"
+            },
+            {
+              "src": "/assets/python.png",
+              "alt": "Python"
+            },
+            {
+              "src": "/assets/ubuntu.png",
+              "alt": "Ubuntu"
+            },
+            {
+              "src": "/assets/docker.png",
+              "alt": "Docker"
+            }
+          ]
+        },
+        "back": {
+          "items": [
+            "Contributed 15-35% of the progress each sprint assigned to a team of 7 using Scrum methodology"
+          ]
+        }
+      }
+    ]
+}
 }

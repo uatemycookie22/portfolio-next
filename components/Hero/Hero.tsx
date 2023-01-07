@@ -13,7 +13,12 @@ const CardHeading = ({ children, heading }: { children?: ReactNode, heading?: st
 	<div className="w-full h-[1px] bg-secondary mt-2 mb-2" />
 </>)
 
-export default function Hero() {
+interface HeroProps {
+	primary: string
+	facts: { heading: string, text: string }[]
+}
+
+export default function Hero(props: HeroProps) {
 	return (
 		<>
 			<div>
@@ -24,7 +29,7 @@ export default function Hero() {
 
 						<div className="mt-56 max-w-lg">
 							<h1 className="text-4xl font-bold mb-2">Lysander Hernandez</h1>
-							<p className="text-xl mb-8">I am a computer science student with an early passion for fullstack web development.</p>
+							<p className="text-xl mb-8">{props.primary}</p>
 							<a href="#" className="text-sl btn bg-interactive-primary hover:bg-interactive-secondary text-primary font-bold py-2 px-4 rounded-lg">
 								View my work
 							</a>
@@ -41,40 +46,36 @@ export default function Hero() {
 									<div className="block lg:grid lg:grid-cols-3 -mx-4">
 										<SimpleCard>
 
-											<CardHeading heading={'5+ years of experience'}>
+											<CardHeading heading={props.facts[0].heading}>
 												<MAccessTime className="text-4xl text-primary" />
 											</CardHeading>
 
 											<p className="text-primary text-base">
-												I have over 5 years of experience as a self taught programmer. I also have 2 amazing internships of experience
-												with a strong background in both front-end and back-end web development.
+												{props.facts[0].text}
 											</p>
 
 										</SimpleCard>
 
 										<SimpleCard>
 
-											<CardHeading heading={'Fullstack skills'}>
+											<CardHeading heading={props.facts[1].heading}>
 												<MDnsIcon className="text-4xl text-primary" />
 											</CardHeading>
 
 											<p className="text-primary text-base">
-												I am skilled in a wide range of programming languages and technologies, including React.js, SCSS, SQL, Spring Boot, and GraphQL.
-												I have experience building fullstack web applications from start to finish, and am comfortable working with both front-end
-												and back-end frameworks.
+												{props.facts[1].text}
 											</p>
 
 										</SimpleCard>
 
 										<SimpleCard>
 
-											<CardHeading heading={'Ambition'}>
+											<CardHeading heading={props.facts[2].heading}>
 												<MEmojiEventsIcon className="text-4xl text-primary" />
 											</CardHeading>
 
 											<p className="text-primary text-base">
-												I am an ambitious individual with a passion for both web development and machine learning,
-												constantly seeking out new challenges and learning opportunities to further advance my skills and career.
+												{props.facts[2].text}
 											</p>
 
 										</SimpleCard>
@@ -93,27 +94,6 @@ export default function Hero() {
 
 
 			</div>
-
-
-			{/*<div className="bg-gray-900 text-white py-12">*/}
-			{/*	<div className="container mx-auto flex items-center px-4 lg:px-0">*/}
-			{/*		<div className="w-full lg:w-1/2 pr-4">*/}
-			{/*			<Image width={64} height={64} className="rounded-full h-64 w-64" src="/assets/selfie0.jpg" alt="Web Developer Portrait" />*/}
-			{/*		</div>*/}
-			{/*		<div className="w-full lg:w-1/2 pl-4">*/}
-			{/*			<h1 className="text-3xl font-bold leading-tight mb-4">Lysander Hernandez</h1>*/}
-			{/*			<p className="text-xl font-light leading-normal mb-8">*/}
-			{/*				I am a computer science student at the University of North Texas.*/}
-			{/*				Software engineering is an industry where one can spend an entire career in and still have much to learn about it.*/}
-
-			{/*				And that&apos;s why I love it.*/}
-			{/*			</p>*/}
-			{/*			<a href="#"*/}
-			{/*			   className="bg-transparent hover:bg-white hover:text-gray-900 font-semibold py-2 px-4 border border-white hover:border-transparent rounded">Contact*/}
-			{/*				Me</a>*/}
-			{/*		</div>*/}
-			{/*	</div>*/}
-			{/*</div>*/}
 
 		</>)
 }

@@ -9,15 +9,16 @@ async function getContent(): Promise<HomeContent> {
 
 	try {
 		const res = (await import('public/content.json')).default
-		content = res as HomeContent
+		content = res
 	}
 	catch (err) {
 		console.log(err)
 		console.log(`Is the project building?`)
 		content = {
+			experience: {jobs: []},
 			about: {text: ["", "", ""]},
 			education: {college: "", graduation: "", location: "", major: "", school: ""},
-			intro: {primary: "", secondary: ""}
+			intro: {primary: "", secondary: "", facts: []}
 		}
 	}
 
@@ -25,25 +26,18 @@ async function getContent(): Promise<HomeContent> {
 }
 
 export default async function HomePage() {
-	const items = [
-		{label: 'Test 1', text: '', id: 'top'},
-		{label: 'Test 2', text: '', id: 'ibm'},
-		{label: 'Test 3', text: '', id: 'tritech'},
-	]
 	const content = await getContent()
 
 	return (
 		<>
-			<IntroComponent heading={items[0].label} index={0} id={items[0].id} />
-			<EducationComponents />
-			<Experience />
+			<IntroComponent {...content.intro} />
+			<EducationComponents {...content.education} />
+			<Experience {...content.experience} />
 			<div style={{
 				position: 'fixed',
 				left: 'min(2vw, 100px)',
 				zIndex: 2,
 			}}>
-
-				{/*<TimelineComponent timelineItems={items} />*/}
 			</div>
 
 			<div className="mainDiv"

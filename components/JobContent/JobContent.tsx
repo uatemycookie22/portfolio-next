@@ -1,4 +1,7 @@
+'use client';
+
 import Image from "next/image";
+import MNewTabIcon from "@components/WrappedIcons/NewTabIcon";
 
 type ImageProps = Parameters<typeof Image>[0]
 type TechnologyProps = Pick<ImageProps, 'src' | 'alt'>
@@ -18,27 +21,34 @@ const Technology = ({src, alt}: TechnologyProps) => (<>
 interface JobContentProps {
 	companyLogo: string
 	companyName: string
+	companyHref: string
 	location: string
 	duration: string
 	position: string
 	technologiesUsed?: TechnologyProps[]
 }
 
-export function JobContent(props: JobContentProps) {
+export default function JobContent(props: JobContentProps) {
 	const technologies = props.technologiesUsed?.map((technologyProps, i) =>
 		(<Technology {...technologyProps} key={i}/>))
 
 	return <>
 		<div className="h-full w-full place-items-start pb-4  grid grid-rows-[0.5fr_0.5fr]">
 
+			<div className="ml-auto left-auto right-0 mt-2 mr-2 absolute">
+				<a className="text-secondary text-left" href={props.companyHref} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}>
+					<MNewTabIcon className="text-secondary text-3xl" />
+				</a>
+			</div>
+
 			<div className="w-full h-[10rem] flex justify-center border-b-2 border-gray-200">
-				<Image width={500} height={500} src={props.companyLogo} alt="TriTech Software"
+				<Image width={500} height={500} src={props.companyLogo} alt={props.companyName}
 				       className="w-[80%] h-full object-contain rounded-t-lg px-8"/>
 			</div>
 			<div className="flex flex-col items-start mb-0 relative rounded-lg h-full w-full">
 
-				<h3 className="text-xl font-bold text-secondary ml-6 mt-14">{props.companyName}</h3>
-				<div className="p-6 block">
+				<h3 className="text-xl font-bold text-secondary ml-6 mt-10">{props.companyName}</h3>
+				<div className="p-6 block items-start justify-start">
 					<p className="text-secondary text-left">Location: {props.location}</p>
 					<p className="text-secondary text-left">Duration: {props.duration}</p>
 					<p className="text-secondary text-left">Position: {props.position}</p>
@@ -51,7 +61,6 @@ export function JobContent(props: JobContentProps) {
 				<div className="p-6 flex flex-wrap gap-x-4 gap-y-2">
 					{technologies}
 				</div>
-
 			</div>
 
 		</div>
