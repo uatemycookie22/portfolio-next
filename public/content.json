@@ -45,7 +45,7 @@
           "companyLogo": "/assets/tritech.png",
           "companyHref": "https://tritechsoft.com/",
           "location": "Allen, Texas",
-          "duration": "Pr",
+          "duration": "May 2022 - Present",
           "position": "Intern",
           "technologiesUsed": [
             {
@@ -88,7 +88,10 @@
         },
         "back": {
           "items": [
-            "Contributed 15-35% of the progress each sprint assigned to a team of 7 using Scrum methodology"
+            "Contributed 15-35% of the progress each sprint assigned to a team of 7 using Scrum methodology",
+            "Accelerated 50% development of frontend features for core products using TypeScript and Angular",
+            "Used Kotlin, Spring Boot, and GCP to advance crucial backend services",
+            "Created required API endpoints with GraphQL and REST for a complex singe page web app"
           ]
         }
       },
@@ -98,7 +101,7 @@
           "companyLogo": "/assets/ibm.png",
           "companyHref": "https://ibm.com/",
           "location": "Copell, Texas",
-          "duration": "Pr",
+          "duration": "June 2021 - July 2021",
           "position": "Intern",
           "technologiesUsed": [
             {
@@ -125,7 +128,8 @@
         },
         "back": {
           "items": [
-            "Contributed 15-35% of the progress each sprint assigned to a team of 7 using Scrum methodology"
+            "Collaborated with 4 other interns to develop microservice-based software with remote and virtual methods",
+            "Developed business-oriented project with technologies such as Docker, VirtualBox, Node, Python, and Git to create a Speech-To-Text system"
           ]
         }
       }
