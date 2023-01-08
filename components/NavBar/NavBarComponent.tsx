@@ -1,18 +1,18 @@
 'use client';
 
-import {ReactNode, useEffect, useMemo, useRef, useState} from "react";
+import {AnchorHTMLAttributes, DetailedHTMLProps, useEffect, useMemo, useRef, useState} from "react";
 import {formatPhoneNumber} from "@utils/formatters";
 
-function NavBarButton({href, children}: {children: ReactNode, href: string | undefined}) {
+function NavBarButton(anchorProps:
+	DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) {
+
+	const {className:_, ...rest} = anchorProps
+
 	return (
-		<a href={href}
-
-		      className={`block mt-4 lg:inline-block lg:mt-0 mr-6 
-		      btn bg-none text-primary font-bold py-2 px-8 rounded-full
-		      focus:outline-none hover:bg-secondary hover:bg-opacity-5 duration-300`}>
-			{children}
-
-		</a>
+		<a {...rest}
+		   className={`block mt-4 lg:inline-block lg:mt-0 mr-6 
+			  btn bg-none text-primary font-bold py-2 px-8 rounded-full
+			  focus:outline-none hover:bg-secondary hover:bg-opacity-5 duration-300`} />
 	)
 }
 
@@ -74,7 +74,7 @@ export default function NavBarComponent(props: NavbarProps) {
 			<div className={`${isMenuOpen ? 'block' : 'hidden'} lg:block lg:flex lg:items-center w-full lg:w-auto`}>
 				<div className="text-sm lg:flex-grow">
 
-						<NavBarButton href='/#top'>
+						<NavBarButton href='/#top' onClick={toggleMenu}>
 							Home
 						</NavBarButton>
 
@@ -82,11 +82,11 @@ export default function NavBarComponent(props: NavbarProps) {
 						{/*	About*/}
 						{/*</NavBarButton>*/}
 
-						<NavBarButton href='/#education'>
+						<NavBarButton href='/#education' onClick={toggleMenu}>
 							Education
 						</NavBarButton>
 
-						<NavBarButton href='/#experience'>
+						<NavBarButton href='/#experience' onClick={toggleMenu}>
 							Experience
 						</NavBarButton>
 
