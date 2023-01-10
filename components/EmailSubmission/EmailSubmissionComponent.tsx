@@ -4,12 +4,12 @@ import {useCallback, useState} from "react";
 import {Alert, Button, Slide, Snackbar, TextField} from "@mui/material";
 import colors from "@styles/colors.module.scss";
 import {useRouter} from "next/navigation";
+import {invalidPrompt, mockPostEmail} from "./mock-post-email";
 
 const emailRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
-const bodyErrorMessage = 'Must be at least 8 characters.'
 const successMessage = 'Email received'
 
-async function postEmail(emailMessage: string, from: string): Promise<boolean> {
+async function postEmail(emailMessage: string, from: string): Promise<[boolean, string]> {
 	const res = await fetch(`http://${process.env.NEXT_PUBLIC_PB_URL}/api/collections/messages/records`, {
 		method: 'POST',
 		headers: {'Content-Type': 'application/json',},
@@ -18,26 +18,33 @@ async function postEmail(emailMessage: string, from: string): Promise<boolean> {
 			message: emailMessage,
 		}),
 	})
+		.catch(console.error)
 
-	return res.ok
+	if (!res) {
+		return [false, 'Email submission failed.']
+	}
+
+	return [res.ok, res.ok ? '' : invalidPrompt]
 }
 
 export default function EmailSubmission() {
 	const [emailContact, setEmail] = useState('')
 	const [emailMessage, setMessage] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
+	const [invalidMessage, setInvalidMessage] = useState('')
 	const [statusMessage, setStatusMessage] = useState('')
 
 	const router = useRouter()
 
 	const sendEmail = useCallback(async () => {
-		const success = await postEmail(emailMessage, emailContact)
+		const [success, errorMessage] = await mockPostEmail(emailMessage, emailContact)
 
-		const newErrorMessage = success ? '' : bodyErrorMessage
-		setErrorMessage(newErrorMessage)
+		if (!success) {
+			setErrorMessage(errorMessage)
+			return
+		}
 
-		const newStatusMessage = success ? successMessage : ''
-		setStatusMessage(newStatusMessage)
+		setStatusMessage(successMessage)
 
 		setMessage('')
 		router.refresh()
@@ -46,13 +53,13 @@ export default function EmailSubmission() {
 	return (
 		<>
 
-		<form style={{display: 'flex', flexDirection: 'column', gap: '25px', maxWidth: '500px' }  }
+		<form className="flex flex-col gap-y-8 w-full"
           onSubmit={async (e) => {
 						e.preventDefault()
             await sendEmail()
           }}
 					onInvalid={() => {
-						setErrorMessage(bodyErrorMessage)
+						setInvalidMessage(invalidPrompt)
 						setStatusMessage('')
 					}}
 		>
@@ -71,7 +78,6 @@ export default function EmailSubmission() {
 			sx={{
 				backgroundColor: 'none',
 			}}
-			color="secondary"
 
 			inputProps={{
 				style: {WebkitBoxShadow: `0 0 0 100px ${colors.bgPrimary} inset`,},
@@ -85,7 +91,7 @@ export default function EmailSubmission() {
 		/>
 
 		<TextField
-			error={!!errorMessage}
+			error={!!invalidMessage}
 			required
 			multiline
 			id="outlined-multiline-static"
@@ -93,7 +99,7 @@ export default function EmailSubmission() {
 			color="secondary"
 			name="Email body"
 			label="Email body"
-			helperText={errorMessage}
+			helperText={invalidMessage}
 			rows={12}
 
 			inputProps={{
@@ -126,6 +132,34 @@ export default function EmailSubmission() {
 				>
 					{statusMessage}
 				</Alert>
+
+
+
+			</Snackbar>
+
+			<Snackbar
+				open={!!errorMessage}
+				autoHideDuration={6000}
+				anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+				TransitionComponent={Slide}
+			>
+
+				<Alert
+					severity="error"
+
+					onClose={() => {
+						setErrorMessage('')
+					}}
+				>
+					{errorMessage}
+					&nbsp;Please email me directly at <span>
+					<a className="text-blue-800 underline" href="mailto:hernandezlysander22@gmail.com">
+						hernandezlysander22@gmail.com
+					</a>
+				</span>
+				</Alert>
+
+
 
 			</Snackbar>
 
