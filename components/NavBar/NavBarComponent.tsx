@@ -8,7 +8,7 @@ function NavBarButton({href, children}: {children: ReactNode, href: string | und
 		<a href={href}
 
 		      className={`block mt-4 lg:inline-block lg:mt-0 mr-6 
-		      btn bg-none text-primary font-bold py-2 px-8 rounded-full
+		      btn bg-none text-primary font-semibold py-2 px-8 rounded-full
 		      focus:outline-none hover:bg-secondary hover:bg-opacity-5 duration-300`}>
 			{children}
 
