@@ -1,6 +1,6 @@
 export const invalidPrompt = 'Must be at least 8 characters.'
 
-export async function mockPostEmail(_: string, __: string): Promise<[boolean, string]> {
+export async function mockPostEmail(..._: any[]): Promise<[boolean, string]> {
 	const res = await new Promise((resolve, reject) => {
 		setTimeout(() => {
 			reject('Promise rejection')
