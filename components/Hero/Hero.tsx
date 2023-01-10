@@ -32,8 +32,12 @@ export default function Hero(props: HeroProps) {
 								View my work
 							</a>
 							<div className="relative top-10 h-16 flex gap-x-3">
-								<MGitHub fontSize='large' className="text-gray-400 hover:text-primary hover:cursor-pointer transition-colors duration-300" />
-								<MLinkedIn fontSize='large' className="text-gray-400 hover:text-primary hover:cursor-pointer transition-colors duration-100" />
+								<a href="https://github.com/uatemycookie22" target="_blank" rel="noreferrer">
+									<MGitHub fontSize='large' className="text-gray-400 hover:text-primary hover:cursor-pointer transition-colors duration-300" />
+								</a>
+								<a href="https://linkedin.com/in/lysander-hernandez-cs-unt/" target="_blank" rel="noreferrer">
+									<MLinkedIn fontSize='large' className="text-gray-400 hover:text-primary hover:cursor-pointer transition-colors duration-300" />
+								</a>
 							</div>
 						</div>
 							<Image className={`hidden md:block transition-opacity duration-500 delay-200 ease-in-out w-auto h-[500px]
