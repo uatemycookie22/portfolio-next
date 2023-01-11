@@ -22,9 +22,9 @@ export default function EducationComponents({ location, major, school, graduatio
 				<div className={`container mx-auto transition-opacity duration-500
 										${schoolInfoIntersected ? "opacity-100" : "opacity-0"}
 										`}>
-						<h2 className="text-3xl font-bold text-center text-primary mb-8">Education</h2>
-						<div className="flex flex-wrap -mx-4">
-							<div className="w-full px-4 mb-0">
+						<h2 className="section-heading">Education</h2>
+						<div className="flex flex-wrap">
+							<div className="w-full mb-0">
 								<div className="relative flex flex-col sm:flex-row gap-12 justify-center">
 									<Image width={600} height={400} src="/assets/unt.png" alt="University" className="w-full h-auto object-fit sm:w-1/2 max-w-lg rounded-t-lg" />
 									<div className={`p-6 transition-opacity duration-500

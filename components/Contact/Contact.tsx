@@ -8,12 +8,12 @@ interface ContactProps {
 export default function Contact(props: ContactProps) {
 	return (<>
 		<section id="contact" className="page-section">
-			<h2 className="text-3xl font-bold text-center text-primary mb-8">Contact</h2>
-
 			<div className="relative w-full flex justify-center">
-				<div className="container grid grid-rows-[] grid-cols-[repeat(auto-fit,minmax(350px,1fr))] -mx-4 justify-items-center">
+				<div className="container grid grid-rows-[] grid-cols-[repeat(auto-fit,minmax(340px,1fr))] lg:justify-items-end gap-12">
 
-					<div className="flex flex-col gap-4 mb-12 relative left-auto right-0">
+					<div className="flex flex-col gap-4 mb-12 relative left-auto right-0 w-fit">
+						<h2 className="section-heading text-left">Contact</h2>
+
 						<h3 className="text-primary">
 							Want to get in touch? Send me an email!
 						</h3>

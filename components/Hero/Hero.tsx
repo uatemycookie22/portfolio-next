@@ -45,10 +45,10 @@ export default function Hero(props: HeroProps) {
 						</div>
 
 
-							<div className="bg-none py-8">
-								<div className="container mx-auto">
-									<h2 className="text-2xl font-bold mb-4 text-primary text-center">Key Facts</h2>
-									<div className="block lg:grid lg:grid-cols-3 -mx-4">
+							<div className="bg-none py-8 self-center">
+								<div className="container">
+									<h2 className="section-heading text-2xl text-left lg:text-center">Key Facts</h2>
+									<div className="block lg:grid lg:grid-cols-3 gap-x-16">
 										<SimpleCard>
 
 											<CardHeading heading={props.facts[0].heading}>
