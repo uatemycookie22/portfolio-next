@@ -83,7 +83,7 @@ export default function EmailSubmission() {
 					}}
 
 					inputProps={{
-						style: {WebkitBoxShadow: `0 0 0 100px ${colors.bgPrimary} inset`,},
+						style: {WebkitBoxShadow: `0 0 0 100px ${'rgb(15,23,42)'} inset`,},
 						pattern: emailRegex,
 						title: "email@domain.com",
 					}}

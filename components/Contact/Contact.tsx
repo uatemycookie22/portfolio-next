@@ -11,7 +11,7 @@ export default function Contact(props: ContactProps) {
 
 			<div className="relative w-full flex justify-center">
 				<div className="container flex justify-center">
-					<div className="w-[50%] min-w-[16rem]">
+					<div className="w-[50%] min-w-[20rem]">
 						<EmailSubmission />
 					</div>
 				</div>
