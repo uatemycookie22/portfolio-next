@@ -27,7 +27,11 @@ async function postEmail(body: FormData): Promise<[boolean, string]> {
 	}
 }
 
-export default function EmailSubmission() {
+interface EmailSubmissionProps {
+	recipientEmail: string
+}
+
+export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) {
 	const [emailContact, setEmail] = useState('')
 	const [emailMessage, setMessage] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
@@ -161,10 +165,12 @@ export default function EmailSubmission() {
 						}}
 					>
 						{errorMessage}
+
 						&nbsp;Please email me directly at <span>
-					<a className="text-blue-800 underline" href="mailto:mail@mail.com">
-						mail@mail.mail {/*// TODO: Use real email here*/}
-					</a>
+						<a className="text-blue-800 underline" href={`mailto:${recipientEmail}`}>
+							{recipientEmail}
+						</a>
+
 				</span>
 					</Alert>
 

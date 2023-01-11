@@ -1,7 +1,7 @@
 import EmailSubmission from "@components/EmailSubmission/EmailSubmissionComponent";
 
 interface ContactProps {
-
+	email: string
 }
 
 export default function Contact(props: ContactProps) {
@@ -12,7 +12,7 @@ export default function Contact(props: ContactProps) {
 			<div className="relative w-full flex justify-center">
 				<div className="container flex justify-center">
 					<div className="w-[50%] min-w-[20rem]">
-						<EmailSubmission />
+						<EmailSubmission recipientEmail={props.email} />
 					</div>
 				</div>
 			</div>
