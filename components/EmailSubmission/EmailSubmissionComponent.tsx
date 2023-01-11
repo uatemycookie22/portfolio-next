@@ -14,7 +14,8 @@ async function postEmail(body: FormData): Promise<[boolean, string]> {
 	try {
 		const res = await fetch(`http://${process.env.NEXT_PUBLIC_PB_URL}/api/collections/messages/records`, {
 			method: 'POST',
-			headers: {'Content-Type': 'application/json',},
+			headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			// headers: {'Content-Type': 'application/json',},
 			body: JSON.stringify(Object.fromEntries(body)),
 			signal: AbortSignal.timeout(4000)
 		})
@@ -65,11 +66,13 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 		<>
 
 			<form className="flex flex-col gap-y-8 w-full"
+			      name="contact"
 			      onSubmit={sendEmail}
 			      onInvalid={() => {
 				      setInvalidMessage(invalidPrompt)
 				      setStatusMessage('')
 			      }}
+			      data-netlify="true"
 			>
 
 				<h1 className="text-primary font-semibold">Send me a message</h1>
