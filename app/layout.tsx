@@ -30,7 +30,7 @@ export default async function RootLayout({ children }: {
 	const contact = await getContact()
 
 	return (
-		<html lang="en">
+		<html lang="en" className="scroll-smooth">
 		<body className="bg-primary min-w-[330px]">
 		<Providers>
 			<header>
