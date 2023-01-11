@@ -10,9 +10,10 @@ import {SendButton} from "@components/EmailSubmission/SendButton";
 const emailRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
 const successMessage = 'Email received'
 
+const messageRecords = `http://${process.env.NEXT_PUBLIC_PB_URL}/api/collections/messages/records`
 async function postEmail(body: FormData): Promise<[boolean, string]> {
 	try {
-		const res = await fetch(`http://${process.env.NEXT_PUBLIC_PB_URL}/api/collections/messages/records`, {
+		const res = await fetch('/', {
 			method: 'POST',
 			headers: { "Content-Type": "application/x-www-form-urlencoded" },
 			// headers: {'Content-Type': 'application/json',},
