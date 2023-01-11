@@ -72,7 +72,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 			      }}
 			>
 
-				<h1 className="text-primary">Send me a message</h1>
+				<h1 className="text-primary font-semibold">Send me a message</h1>
 
 				<TextField
 					required
