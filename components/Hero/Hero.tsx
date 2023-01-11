@@ -31,10 +31,10 @@ export default function Hero(props: HeroProps) {
 								View my work
 							</a>
 							<div className="relative top-10 h-16 flex gap-x-3">
-								<a href="https://github.com/uatemycookie22" target="_blank" rel="noreferrer">
+								<a href="https://github.com/uatemycookie22" target="_blank" rel="noreferrer" aria-label="My GitHub">
 									<MGitHub fontSize='large' className="text-gray-400 hover:text-primary hover:cursor-pointer transition-colors duration-300" />
 								</a>
-								<a href="https://linkedin.com/in/lysander-hernandez-cs-unt/" target="_blank" rel="noreferrer">
+								<a href="https://linkedin.com/in/lysander-hernandez-cs-unt/" target="_blank" rel="noreferrer" aria-label="My LinkedIn">
 									<MLinkedIn fontSize='large' className="text-gray-400 hover:text-primary hover:cursor-pointer transition-colors duration-300" />
 								</a>
 							</div>
