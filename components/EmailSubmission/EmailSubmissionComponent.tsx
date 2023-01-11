@@ -34,7 +34,10 @@ export default function EmailSubmission() {
 	const [invalidMessage, setInvalidMessage] = useState('')
 	const [statusMessage, setStatusMessage] = useState('')
 
-	const mutation = useMutation(postEmail)
+	const mutation = useMutation((form: FormData) => {
+		setInvalidMessage('')
+		return postEmail(form)
+	})
 
 	const router = useRouter()
 
