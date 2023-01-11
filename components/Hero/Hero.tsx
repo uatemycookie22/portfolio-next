@@ -5,7 +5,7 @@ import { MDnsIcon, MEmojiEventsIcon, MAccessTimeIcon } from '@icons'
 
 const CardHeading = ({ children, heading }: { children?: ReactNode, heading?: string }) => (<>
 	<div className="flex justify-between lg:gap-4">
-		<h3 className="flex text-xl font-bold text-primary items-center">{heading}</h3>
+		<h3 className="flex text-xl font-semibold text-primary items-center">{heading}</h3>
 		{children}
 	</div>
 	<div className="w-full h-[1px] bg-secondary mt-2 mb-2" />
