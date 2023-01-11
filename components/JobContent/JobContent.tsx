@@ -43,9 +43,10 @@ export default function JobContent(props: JobContentProps) {
 				</a>
 			</div>
 
-			<div className="w-full h-[10rem] flex justify-center border-b-2 border-gray-200">
-				<Image width={500} height={500} src={props.companyLogo} alt={props.companyName}
-				       className="w-[80%] h-full object-contain rounded-t-lg px-8"/>
+			<div className="bg-center w-full h-[10rem]  flex justify-center border-b-2 border-gray-200 rounded-t-lg">
+				<div className="w-[80%] flex items-center">
+					<Image width={1280} height={640} src={props.companyLogo} alt={props.companyName} />
+				</div>
 			</div>
 			<div className="flex flex-col items-start mb-0 relative rounded-lg h-full w-full">
 
