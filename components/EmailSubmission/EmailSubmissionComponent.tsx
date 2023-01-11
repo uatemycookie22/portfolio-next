@@ -17,7 +17,7 @@ async function postEmail(body: FormData): Promise<[boolean, string]> {
 			method: 'POST',
 			headers: { "Content-Type": "application/x-www-form-urlencoded" },
 			// headers: {'Content-Type': 'application/json',},
-			body: JSON.stringify(Object.fromEntries(body)),
+			body: new URLSearchParams(body as any).toString(),
 			signal: AbortSignal.timeout(4000)
 		})
 
