@@ -1,7 +1,7 @@
 import Image from "next/image";
 import SimpleCard from "@components/SimpleCard/SimpleCard";
 import {ReactNode} from "react";
-import { MDnsIcon, MEmojiEventsIcon, MAccessTimeIcon } from '@icons'
+import {MDnsIcon, MEmojiEventsIcon, MAccessTimeIcon, MGitHub, MLinkedIn} from '@icons'
 
 const CardHeading = ({ children, heading }: { children?: ReactNode, heading?: string }) => (<>
 	<div className="flex justify-between lg:gap-4">
@@ -31,6 +31,14 @@ export default function Hero(props: HeroProps) {
 							<a href="#" className="text-sl btn bg-interactive-primary hover:bg-interactive-secondary text-primary font-bold py-2 px-4 rounded-lg">
 								View my work
 							</a>
+							<div className="relative top-10 h-16 flex gap-x-3">
+								<a href="https://github.com/uatemycookie22" target="_blank" rel="noreferrer" aria-label="My GitHub">
+									<MGitHub fontSize='large' className="text-gray-400 hover:text-primary hover:cursor-pointer transition-colors duration-300" />
+								</a>
+								<a href="https://linkedin.com/in/lysander-hernandez-cs-unt/" target="_blank" rel="noreferrer" aria-label="My LinkedIn">
+									<MLinkedIn fontSize='large' className="text-gray-400 hover:text-primary hover:cursor-pointer transition-colors duration-300" />
+								</a>
+							</div>
 						</div>
 							<Image className={`hidden md:block transition-opacity duration-500 delay-200 ease-in-out w-auto h-[500px]
 							

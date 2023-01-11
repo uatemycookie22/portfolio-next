@@ -1,6 +1,8 @@
 import IntroComponent from "@components/Intro/IntroComponent";
 import EducationComponents from "@components/Education/EducationComponent";
 import Experience from "@components/Experience/Experience";
+import Contact from "@components/Contact/Contact";
+import {getContact} from "./api";
 
 async function getContent(): Promise<HomeContent> {
 	let content: HomeContent
@@ -10,8 +12,6 @@ async function getContent(): Promise<HomeContent> {
 		content = res
 	}
 	catch (err) {
-		console.log(err)
-		console.log(`Is the project building?`)
 		content = {
 			experience: {jobs: []},
 			about: {text: ["", "", ""]},
@@ -25,12 +25,14 @@ async function getContent(): Promise<HomeContent> {
 
 export default async function HomePage() {
 	const content = await getContent()
+	const contact = await getContact()
 
 	return (
 		<>
 			<IntroComponent {...content.intro} />
 			<EducationComponents {...content.education} />
 			<Experience {...content.experience} />
+			<Contact email={contact.email} />
 			<div style={{
 				position: 'fixed',
 				left: 'min(2vw, 100px)',
