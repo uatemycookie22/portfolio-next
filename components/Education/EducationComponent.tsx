@@ -18,13 +18,10 @@ export default function EducationComponents({ location, major, school, graduatio
 	})
 
 	return (<>
-		<section id="education">
-
-			<div className="py-12">
-				<div className={`container mx-auto px-4 transition-opacity duration-500
+		<section id="education" className="page-section">
+				<div className={`container mx-auto transition-opacity duration-500
 										${schoolInfoIntersected ? "opacity-100" : "opacity-0"}
 										`}>
-					<div>
 						<h2 className="text-3xl font-bold text-center text-primary mb-8">Education</h2>
 						<div className="flex flex-wrap -mx-4">
 							<div className="w-full px-4 mb-0">
@@ -44,10 +41,7 @@ export default function EducationComponents({ location, major, school, graduatio
 								</div>
 							</div>
 						</div>
-					</div>
 				</div>
-			</div>
-
 		</section>
 	</>)
 }

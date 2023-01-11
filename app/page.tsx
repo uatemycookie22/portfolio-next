@@ -33,26 +33,6 @@ export default async function HomePage() {
 			<EducationComponents {...content.education} />
 			<Experience {...content.experience} />
 			<Contact email={contact.email} />
-			<div style={{
-				position: 'fixed',
-				left: 'min(2vw, 100px)',
-				zIndex: 2,
-			}}>
-			</div>
-
-			<div className="mainDiv"
-			     style={{
-						gridTemplateAreas: 'none content',
-			     }}>
-				<div style={{
-
-					gridArea: 'content',
-					width: 'calc(100% - min(5vw, 80px))',
-					padding: '10px 0 0 min(5vw, 80px)',
-				}}>
-
-				</div>
-			</div>
 		</>
 
 	)

@@ -25,4 +25,8 @@
         filter: blur(0px);
         -webkit-font-smoothing: subpixel-antialiased;
     }
+
+    .page-section {
+        @apply py-20 px-4;
+    }
 }

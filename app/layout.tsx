@@ -21,7 +21,7 @@ export default async function RootLayout({ children }: {
 				</nav>
 			</header>
 
-			<main>
+			<main className="pb-32">
 				{children}
 			</main>
 

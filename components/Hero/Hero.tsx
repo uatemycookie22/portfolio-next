@@ -19,9 +19,8 @@ interface HeroProps {
 export default function Hero(props: HeroProps) {
 	return (
 		<>
-			<div>
-				<div className=" bg-center bg-no-repeat bg-cover h-min-screen" style={{ backgroundImage: `none` }}>
-					<div className="flex flex-col gap-y-16 h-full justify-center px-8 py-6 text-white">
+				<div className="bg-center bg-no-repeat bg-cover h-min-screen" style={{ backgroundImage: `none` }}>
+					<div className="flex flex-col gap-y-12 h-full justify-center px-8 text-white">
 						<div className="flex justify-center">
 
 
@@ -96,10 +95,5 @@ export default function Hero(props: HeroProps) {
 					</div>
 
 				</div>
-
-
-
-			</div>
-
 		</>)
 }
