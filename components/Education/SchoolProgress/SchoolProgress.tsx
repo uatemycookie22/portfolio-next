@@ -1,4 +1,4 @@
-import MGraduation from "@components/WrappedIcons/MGraduationIcon";
+import {MGraduation} from "@icons";
 import useFirstIntersection from "@hooks/use-first-intersection";
 
 const SchoolProgress = () => {

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import MNewTabIcon from "@icons/MNewTabIcon";
+import {MNewTabIcon} from "@icons";
 
 type ImageProps = Parameters<typeof Image>[0]
 type TechnologyProps = Pick<ImageProps, 'src' | 'alt'>

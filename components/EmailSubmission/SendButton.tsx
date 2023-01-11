@@ -1,6 +1,6 @@
 'use client';
 import {Button, CircularProgress} from "@mui/material";
-import MSend from "@icons/MSend";
+import {MSend} from "@icons";
 
 export function SendButton(props: Parameters<typeof Button>[0] & { isLoading?: boolean }) {
 	const {isLoading, ...buttonProps} = props

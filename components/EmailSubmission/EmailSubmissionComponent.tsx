@@ -2,7 +2,6 @@
 
 import {FormEvent, useCallback, useState} from "react";
 import {Alert, Slide, Snackbar, TextField} from "@mui/material";
-import colors from "@styles/colors.module.scss";
 import {useRouter} from "next/navigation";
 import {invalidPrompt} from "./mock-post-email";
 import {useMutation} from "react-query";
@@ -38,12 +37,12 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 	const [invalidMessage, setInvalidMessage] = useState('')
 	const [statusMessage, setStatusMessage] = useState('')
 
+	const router = useRouter()
+
 	const mutation = useMutation((form: FormData) => {
 		setInvalidMessage('')
 		return postEmail(form)
 	})
-
-	const router = useRouter()
 
 	const sendEmail = useCallback( (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
@@ -73,9 +72,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 			      }}
 			>
 
-				<h1 style={{
-					color: colors.mainTextColor
-				}}>Send me an email</h1>
+				<h1 className="text-primary">Send me a message</h1>
 
 				<TextField
 					required
@@ -171,7 +168,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 							{recipientEmail}
 						</a>
 
-				</span>
+						</span>
 					</Alert>
 
 
