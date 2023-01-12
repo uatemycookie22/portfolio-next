@@ -6,6 +6,7 @@ import {useRouter} from "next/navigation";
 import {invalidPrompt} from "./mock-post-email";
 import {useMutation} from "react-query";
 import {SendButton} from "@components/EmailSubmission/SendButton";
+import {encode} from "@utils/fetch";
 
 const emailRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
 const successMessage = 'Email received'
@@ -17,7 +18,7 @@ async function postEmail(body: FormData): Promise<[boolean, string]> {
 			method: 'POST',
 			headers: { "Content-Type": "application/x-www-form-urlencoded" },
 			// headers: {'Content-Type': 'application/json',},
-			body: new URLSearchParams(body as any).toString(),
+			body: encode({"form-name": 'contact', ...Object.fromEntries(body.entries())}),
 			signal: AbortSignal.timeout(4000)
 		})
 
@@ -63,11 +64,16 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 		})
 	}, [mutation, router])
 
+	// @ts-ignore
+	// @ts-ignore
+	// @ts-ignore
 	return (
 		<>
 
 			<form className="flex flex-col gap-y-8 w-full"
 			      name="contact"
+			      method="POST"
+			      action="/"
 			      onSubmit={sendEmail}
 			      onInvalid={() => {
 				      setInvalidMessage(invalidPrompt)
@@ -85,7 +91,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 					name="address"
 					label="Email address"
 					autoComplete="email"
-
+					type="email"
 					sx={{
 						backgroundColor: 'none',
 					}}
@@ -110,6 +116,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 					color="secondary"
 					name="body"
 					label="Email body"
+					type="text"
 					helperText={invalidMessage}
 					rows={12}
 
