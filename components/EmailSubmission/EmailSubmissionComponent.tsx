@@ -73,7 +73,6 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 			<form className="flex flex-col gap-y-8 w-full"
 			      name="contact"
 			      method="POST"
-			      action="/"
 			      onSubmit={sendEmail}
 			      onInvalid={() => {
 				      setInvalidMessage(invalidPrompt)
