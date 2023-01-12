@@ -2,7 +2,6 @@
 
 import {FormEvent, useCallback, useState} from "react";
 import {Alert, Slide, Snackbar, TextField} from "@mui/material";
-import {useRouter} from "next/navigation";
 import {invalidPrompt} from "./mock-post-email";
 import {useMutation} from "react-query";
 import {SendButton} from "@components/EmailSubmission/SendButton";
@@ -40,8 +39,6 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 	const [invalidMessage, setInvalidMessage] = useState('')
 	const [statusMessage, setStatusMessage] = useState('')
 
-	const router = useRouter()
-
 	const mutation = useMutation((form: FormData) => {
 		setInvalidMessage('')
 		return postEmail(form)
@@ -59,10 +56,9 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 
 				setMessage('')
 				setStatusMessage(successMessage)
-				router.refresh()
 			},
 		})
-	}, [mutation, router])
+	}, [mutation])
 
 	// @ts-ignore
 	// @ts-ignore
