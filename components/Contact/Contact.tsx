@@ -1,5 +1,6 @@
 import EmailSubmission from "@components/EmailSubmission/EmailSubmissionComponent";
 import {MEmail} from "@icons";
+import StaticForm from "@components/StaticForms/StaticForms";
 
 interface ContactProps {
 	email: string
@@ -27,6 +28,7 @@ export default function Contact(props: ContactProps) {
 
 					<div className="w-full min-w-[20rem]">
 						<EmailSubmission recipientEmail={props.email} />
+						<StaticForm />
 					</div>
 				</div>
 			</div>
