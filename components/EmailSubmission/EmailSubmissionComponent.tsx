@@ -13,17 +13,23 @@ const successMessage = 'Email received'
 const messageRecords = `http://${process.env.NEXT_PUBLIC_PB_URL}/api/collections/messages/records`
 async function postEmail(body: FormData): Promise<[boolean, string]> {
 	try {
+		const controller = new AbortController();
+		const id = setTimeout(() => controller.abort(), 4000);
+
 		const res = await fetch('/', {
 			method: 'POST',
 			headers: { "Content-Type": "application/x-www-form-urlencoded" },
 			// headers: {'Content-Type': 'application/json',},
 			body: encode({"form-name": 'contact', ...Object.fromEntries(body.entries())}),
-			signal: AbortSignal.timeout(4000)
+			// signal: AbortSignal.timeout(4000)
+			signal: controller.signal
 		})
+		clearTimeout(id)
 
 		return [res.ok, res.ok ? '' : invalidPrompt]
 	} catch (err) {
 		console.error('Email submission timed out.')
+		console.error(err)
 		return [false, 'Email submission failed.']
 	}
 }
@@ -60,9 +66,6 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 		})
 	}, [mutation])
 
-	// @ts-ignore
-	// @ts-ignore
-	// @ts-ignore
 	return (
 		<>
 
