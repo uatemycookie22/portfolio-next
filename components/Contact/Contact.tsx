@@ -48,7 +48,9 @@ export default async function Contact() {
 									<MDocument />
 									<a href={`/assets/files/lh-resume.pdf`}
 									   target="_blank"
-									   className="hover:underline">
+									   className="hover:underline"
+									   rel="noreferrer"
+									>
 										Resume
 									</a>
 									<a href={`/assets/files/lh-resume.pdf`} download>
