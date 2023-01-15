@@ -32,7 +32,7 @@ export default async function HomePage() {
 			<IntroComponent {...content.intro} />
 			<EducationComponents {...content.education} />
 			<Experience {...content.experience} />
-			<Contact email={contact.email} />
+			<Contact email={contact.email} phone={contact.phone} />
 		</>
 
 	)
