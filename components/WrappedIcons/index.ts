@@ -9,3 +9,5 @@ export {default as MNewTabIcon} from "@icons/MNewTabIcon";
 export {default as MEmail} from "@icons/MEmail";
 export {default as MSend} from "@icons/MSend";
 export {default as MDownload} from "@icons/MDownload";
+export {default as MPhone} from "@icons/MPhone"
+export {default as MDocument} from "@icons/MDocument"
