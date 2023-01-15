@@ -1,16 +1,13 @@
 import EmailSubmission from "@components/EmailSubmission/EmailSubmissionComponent";
 import {MDocument, MDownload, MEmail, MPhone} from "@icons";
 import StaticForm from "@components/StaticForms/StaticForms";
-import {useMemo} from "react";
 import {formatPhoneNumber} from "@utils/formatters";
+import {getContact} from "@api/global";
 
-interface ContactProps {
-	email: string
-	phone: string
-}
+export default async function Contact() {
+	const { phone, email } = await getContact()
+	const formattedPhone = formatPhoneNumber(phone)
 
-export default function Contact(props: ContactProps) {
-	const formattedPhone = useMemo(() => formatPhoneNumber(props.phone), [props.phone])
 	return (<>
 		<section id="contact" className="page-section">
 			<div className="relative w-full flex justify-center">
@@ -29,7 +26,7 @@ export default function Contact(props: ContactProps) {
 
 								<div className="text-primary flex gap-2">
 									<MEmail />
-									<a href={`mailto:${props.email}`} className="hover:underline">{props.email}</a>
+									<a href={`mailto:${email}`} className="hover:underline">{email}</a>
 								</div>
 
 							</div>
@@ -41,7 +38,7 @@ export default function Contact(props: ContactProps) {
 
 								<div className="text-primary flex gap-2">
 									<MPhone />
-									<a href={`tel:${props.phone}`} className="hover:underline">{formattedPhone}</a>
+									<a href={`tel:${phone}`} className="hover:underline">{formattedPhone}</a>
 								</div>
 
 							</div>
@@ -63,7 +60,7 @@ export default function Contact(props: ContactProps) {
 
 					</div>
 						<div className="w-full min-w-[20rem]">
-							<EmailSubmission recipientEmail={props.email} />
+							<EmailSubmission recipientEmail={email} />
 							<StaticForm />
 						</div>
 

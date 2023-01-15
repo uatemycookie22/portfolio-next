@@ -13,7 +13,8 @@
       "@styles/*": ["./styles/*"],
       "@utils/*": ["./utils/*.ts"],
       "@icons": ["./components/WrappedIcons/index.ts"],
-      "@icons/*": ["./components/WrappedIcons/*.tsx"]
+      "@icons/*": ["./components/WrappedIcons/*.tsx"],
+      "@api/*": ["./api/*.ts"]
     },
     "allowJs": true,
     "skipLibCheck": true,
