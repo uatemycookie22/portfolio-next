@@ -6,5 +6,6 @@ export {default as MAccessTimeIcon} from './MAccessTimeIcon'
 export {default as MGitHub} from './MGitHub'
 export {default as MLinkedIn} from './MLinkedIn'
 export {default as MNewTabIcon} from "@icons/MNewTabIcon";
-export {default as MSend} from "@icons/MSend";
 export {default as MEmail} from "@icons/MEmail";
+export {default as MSend} from "@icons/MSend";
+export {default as MDownload} from "@icons/MDownload";
