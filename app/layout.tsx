@@ -3,7 +3,7 @@ import {ReactNode} from "react";
 import NavBarComponent from "../components/NavBar/NavBarComponent";
 import Providers from "./main-provider";
 import '../public/build/tailwind.css';
-import {getContact} from "./api";
+import {getContact} from "@api/global";
 
 export default async function RootLayout({ children }: {
 	children: ReactNode;

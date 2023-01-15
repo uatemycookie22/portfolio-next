@@ -2,6 +2,7 @@ import Image from "next/image";
 import SimpleCard from "@components/SimpleCard/SimpleCard";
 import {ReactNode} from "react";
 import {MDnsIcon, MEmojiEventsIcon, MAccessTimeIcon, MGitHub, MLinkedIn} from '@icons'
+import PdfButton from "@components/PdfButton/PdfButton";
 
 const CardHeading = ({ children, heading }: { children?: ReactNode, heading?: string }) => (<>
 	<div className="flex justify-between lg:gap-4">
@@ -27,9 +28,9 @@ export default function Hero(props: HeroProps) {
 						<div className="mt-56 max-w-lg">
 							<h1 className="text-4xl font-bold mb-2">Lysander Hernandez</h1>
 							<p className="text-xl mb-8">{props.primary}</p>
-							<a href="#" className="text-sl btn bg-interactive-primary hover:bg-interactive-secondary text-primary font-bold py-2 px-4 rounded-lg">
-								View my work
-							</a>
+							<PdfButton href="/assets/files/lh-resume.pdf">
+								Resume
+							</PdfButton>
 							<div className="relative top-10 h-16 flex gap-x-3">
 								<a href="https://github.com/uatemycookie22" target="_blank" rel="noreferrer" aria-label="My GitHub">
 									<MGitHub fontSize='large' className="text-gray-400 hover:text-primary hover:cursor-pointer transition-colors duration-300" />
