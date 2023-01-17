@@ -98,6 +98,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 						style: {WebkitBoxShadow: `0 0 0 100px ${'rgb(15,23,42)'} inset`,},
 						pattern: emailRegex,
 						title: "email@domain.com",
+						"data-cy": "user address"
 					}}
 
 					value={emailContact}
@@ -121,6 +122,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 					inputProps={{
 						minLength: 8,
 						maxLength: 1000,
+						"data-cy": "message body"
 					}}
 
 					value={emailMessage}
@@ -128,7 +130,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 					onChange={(e) => setMessage(e.target.value)}
 				/>
 
-				<SendButton isLoading={mutation.isLoading} />
+				<SendButton data-cy="send message" isLoading={mutation.isLoading} />
 
 				<Snackbar
 					open={!!statusMessage}

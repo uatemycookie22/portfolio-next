@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "build:css": "postcss styles/input.css -o public/build/tailwind.css",
-    "dev:css": "tailwindcss --input ./styles/input.css --output ./public/build/tailwind.css --watch"
+    "dev:css": "tailwindcss --input ./styles/input.css --output ./public/build/tailwind.css --watch",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test": "start-server-and-test start http://localhost:3000 cypress:run"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -32,6 +35,8 @@
     "typescript": "4.9.4"
   },
   "devDependencies": {
-    "concurrently": "^7.6.0"
+    "concurrently": "^7.6.0",
+    "cypress": "^12.3.0",
+    "start-server-and-test": "^1.15.2"
   }
 }
