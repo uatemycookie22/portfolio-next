@@ -80,7 +80,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 			      data-netlify="true"
 			>
 
-				<h1 className="text-primary font-semibold">Send me a message</h1>
+				<h1 className="text-white font-semibold">Send me a message</h1>
 
 				<TextField
 					required

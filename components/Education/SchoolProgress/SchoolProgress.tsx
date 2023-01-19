@@ -13,7 +13,7 @@ const SchoolProgress = () => {
 					     ref={el => {if (el) barRef.current = el}}>
 					</div>
 				</div>
-				<MGraduation className="text-primary"/>
+				<MGraduation className="text-white"/>
 			</div>
 		</>
 		)

@@ -11,7 +11,7 @@ const Technology = ({src, alt}: TechnologyProps) => (<>
 		       className="object-contain rounded-md w-[35px] h-[35px]"/>
 
 		<span
-			className="scale-0 w-auto absolute top-10 min-w-max text-primary rounded-lg bg-gray-700 p-1 group-hover:scale-100 transition-all duration-50 z-50 hover:hidden">
+			className="scale-0 w-auto absolute top-10 min-w-max text-white rounded-lg bg-gray-700 p-1 group-hover:scale-100 transition-all duration-50 z-50 hover:hidden">
 			{alt}
 		</span>
 

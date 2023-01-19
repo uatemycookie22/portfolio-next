@@ -5,8 +5,8 @@ export default function PdfButton(props: DetailedHTMLProps<AnchorHTMLAttributes<
     const {className:_, children, ...anchorProps} = props
 	return (<div className="flex gap-1">
         <a {...anchorProps} target="_blank" rel="noreferrer"
-              className={`w-fit flex gap-2 items-center
-              text-sl btn bg-interactive-primary hover:bg-interactive-secondary text-primary font-semibold py-2 px-4 rounded-lg
+              className={`w-fit flex gap-2 items-center text-sl btn text-white font-semibold py-2 px-4 rounded-lg
+               bg-violet-600 hover:bg-violet-700
               btn-transition hover:bg-interactive-secondary`}>
             <MNewTabIcon fontSize='small' />
             <span>

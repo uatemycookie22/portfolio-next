@@ -6,7 +6,7 @@ import PdfButton from "@components/PdfButton/PdfButton";
 
 const CardHeading = ({ children, heading }: { children?: ReactNode, heading?: string }) => (<>
 	<div className="flex justify-between lg:gap-4">
-		<h3 className="flex text-xl font-semibold text-primary items-center">{heading}</h3>
+		<h3 className="flex text-xl font-semibold text-white items-center">{heading}</h3>
 		{children}
 	</div>
 	<div className="w-full h-[1px] bg-secondary mt-2 mb-2" />
@@ -27,16 +27,16 @@ export default function Hero(props: HeroProps) {
 
 						<div className="mt-56 max-w-lg">
 							<h1 className="text-4xl font-bold mb-2">Lysander Hernandez</h1>
-							<p className="text-xl mb-8">{props.primary}</p>
+							<p className="text-xl mb-8 text-slate">{props.primary}</p>
 							<PdfButton href="/assets/files/lh-resume.pdf">
 								Resume
 							</PdfButton>
 							<div className="relative top-10 h-16 flex gap-x-3">
 								<a href="https://github.com/uatemycookie22" target="_blank" rel="noreferrer" aria-label="My GitHub">
-									<MGitHub fontSize='large' className="text-gray-400 hover:text-primary hover:cursor-pointer contact-icon" />
+									<MGitHub fontSize='large' className="text-neutral hover:text-white hover:cursor-pointer contact-icon" />
 								</a>
 								<a href="https://linkedin.com/in/lysander-hernandez-cs-unt/" target="_blank" rel="noreferrer" aria-label="My LinkedIn">
-									<MLinkedIn fontSize='large' className="text-gray-400 hover:text-primary hover:cursor-pointer contact-icon" />
+									<MLinkedIn fontSize='large' className="text-neutral hover:text-white hover:cursor-pointer contact-icon" />
 								</a>
 							</div>
 						</div>
@@ -53,10 +53,10 @@ export default function Hero(props: HeroProps) {
 										<SimpleCard>
 
 											<CardHeading heading={props.facts[0].heading}>
-												<MAccessTimeIcon className="text-4xl text-primary" />
+												<MAccessTimeIcon className="text-4xl text-white" />
 											</CardHeading>
 
-											<p className="text-primary text-base">
+											<p className="text-white text-base">
 												{props.facts[0].text}
 											</p>
 
@@ -65,10 +65,10 @@ export default function Hero(props: HeroProps) {
 										<SimpleCard>
 
 											<CardHeading heading={props.facts[1].heading}>
-												<MDnsIcon className="text-4xl text-primary" />
+												<MDnsIcon className="text-4xl text-white" />
 											</CardHeading>
 
-											<p className="text-primary text-base">
+											<p className="text-white text-base">
 												{props.facts[1].text}
 											</p>
 
@@ -77,10 +77,10 @@ export default function Hero(props: HeroProps) {
 										<SimpleCard>
 
 											<CardHeading heading={props.facts[2].heading}>
-												<MEmojiEventsIcon className="text-4xl text-primary" />
+												<MEmojiEventsIcon className="text-4xl text-white" />
 											</CardHeading>
 
-											<p className="text-primary text-base">
+											<p className="text-white text-base">
 												{props.facts[2].text}
 											</p>
 

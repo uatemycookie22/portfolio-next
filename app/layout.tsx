@@ -13,7 +13,7 @@ export default async function RootLayout({ children }: {
 
 	return (
 		<html lang="en" className="scroll-smooth">
-		<body className="bg-primary min-w-[330px]">
+		<body className="bg-zinc-900 min-w-[330px]">
 		<Providers>
 			<header>
 				<nav>

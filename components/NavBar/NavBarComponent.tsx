@@ -1,7 +1,18 @@
 'use client';
 
-import {AnchorHTMLAttributes, DetailedHTMLProps, useEffect, useMemo, useRef, useState} from "react";
+import {
+	AnchorHTMLAttributes,
+	ButtonHTMLAttributes,
+	DetailedHTMLProps,
+	useEffect,
+	useMemo,
+	useRef,
+	useState
+} from "react";
 import {formatPhoneNumber} from "@utils/formatters";
+import {useAtom} from "jotai";
+import {darkModeAtom} from "@atoms/dark-mode";
+import {MDay, MNight} from "@icons";
 
 function NavBarButton(anchorProps:
 	DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) {
@@ -11,9 +22,25 @@ function NavBarButton(anchorProps:
 	return (
 		<a {...rest}
 		   className={`block mt-4 lg:inline-block lg:mt-0 mr-4
-			  btn bg-none text-primary font-semibold py-2 px-6 rounded-full
+			  btn bg-none text-white font-semibold py-2 px-6 rounded-full
 			  focus:outline-none hover:bg-secondary hover:bg-opacity-5 duration-300`} />
 	)
+}
+type ButtonProps =  DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+function ToggleDarkmodeButton({onClick, ...rest}: Omit<ButtonProps, 'className'>) {
+	const [darkMode] = useAtom(darkModeAtom)
+
+	return (
+			<button
+				className={`bg-secondary bg-opacity-0  hover:bg-opacity-10 text-secondary font-medium py-2 px-4 rounded-md 
+				dark:text-white
+				`}
+				onClick={onClick}
+				{...rest}
+			>
+				{darkMode ? <MNight /> :  <MDay />}
+			</button>
+			)
 }
 
 type NavbarProps = {
@@ -36,15 +63,21 @@ export default function NavBarComponent(props: NavbarProps) {
 		rotatedW: 'w-[28px]',
 	})
 
+	const [darkMode, setDarkmode] = useAtom(darkModeAtom)
+
+
 	return (
 		<>
 
-		<div className={`fixed w-full z-50 top-0 bg-primary lg:flex lg:justify-between lg:items-center lg:px-4 px-6 py-3  text-primary
-		transition duration-300
+		<div className={`fixed w-full z-50 top-0 bg-transparent backdrop-filter backdrop-blur-sm lg:flex lg:justify-between lg:items-center lg:px-4 px-6 py-3  text-white
+		transition duration-300 
 		${scrollDirection ? 'top-0' : 'translate-y-[-100%] sm:translate-y-0'}
+		${darkMode ? 'dark' : ''}
 		`}>
 			<div className="flex justify-between items-center ml-5">
 				<a href="/" className="text-2xl font-semibold tracking-tight">LH</a>
+
+
 
 				<div className="relative z-10 lg:hidden">
 					<button
@@ -93,7 +126,7 @@ export default function NavBarComponent(props: NavbarProps) {
 					<NavBarButton href='/#contact' onClick={toggleMenu}>
 						Contact
 					</NavBarButton>
-
+					<ToggleDarkmodeButton onClick={() => setDarkmode(!darkMode)} />
 						{/*<NavBarButton href='/#projects'>*/}
 						{/*	Projects*/}
 						{/*</NavBarButton>*/}
@@ -102,14 +135,14 @@ export default function NavBarComponent(props: NavbarProps) {
 				<div className="text-sm">
 
 						<NavBarButton href={`mailto:${email}`}>
-							<span className="text-gray-300 transition duration-300 group-hover:text-primary">
+							<span className="text-gray-300 transition duration-300 group-hover:text-white">
 								{email}
 							</span>
 						</NavBarButton>
 
 						<NavBarButton href={`tel:${phone}`}>
 							<div className="w-full h-full">
-								<span className="text-gray-300 transition duration-300 group-hover:text-primary">
+								<span className="text-gray-300 transition duration-300 group-hover:text-white">
 									{phoneFormatted}
 								</span>
 							</div>
