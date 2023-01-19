@@ -1,3 +1,3 @@
 import {atomWithStorage} from "jotai/utils";
 
-const darkModeAtom = atomWithStorage('darkMode', true)
+export const darkModeAtom = atomWithStorage('darkMode', true)
