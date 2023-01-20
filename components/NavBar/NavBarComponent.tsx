@@ -77,8 +77,6 @@ export default function NavBarComponent(props: NavbarProps) {
 			<div className="flex justify-between items-center ml-5">
 				<a href="/" className="text-2xl font-semibold tracking-tight">LH</a>
 
-
-
 				<div className="relative z-10 lg:hidden">
 					<button
 						aria-label="hamburger menu to open navigation drawer"
@@ -87,17 +85,17 @@ export default function NavBarComponent(props: NavbarProps) {
 					`}
 						onClick={toggleMenu}
 					>
-					<span className={`h-[3px] bg-secondary origin-left transition-transform ease-in-out transition ease-in-out
+					<span className={`h-[3px] bg-white origin-left transition-transform ease-in-out transition ease-in-out
 					${ isMenuOpen ? tw.rotatedW : 'w-full'}
 					${ isMenuOpen ? 'rotate-[45deg]' : ''}
 					`} />
 
-						<span className={`h-[3px] bg-secondary transition-opacity ease-linear
+						<span className={`h-[3px] bg-white transition-opacity ease-linear
 					${ isMenuOpen ? tw.rotatedW : 'w-full'}
 					${ isMenuOpen ? 'opacity-0' : ''}
 					`} />
 
-						<span className={`h-[3px] bg-secondary origin-left transition-transform ease-in-out transition ease-out
+						<span className={`h-[3px] bg-white origin-left transition-transform ease-in-out transition ease-out
 					${ isMenuOpen ? tw.rotatedW : 'w-full'}
 					${ isMenuOpen ? 'rotate-[-45deg]' : ''}`} />
 					</button>
@@ -106,6 +104,7 @@ export default function NavBarComponent(props: NavbarProps) {
 
 			<div className={`${isMenuOpen ? 'block' : 'hidden'} lg:block lg:flex lg:items-center w-full lg:w-auto`}>
 				<div className="text-sm lg:flex-grow">
+						<ToggleDarkmodeButton onClick={() => setDarkmode(!darkMode)} />
 
 						<NavBarButton href='/#top' onClick={toggleMenu}>
 							Home
@@ -126,7 +125,7 @@ export default function NavBarComponent(props: NavbarProps) {
 					<NavBarButton href='/#contact' onClick={toggleMenu}>
 						Contact
 					</NavBarButton>
-					<ToggleDarkmodeButton onClick={() => setDarkmode(!darkMode)} />
+
 						{/*<NavBarButton href='/#projects'>*/}
 						{/*	Projects*/}
 						{/*</NavBarButton>*/}
