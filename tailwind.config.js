@@ -50,7 +50,11 @@ module.exports = {
       white: colors.white,
       slate: colors.slate["300"],
       neutral: colors.neutral["500"],
-      emerald: colors.emerald["400"]
+      emerald: colors.emerald["400"],
+      violet: {
+        600: colors.violet["600"],
+        700: colors.violet["700"],
+      }
     },
 
   },

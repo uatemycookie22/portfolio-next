@@ -9,7 +9,7 @@ const CardHeading = ({ children, heading }: { children?: ReactNode, heading?: st
 		<h3 className="flex text-xl font-semibold text-white items-center">{heading}</h3>
 		{children}
 	</div>
-	<div className="w-full h-[1px] bg-secondary mt-2 mb-2" />
+	<div className="w-full h-[1px] mt-2 mb-2 dark:bg-white" />
 </>)
 
 interface HeroProps {
@@ -20,9 +20,9 @@ interface HeroProps {
 export default function Hero(props: HeroProps) {
 	return (
 		<>
-				<div className="bg-center bg-no-repeat bg-cover h-min-screen" style={{ backgroundImage: `none` }}>
-					<div className="flex flex-col gap-y-12 h-full justify-center px-8 text-white">
-						<div className="flex justify-center">
+				<div className="bg-center bg-no-repeat px-8 lg:px-0 bg-cover h-min-screen" style={{ backgroundImage: `none` }}>
+					<div className="flex flex-col gap-y-12 h-full justify-center text-white">
+						<div className="w-full pl-4 grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] place-items-start lg:place-items-end">
 
 
 						<div className="mt-56 max-w-lg">
@@ -33,21 +33,30 @@ export default function Hero(props: HeroProps) {
 							</PdfButton>
 							<div className="relative top-10 h-16 flex gap-x-3">
 								<a href="https://github.com/uatemycookie22" target="_blank" rel="noreferrer" aria-label="My GitHub">
-									<MGitHub fontSize='large' className="text-neutral hover:text-white hover:cursor-pointer contact-icon" />
+									<MGitHub fontSize='large' className={`text-neutral hover:text-white hover:cursor-pointer transition-duration-300i
+									dark:hover:text-violet-700
+									`} />
 								</a>
 								<a href="https://linkedin.com/in/lysander-hernandez-cs-unt/" target="_blank" rel="noreferrer" aria-label="My LinkedIn">
-									<MLinkedIn fontSize='large' className="text-neutral hover:text-white hover:cursor-pointer contact-icon" />
+									<MLinkedIn fontSize='large' className={`text-neutral hover:text-white hover:cursor-pointer transition-duration-300i
+									 dark:hover:text-violet-700
+									`} />
 								</a>
 							</div>
 						</div>
-							<Image className={`hidden md:block transition-opacity duration-500 delay-200 ease-in-out w-auto h-[500px]
-							
-							`} src={'/assets/headshot1.png'} alt={'headshot of Lysander'} width={400} height={533} priority={true}/>
+							<Image className={`hidden lg:block transition-opacity duration-500 delay-200 ease-in-out w-full h-[533px]
+							bg-cover object-contain
+							dark:text-violet-600
+							`} src={'/assets/headshot1.png'} alt={'headshot of Lysander'} width={400} height={533} priority={true}
+							       style={{
+											 backgroundImage: "url('/assets/wavy-shape.png')",
+							       }}
+							/>
 						</div>
 
 
-							<div className="bg-none py-8 self-center">
-								<div className="container">
+							<div className="bg-none py-8 self-center lg:px-8">
+								<div className="w-full lg:container">
 									<h2 className="section-heading text-2xl text-left lg:text-center">Key Facts</h2>
 									<div className="block lg:grid lg:grid-cols-3 gap-x-16">
 										<SimpleCard>
@@ -56,7 +65,7 @@ export default function Hero(props: HeroProps) {
 												<MAccessTimeIcon className="text-4xl text-white" />
 											</CardHeading>
 
-											<p className="text-white text-base">
+											<p className="text-white text-base dark:text-slate">
 												{props.facts[0].text}
 											</p>
 
@@ -68,7 +77,7 @@ export default function Hero(props: HeroProps) {
 												<MDnsIcon className="text-4xl text-white" />
 											</CardHeading>
 
-											<p className="text-white text-base">
+											<p className="text-white text-base dark:text-slate">
 												{props.facts[1].text}
 											</p>
 
@@ -80,7 +89,7 @@ export default function Hero(props: HeroProps) {
 												<MEmojiEventsIcon className="text-4xl text-white" />
 											</CardHeading>
 
-											<p className="text-white text-base">
+											<p className="text-white text-base dark:text-slate">
 												{props.facts[2].text}
 											</p>
 

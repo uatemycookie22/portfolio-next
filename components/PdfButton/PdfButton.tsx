@@ -7,7 +7,7 @@ export default function PdfButton(props: DetailedHTMLProps<AnchorHTMLAttributes<
         <a {...anchorProps} target="_blank" rel="noreferrer"
               className={`w-fit flex gap-2 items-center text-sl btn text-white font-semibold py-2 px-4 rounded-lg
                bg-violet-600 hover:bg-violet-700
-              btn-transition hover:bg-interactive-secondary`}>
+               transition-duration-300`}>
             <MNewTabIcon fontSize='small' />
             <span>
                 {children}
