@@ -44,7 +44,7 @@ export default function Hero(props: HeroProps) {
 								</a>
 							</div>
 						</div>
-							<div className="w-full relative">
+							<div className="w-full relative flex justify-center">
 									<Image className={`hidden lg:block absolute right-0 left-auto rounded-[5rem]
 									transition-opacity duration-500 delay-200 ease-in-out w-full h-[533px]
 									bg-cover
@@ -55,8 +55,8 @@ export default function Hero(props: HeroProps) {
 											       }}
 											/>
 
-								<Image className={`hidden lg:block relative transition-opacity duration-500 delay-200 ease-in-out w-full h-[533px] z-10
-							bg-cover object-contain
+								<Image className={`hidden lg:block transition-opacity duration-500 delay-200 ease-in-out w-fit h-[533px] z-10
+							bg-cover
 							dark:text-violet-600
 							`} src={'/assets/headshot1.png'} alt={'headshot of Lysander'} width={400} height={533} priority={true}
 								/>
