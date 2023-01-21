@@ -34,24 +34,34 @@ export default function Hero(props: HeroProps) {
 							<div className="relative top-10 h-16 flex gap-x-3">
 								<a href="https://github.com/uatemycookie22" target="_blank" rel="noreferrer" aria-label="My GitHub">
 									<MGitHub fontSize='large' className={`text-neutral hover:text-white hover:cursor-pointer transition-duration-300i
-									dark:hover:text-violet-700
+									dark:hover:text-violet-600
 									`} />
 								</a>
 								<a href="https://linkedin.com/in/lysander-hernandez-cs-unt/" target="_blank" rel="noreferrer" aria-label="My LinkedIn">
 									<MLinkedIn fontSize='large' className={`text-neutral hover:text-white hover:cursor-pointer transition-duration-300i
-									 dark:hover:text-violet-700
+									 dark:hover:text-violet-600
 									`} />
 								</a>
 							</div>
 						</div>
-							<Image className={`hidden lg:block transition-opacity duration-500 delay-200 ease-in-out w-full h-[533px]
+							<div className="w-full relative">
+									<Image className={`hidden lg:block absolute right-0 left-auto rounded-[5rem]
+									transition-opacity duration-500 delay-200 ease-in-out w-full h-[533px]
+									bg-cover
+									dark:text-violet-600 dark:filter-purple
+									`} src={'/assets/wavy-shape.png'} alt={'headshot of Lysander'} width={3000} height={5000} priority={true}
+											       style={{
+
+											       }}
+											/>
+
+								<Image className={`hidden lg:block relative transition-opacity duration-500 delay-200 ease-in-out w-full h-[533px] z-10
 							bg-cover object-contain
 							dark:text-violet-600
 							`} src={'/assets/headshot1.png'} alt={'headshot of Lysander'} width={400} height={533} priority={true}
-							       style={{
-											 backgroundImage: "url('/assets/wavy-shape.png')",
-							       }}
-							/>
+								/>
+							</div>
+
 						</div>
 
 
