@@ -68,7 +68,7 @@ export default function NavBarComponent(props: NavbarProps) {
 	return (
 		<>
 
-		<div className={`fixed w-full z-50 top-0 bg-transparent backdrop-filter backdrop-blur-sm lg:flex lg:justify-between lg:items-center lg:px-4 px-6 py-3  text-white
+		<div className={`fixed w-full z-50 top-0 bg-zinc-900/75 backdrop-filter backdrop-blur lg:flex lg:justify-between lg:items-center lg:px-4 px-6 py-3  text-white
 		transition duration-300 
 		${scrollDirection ? 'top-0' : 'translate-y-[-100%] sm:translate-y-0'}
 		`}>
