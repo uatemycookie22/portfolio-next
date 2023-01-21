@@ -65,14 +65,12 @@ export default function NavBarComponent(props: NavbarProps) {
 
 	const [darkMode, setDarkmode] = useAtom(darkModeAtom)
 
-
 	return (
 		<>
 
 		<div className={`fixed w-full z-50 top-0 bg-transparent backdrop-filter backdrop-blur-sm lg:flex lg:justify-between lg:items-center lg:px-4 px-6 py-3  text-white
 		transition duration-300 
 		${scrollDirection ? 'top-0' : 'translate-y-[-100%] sm:translate-y-0'}
-		${darkMode ? 'dark' : ''}
 		`}>
 			<div className="flex justify-between items-center ml-5">
 				<a href="/" className="text-2xl font-semibold tracking-tight">LH</a>
