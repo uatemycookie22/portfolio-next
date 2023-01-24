@@ -42,8 +42,9 @@ export default function NavBarComponent(props: NavbarProps) {
 			<div className="flex justify-between items-center ml-5">
 				<a href="/" className={`text-2xl font-semibold tracking-tight font-medium rounded-md w-fit
 				text-hover-purple
-				transition-duration-300
-				dark:text-white
+				text-black
+			  transition-duration-300
+			  dark:text-white
 				`}>
 					LH
 				</a>
