@@ -1,136 +1,192 @@
 'use client';
 
-import {useCallback, useState} from "react";
-import {Alert, Button, Slide, Snackbar, TextField} from "@mui/material";
-import colors from "@styles/colors.module.scss";
-import {useRouter} from "next/navigation";
+import {FormEvent, useCallback, useState} from "react";
+import {Alert, Slide, Snackbar, TextField} from "@mui/material";
+import {invalidPrompt} from "./mock-post-email";
+import {useMutation} from "react-query";
+import {SendButton} from "@components/EmailSubmission/SendButton";
+import {encode} from "@utils/fetch";
 
 const emailRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
-const bodyErrorMessage = 'Must be at least 8 characters.'
 const successMessage = 'Email received'
 
-async function postEmail(emailMessage: string, from: string): Promise<boolean> {
-	const res = await fetch(`http://${process.env.NEXT_PUBLIC_PB_URL}/api/collections/messages/records`, {
-		method: 'POST',
-		headers: {'Content-Type': 'application/json',},
-		body: JSON.stringify({
-			email: from,
-			message: emailMessage,
-		}),
-	})
+const messageRecords = `http://${process.env.NEXT_PUBLIC_PB_URL}/api/collections/messages/records`
+async function postEmail(body: FormData): Promise<[boolean, string]> {
+	try {
+		const controller = new AbortController();
+		const id = setTimeout(() => controller.abort(), 4000);
 
-	return res.ok
+		const res = await fetch('/', {
+			method: 'POST',
+			headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			// headers: {'Content-Type': 'application/json',},
+			body: encode({"form-name": 'contact', ...Object.fromEntries(body.entries())}),
+			// signal: AbortSignal.timeout(4000)
+			signal: controller.signal
+		})
+		clearTimeout(id)
+
+		return [res.ok, res.ok ? '' : invalidPrompt]
+	} catch (err) {
+		console.error('Email submission timed out.')
+		console.error(err)
+		return [false, 'Email submission failed.']
+	}
 }
 
-export default function EmailSubmission() {
+interface EmailSubmissionProps {
+	recipientEmail: string
+}
+
+export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) {
 	const [emailContact, setEmail] = useState('')
 	const [emailMessage, setMessage] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
+	const [invalidMessage, setInvalidMessage] = useState('')
 	const [statusMessage, setStatusMessage] = useState('')
 
-	const router = useRouter()
+	const mutation = useMutation((form: FormData) => {
+		setInvalidMessage('')
+		return postEmail(form)
+	})
 
-	const sendEmail = useCallback(async () => {
-		const success = await postEmail(emailMessage, emailContact)
+	const sendEmail = useCallback( (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
 
-		const newErrorMessage = success ? '' : bodyErrorMessage
-		setErrorMessage(newErrorMessage)
+		mutation.mutate(new FormData(e.currentTarget), {
+			onSuccess: ([success, errorMessage]) => {
+				if (!success) {
+					setErrorMessage(errorMessage)
+					return
+				}
 
-		const newStatusMessage = success ? successMessage : ''
-		setStatusMessage(newStatusMessage)
-
-		setMessage('')
-		router.refresh()
-	}, [emailContact, emailMessage, router])
+				setMessage('')
+				setStatusMessage(successMessage)
+			},
+		})
+	}, [mutation])
 
 	return (
 		<>
 
-		<form style={{display: 'flex', flexDirection: 'column', gap: '25px', maxWidth: '500px' }  }
-          onSubmit={async (e) => {
-						e.preventDefault()
-            await sendEmail()
-          }}
-					onInvalid={() => {
-						setErrorMessage(bodyErrorMessage)
-						setStatusMessage('')
-					}}
-		>
-
-		<h1 style={{
-			color: colors.mainTextColor
-		}}>Send me an email</h1>
-
-		<TextField
-			required
-			id="outlined-required"
-			variant="outlined"
-			label="Email address"
-			autoComplete="email"
-
-			sx={{
-				backgroundColor: 'none',
-			}}
-			color="secondary"
-
-			inputProps={{
-				style: {WebkitBoxShadow: `0 0 0 100px ${colors.bgPrimary} inset`,},
-				pattern: emailRegex,
-				title: "email@domain.com",
-			}}
-
-			value={emailContact}
-
-			onChange={(e) => setEmail(e.target.value)}
-		/>
-
-		<TextField
-			error={!!errorMessage}
-			required
-			multiline
-			id="outlined-multiline-static"
-			variant="outlined"
-			color="secondary"
-			name="Email body"
-			label="Email body"
-			helperText={errorMessage}
-			rows={12}
-
-			inputProps={{
-				minLength: 8,
-				maxLength: 1000,
-			}}
-
-			value={emailMessage}
-
-			onChange={(e) => setMessage(e.target.value)}
-		/>
-
-		<Button type="submit"  color="secondary" variant="outlined" style={{alignSelf: 'flex-start'}}>
-			Send
-		</Button>
-
-			<Snackbar
-				open={!!statusMessage}
-				autoHideDuration={6000}
-				anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
-				TransitionComponent={Slide}
+			<form className="flex flex-col gap-y-8 w-full"
+			      name="contact"
+			      method="POST"
+			      onSubmit={sendEmail}
+			      onInvalid={() => {
+				      setInvalidMessage(invalidPrompt)
+				      setStatusMessage('')
+			      }}
+			      data-netlify="true"
 			>
 
-				<Alert
-					severity="success"
+				<h1 className="text-primary font-semibold">Send me a message</h1>
 
+				<TextField
+					error={!!invalidMessage}
+					required
+					id="outlined-required"
+					variant="outlined"
+					name="address"
+					color="secondary"
+					label="Email address"
+					autoComplete="email"
+					type="email"
+					sx={{
+						backgroundColor: 'none',
+					}}
+
+					inputProps={{
+						style: {WebkitBoxShadow: `0 0 0 100px ${'rgb(15,23,42)'} inset`,},
+						pattern: emailRegex,
+						title: "email@domain.com",
+					}}
+
+					value={emailContact}
+
+					onChange={(e) => setEmail(e.target.value)}
+				/>
+
+				<TextField
+					error={!!invalidMessage}
+					required
+					multiline
+					id="outlined-multiline-static"
+					variant="outlined"
+					color="secondary"
+					name="body"
+					label="Email body"
+					type="text"
+					helperText={invalidMessage}
+					rows={12}
+
+					inputProps={{
+						minLength: 8,
+						maxLength: 1000,
+					}}
+
+					value={emailMessage}
+
+					onChange={(e) => setMessage(e.target.value)}
+				/>
+
+				<SendButton isLoading={mutation.isLoading} />
+
+				<Snackbar
+					open={!!statusMessage}
+					autoHideDuration={6000}
+					anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+					TransitionComponent={Slide}
 					onClose={() => {
 						setStatusMessage('')
 					}}
 				>
-					{statusMessage}
-				</Alert>
 
-			</Snackbar>
+					<Alert
+						severity="success"
+
+						onClose={() => {
+							setStatusMessage('')
+						}}
+					>
+						{statusMessage}
+					</Alert>
 
 
-	</form>
+				</Snackbar>
+
+				<Snackbar
+					open={!!errorMessage}
+					autoHideDuration={5000}
+					anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+					TransitionComponent={Slide}
+					onClose={ () => {
+						setErrorMessage('')
+					}}
+				>
+
+					<Alert
+						severity="error"
+
+						onClose={() => {
+							setErrorMessage('')
+						}}
+					>
+						{errorMessage}
+
+						&nbsp;Please email me directly at <span>
+						<a className="text-blue-800 underline" href={`mailto:${recipientEmail}`}>
+							{recipientEmail}
+						</a>
+
+						</span>
+					</Alert>
+
+
+				</Snackbar>
+
+
+			</form>
 
 		</>
 			)

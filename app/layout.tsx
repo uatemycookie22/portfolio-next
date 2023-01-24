@@ -3,25 +3,7 @@ import {ReactNode} from "react";
 import NavBarComponent from "../components/NavBar/NavBarComponent";
 import Providers from "./main-provider";
 import '../public/build/tailwind.css';
-
-async function getContact(): Promise<Contact> {
-	let contact: Contact
-
-	try {
-		const res = (await import('public/contact.json')).default
-		contact = res.contact
-	}
-	catch (err) {
-		console.log(err)
-		console.log(`Is the project building?`)
-		contact = {
-			phone: '',
-			email: '',
-		}
-	}
-
-	return contact
-}
+import {getContact} from "@api/global";
 
 export default async function RootLayout({ children }: {
 	children: ReactNode;
@@ -39,7 +21,7 @@ export default async function RootLayout({ children }: {
 				</nav>
 			</header>
 
-			<main>
+			<main className="pb-32">
 				{children}
 			</main>
 

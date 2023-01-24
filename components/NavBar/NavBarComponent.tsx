@@ -10,8 +10,8 @@ function NavBarButton(anchorProps:
 
 	return (
 		<a {...rest}
-		   className={`block mt-4 lg:inline-block lg:mt-0 mr-6 
-			  btn bg-none text-primary font-semibold py-2 px-8 rounded-full
+		   className={`block mt-4 lg:inline-block lg:mt-0 mr-4
+			  btn bg-none text-primary font-semibold py-2 px-6 rounded-full
 			  focus:outline-none hover:bg-secondary hover:bg-opacity-5 duration-300`} />
 	)
 }
@@ -89,6 +89,10 @@ export default function NavBarComponent(props: NavbarProps) {
 						<NavBarButton href='/#experience' onClick={toggleMenu}>
 							Experience
 						</NavBarButton>
+
+					<NavBarButton href='/#contact' onClick={toggleMenu}>
+						Contact
+					</NavBarButton>
 
 						{/*<NavBarButton href='/#projects'>*/}
 						{/*	Projects*/}
