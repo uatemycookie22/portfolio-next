@@ -34,12 +34,12 @@ export default function Hero(props: HeroProps) {
 							<div className="relative top-10 h-16 flex gap-x-3">
 								<a href="https://github.com/uatemycookie22" target="_blank" rel="noreferrer" aria-label="My GitHub">
 									<MGitHub fontSize='large' className={`text-neutral hover:text-white hover:cursor-pointer transition-duration-300i
-									dark:hover:text-violet-600
+									text-hover-purple
 									`} />
 								</a>
 								<a href="https://linkedin.com/in/lysander-hernandez-cs-unt/" target="_blank" rel="noreferrer" aria-label="My LinkedIn">
 									<MLinkedIn fontSize='large' className={`text-neutral hover:text-white hover:cursor-pointer transition-duration-300i
-									 dark:hover:text-violet-600
+									 text-hover-purple
 									`} />
 								</a>
 							</div>
@@ -72,7 +72,7 @@ export default function Hero(props: HeroProps) {
 										<SimpleCard>
 
 											<CardHeading heading={props.facts[0].heading}>
-												<MAccessTimeIcon className="text-4xl text-white" />
+												<MAccessTimeIcon className="text-4xl dark:text-white" />
 											</CardHeading>
 
 											<p className="text-white text-base dark:text-slate">

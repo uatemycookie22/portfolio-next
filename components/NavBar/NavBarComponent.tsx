@@ -1,47 +1,11 @@
 'use client';
 
-import {
-	AnchorHTMLAttributes,
-	ButtonHTMLAttributes,
-	DetailedHTMLProps,
-	useEffect,
-	useMemo,
-	useRef,
-	useState
-} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
 import {formatPhoneNumber} from "@utils/formatters";
 import {useAtom} from "jotai";
 import {darkModeAtom} from "@atoms/dark-mode";
-import {MDay, MNight} from "@icons";
-
-function NavBarButton(anchorProps:
-	DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) {
-
-	const {className:_, ...rest} = anchorProps
-
-	return (
-		<a {...rest}
-		   className={`block mt-4 lg:inline-block lg:mt-0 mr-4
-			  btn bg-none text-white font-semibold py-2 px-6 rounded-full
-			  focus:outline-none hover:bg-secondary hover:bg-opacity-5 duration-300`} />
-	)
-}
-type ButtonProps =  DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
-function ToggleDarkmodeButton({onClick, ...rest}: Omit<ButtonProps, 'className'>) {
-	const [darkMode] = useAtom(darkModeAtom)
-
-	return (
-			<button
-				className={`bg-secondary bg-opacity-0  hover:bg-opacity-10 text-secondary font-medium py-2 px-4 rounded-md 
-				dark:text-white
-				`}
-				onClick={onClick}
-				{...rest}
-			>
-				{darkMode ? <MNight /> :  <MDay />}
-			</button>
-			)
-}
+import NavBarButton from "@components/NavBar/NavBarButton";
+import ToggleDarkmodeButton from "@components/NavBar/DarkModeToggle";
 
 type NavbarProps = {
 	contact: Contact
@@ -73,7 +37,13 @@ export default function NavBarComponent(props: NavbarProps) {
 		${scrollDirection ? 'top-0' : 'translate-y-[-100%] sm:translate-y-0'}
 		`}>
 			<div className="flex justify-between items-center ml-5">
-				<a href="/" className="text-2xl font-semibold tracking-tight">LH</a>
+				<a href="/" className={`text-2xl font-semibold tracking-tight font-medium rounded-md  border-[thin] border-violet-600/0 w-fit
+				hover:bg-opacity-10 text-hover-purple
+				transition-colors duration-300
+				dark:text-white
+				`}>
+					LH
+				</a>
 
 				<div className="relative z-10 lg:hidden">
 					<button
@@ -100,8 +70,8 @@ export default function NavBarComponent(props: NavbarProps) {
 				</div>
 			</div>
 
-			<div className={`${isMenuOpen ? 'block' : 'hidden'} lg:block lg:flex lg:items-center w-full lg:w-auto`}>
-				<div className="text-sm lg:flex-grow">
+			<div className={`${isMenuOpen ? 'block' : 'hidden'} lg:block lg:items-center w-full lg:w-auto mt-4 lg:mt-0`}>
+				<div className="text-sm lg:flex-grow flex flex-col lg:flex-row gap-4">
 						<ToggleDarkmodeButton onClick={() => setDarkmode(!darkMode)} />
 
 						<NavBarButton href='/#top' onClick={toggleMenu}>
@@ -128,22 +98,13 @@ export default function NavBarComponent(props: NavbarProps) {
 						{/*	Projects*/}
 						{/*</NavBarButton>*/}
 
-				</div>
-				<div className="text-sm">
+					<NavBarButton href={`mailto:${email}`}>
+						{email}
+					</NavBarButton>
 
-						<NavBarButton href={`mailto:${email}`}>
-							<span className="text-gray-300 transition duration-300 group-hover:text-white">
-								{email}
-							</span>
-						</NavBarButton>
-
-						<NavBarButton href={`tel:${phone}`}>
-							<div className="w-full h-full">
-								<span className="text-gray-300 transition duration-300 group-hover:text-white">
-									{phoneFormatted}
-								</span>
-							</div>
-						</NavBarButton>
+					<NavBarButton href={`tel:${phone}`}>
+						{phoneFormatted}
+					</NavBarButton>
 				</div>
 			</div>
 		</div>

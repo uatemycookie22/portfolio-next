@@ -47,4 +47,12 @@
     .filter-purple {
         filter: brightness(40%) sepia(0.4) saturate(25) hue-rotate(238deg);
     }
+
+    .text-hover-purple {
+        @apply dark:hover:text-violet-600 hover:text-violet-600;
+    }
+
+    .border-hover-purple {
+        @apply dark:hover:border-violet-600/40 dark:border-violet-600/0 border-b-2;
+    }
 }
