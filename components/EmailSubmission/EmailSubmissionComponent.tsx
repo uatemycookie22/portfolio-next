@@ -83,10 +83,12 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 				<h1 className="text-white font-semibold">Send me a message</h1>
 
 				<TextField
+					error={!!invalidMessage}
 					required
 					id="outlined-required"
 					variant="outlined"
 					name="address"
+					color="secondary"
 					label="Email address"
 					autoComplete="email"
 					type="email"
