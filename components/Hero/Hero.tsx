@@ -28,11 +28,11 @@ export default function Hero(props: HeroProps) {
 						<div className="mt-56 max-w-lg">
 							<h1 className="text-4xl font-bold mb-2 text-black dark:text-white">A H</h1>
 							<p className="text-xl mb-8 text-slate-800 dark:text-slate-300">{props.primary}</p>
-							<PdfButton href="/assets/files/lh-resume.pdf">
+							<PdfButton href="https://google.com">
 								Resume
 							</PdfButton>
 							<div className="relative top-10 h-16 flex gap-x-3">
-								<a href="https://github.com/uatemycookie22" target="_blank" rel="noreferrer" aria-label="My GitHub">
+								<a href="https://github.com" target="_blank" rel="noreferrer" aria-label="My GitHub">
 									<MGitHub fontSize='large' className={`text-neutral
 									hover:cursor-pointer transition-duration-300i
 									text-hover-purple
@@ -50,7 +50,7 @@ export default function Hero(props: HeroProps) {
 									<Image className={`hidden lg:block absolute right-0 left-auto rounded-[5rem]
 									transition-opacity duration-500 delay-200 ease-in-out w-full h-[533px]
 									bg-cover filter-purple
-									`} src={'/assets/wavy-shape.png'} alt={'headshot of Lysander'} width={3000} height={5000} priority={true}
+									`} src={'/assets/wavy-shape.png'} alt={'wavy figure'} width={3000} height={5000} priority={true}
 											       style={{
 
 											       }}

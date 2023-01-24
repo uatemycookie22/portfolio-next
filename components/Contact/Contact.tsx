@@ -46,14 +46,14 @@ export default async function Contact() {
 							<div className="flex flex-col gap-2">
 								<div className="text-white flex gap-2">
 									<MDocument />
-									<a href={`/assets/files/lh-resume.pdf`}
+									<a href={`https://google.com`}
 									   target="_blank"
 									   className="hover:underline"
 									   rel="noreferrer"
 									>
 										Resume
 									</a>
-									<a href={`/assets/files/lh-resume.pdf`} download>
+									<a href={`https://google.com`} download>
 										<MDownload fontSize="small" />
 									</a>
 								</div>
