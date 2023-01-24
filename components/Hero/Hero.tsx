@@ -35,14 +35,14 @@ export default function Hero(props: HeroProps) {
 								<a href="https://github.com/uatemycookie22" target="_blank" rel="noreferrer" aria-label="My GitHub">
 									<MGitHub fontSize='large' className="text-gray-400 hover:text-primary hover:cursor-pointer contact-icon" />
 								</a>
-								<a href="https://linkedin.com/in/lysander-hernandez-cs-unt/" target="_blank" rel="noreferrer" aria-label="My LinkedIn">
+								<a href="https://linkedin.com/" target="_blank" rel="noreferrer" aria-label="My LinkedIn">
 									<MLinkedIn fontSize='large' className="text-gray-400 hover:text-primary hover:cursor-pointer contact-icon" />
 								</a>
 							</div>
 						</div>
 							<Image className={`hidden md:block transition-opacity duration-500 delay-200 ease-in-out w-auto h-[500px]
 							
-							`} src={'/assets/woman.png'} alt={'headshot of Lysander'} width={400} height={533} priority={true}/>
+							`} src={'/assets/woman.png'} alt={'headshot of AH'} width={400} height={533} priority={true}/>
 						</div>
 
 

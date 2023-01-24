@@ -18,14 +18,14 @@ export default function IntroTypography() {
 		<>
 			<Typography sx={{color: 'text.primary', fontSize: '2.25rem'}} variant="body1" gutterBottom>
 
-				My name is Lysander Hernandez.
+				My name is AH.
 
 			</Typography>
 
 			<Typography sx={{color: 'text.primary', fontSize: '1.75rem'}} variant="body2" gutterBottom>
 				I am a computer science student at the
 
-				<span style={{color: colors.untPrimary}}> University of North Texas. </span>
+				<span style={{color: colors.untPrimary}}> Princeton University. </span>
 
 			</Typography>
 
