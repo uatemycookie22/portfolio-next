@@ -32,14 +32,17 @@ export default function NavBarComponent(props: NavbarProps) {
 	return (
 		<>
 
-		<div className={`fixed w-full z-50 top-0 bg-zinc-900/75 backdrop-filter backdrop-blur lg:flex lg:justify-between lg:items-center lg:px-4 px-6 py-3  text-white
-		transition duration-300 
+		<div className={`fixed w-full z-50 top-0 
+		backdrop-filter backdrop-blur lg:flex lg:justify-between lg:items-center lg:px-4 px-6 py-3   
+		transition-duration-300
+		text-black bg-zinc-200/40
+		dark:text-white dark:bg-zinc-900/75
 		${scrollDirection ? 'top-0' : 'translate-y-[-100%] sm:translate-y-0'}
 		`}>
 			<div className="flex justify-between items-center ml-5">
-				<a href="/" className={`text-2xl font-semibold tracking-tight font-medium rounded-md  border-[thin] border-violet-600/0 w-fit
-				hover:bg-opacity-10 text-hover-purple
-				transition-colors duration-300
+				<a href="/" className={`text-2xl font-semibold tracking-tight font-medium rounded-md w-fit
+				text-hover-purple
+				transition-duration-300
 				dark:text-white
 				`}>
 					LH
@@ -53,17 +56,17 @@ export default function NavBarComponent(props: NavbarProps) {
 					`}
 						onClick={toggleMenu}
 					>
-					<span className={`h-[3px] bg-white origin-left transition-transform ease-in-out transition ease-in-out
+					<span className={`h-[3px] bg-black dark:bg-white origin-left transition-transform ease-in-out transition ease-in-out
 					${ isMenuOpen ? tw.rotatedW : 'w-full'}
 					${ isMenuOpen ? 'rotate-[45deg]' : ''}
 					`} />
 
-						<span className={`h-[3px] bg-white transition-opacity ease-linear
+						<span className={`h-[3px] bg-black dark:bg-white transition-opacity ease-linear
 					${ isMenuOpen ? tw.rotatedW : 'w-full'}
 					${ isMenuOpen ? 'opacity-0' : ''}
 					`} />
 
-						<span className={`h-[3px] bg-white origin-left transition-transform ease-in-out transition ease-out
+						<span className={`h-[3px] bg-black dark:bg-white origin-left transition-transform ease-in-out transition ease-out
 					${ isMenuOpen ? tw.rotatedW : 'w-full'}
 					${ isMenuOpen ? 'rotate-[-45deg]' : ''}`} />
 					</button>

@@ -6,10 +6,10 @@ import PdfButton from "@components/PdfButton/PdfButton";
 
 const CardHeading = ({ children, heading }: { children?: ReactNode, heading?: string }) => (<>
 	<div className="flex justify-between lg:gap-4">
-		<h3 className="flex text-xl font-semibold text-white items-center">{heading}</h3>
+		<h3 className="flex text-xl font-semibold text-black dark:text-white items-center">{heading}</h3>
 		{children}
 	</div>
-	<div className="w-full h-[1px] mt-2 mb-2 dark:bg-white" />
+	<div className="w-full h-[1px] mt-2 mb-2 bg-black dark:bg-white" />
 </>)
 
 interface HeroProps {
@@ -26,20 +26,22 @@ export default function Hero(props: HeroProps) {
 
 
 						<div className="mt-56 max-w-lg">
-							<h1 className="text-4xl font-bold mb-2">Lysander Hernandez</h1>
-							<p className="text-xl mb-8 text-slate">{props.primary}</p>
+							<h1 className="text-4xl font-bold mb-2 text-black dark:text-white">Lysander Hernandez</h1>
+							<p className="text-xl mb-8 text-slate-800 dark:text-slate-300">{props.primary}</p>
 							<PdfButton href="/assets/files/lh-resume.pdf">
 								Resume
 							</PdfButton>
 							<div className="relative top-10 h-16 flex gap-x-3">
 								<a href="https://github.com/uatemycookie22" target="_blank" rel="noreferrer" aria-label="My GitHub">
-									<MGitHub fontSize='large' className={`text-neutral hover:text-white hover:cursor-pointer transition-duration-300i
+									<MGitHub fontSize='large' className={`text-neutral
+									hover:cursor-pointer transition-duration-300i
 									text-hover-purple
 									`} />
 								</a>
 								<a href="https://linkedin.com/in/lysander-hernandez-cs-unt/" target="_blank" rel="noreferrer" aria-label="My LinkedIn">
-									<MLinkedIn fontSize='large' className={`text-neutral hover:text-white hover:cursor-pointer transition-duration-300i
-									 text-hover-purple
+									<MLinkedIn fontSize='large' className={`text-neutral 
+										hover:cursor-pointer transition-duration-300i
+									  text-hover-purple
 									`} />
 								</a>
 							</div>
@@ -47,17 +49,15 @@ export default function Hero(props: HeroProps) {
 							<div className="w-full relative flex justify-center">
 									<Image className={`hidden lg:block absolute right-0 left-auto rounded-[5rem]
 									transition-opacity duration-500 delay-200 ease-in-out w-full h-[533px]
-									bg-cover
-									dark:text-violet-600 dark:filter-purple
+									bg-cover filter-purple
 									`} src={'/assets/wavy-shape.png'} alt={'headshot of Lysander'} width={3000} height={5000} priority={true}
 											       style={{
 
 											       }}
 											/>
 
-								<Image className={`hidden lg:block transition-opacity duration-500 delay-200 ease-in-out w-fit h-[533px] z-10
-							bg-cover
-							dark:text-violet-600
+								<Image className={`hidden lg:block transition-opacity duration-500 delay-200 
+								ease-in-out w-fit h-[533px] z-10 bg-cover
 							`} src={'/assets/headshot1.png'} alt={'headshot of Lysander'} width={400} height={533} priority={true}
 								/>
 							</div>
@@ -67,15 +67,15 @@ export default function Hero(props: HeroProps) {
 
 							<div className="bg-none py-8 self-center lg:px-8">
 								<div className="w-full lg:container">
-									<h2 className="section-heading text-2xl text-left lg:text-center">Key Facts</h2>
+									<h2 className="section-heading text-2xl text-left lg:text-center text-black dark:text-white" >Key Facts</h2>
 									<div className="block lg:grid lg:grid-cols-3 gap-x-16">
 										<SimpleCard>
 
 											<CardHeading heading={props.facts[0].heading}>
-												<MAccessTimeIcon className="text-4xl dark:text-white" />
+												<MAccessTimeIcon className="text-4xl text-black dark:text-white" />
 											</CardHeading>
 
-											<p className="text-white text-base dark:text-slate">
+											<p className="text-base text-slate-800 dark:text-slate-300">
 												{props.facts[0].text}
 											</p>
 
@@ -84,10 +84,10 @@ export default function Hero(props: HeroProps) {
 										<SimpleCard>
 
 											<CardHeading heading={props.facts[1].heading}>
-												<MDnsIcon className="text-4xl text-white" />
+												<MDnsIcon className="text-4xl text-black dark:text-slate-300" />
 											</CardHeading>
 
-											<p className="text-white text-base dark:text-slate">
+											<p className="text-slate-800 text-base dark:text-slate-300">
 												{props.facts[1].text}
 											</p>
 
@@ -96,10 +96,10 @@ export default function Hero(props: HeroProps) {
 										<SimpleCard>
 
 											<CardHeading heading={props.facts[2].heading}>
-												<MEmojiEventsIcon className="text-4xl text-white" />
+												<MEmojiEventsIcon className="text-4xl text-black dark:text-slate-300" />
 											</CardHeading>
 
-											<p className="text-white text-base dark:text-slate">
+											<p className="text-slate-800 text-base dark:text-slate-300">
 												{props.facts[2].text}
 											</p>
 

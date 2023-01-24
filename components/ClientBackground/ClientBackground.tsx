@@ -10,7 +10,7 @@ export default function ClientBackground({children}: { children: ReactNode }) {
 		<div  className={`bg-transparent
 		${darkMode ? 'dark': ''}
 		`}>
-			<div  className="bg-zinc-500 dark:bg-zinc-900 transition-colors duration-150">
+			<div  className="bg-zinc-200 dark:bg-zinc-900 transition-colors duration-150">
 				{children}
 			</div>
 		</div>

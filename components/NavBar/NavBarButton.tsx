@@ -8,7 +8,7 @@ export default function NavBarButton(anchorProps:
 	return (
 		<a {...rest}
 		   className={`block lg:inline-block py-2 px-4 text-hover-purple border-hover-purple
-				font-semibold text-hover-purple
+				font-semibold text-black
 			  transition-duration-300
 			  dark:text-white
 			  `}/>

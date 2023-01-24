@@ -14,7 +14,7 @@ export default function PdfButton(props: DetailedHTMLProps<AnchorHTMLAttributes<
             </span>
         </a>
 
-        <a className="btn text-sl p-2 rounded-lg" {...anchorProps} download>
+        <a className="btn text-sl p-2 rounded-lg text-black dark:text-white" {...anchorProps} download>
             <MDownload />
         </a>
 

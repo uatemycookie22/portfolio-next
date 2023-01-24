@@ -29,6 +29,7 @@ module.exports = {
       zinc: {
         900: colors.zinc["900"],
         500: colors.zinc["500"],
+        200: colors.zinc["200"],
       },
       neutral: colors.neutral["500"],
       violet: {
@@ -48,7 +49,10 @@ module.exports = {
       current: 'currentColor',
       black: colors.black,
       white: colors.white,
-      slate: colors.slate["300"],
+      slate: {
+        300: colors.slate["300"],
+        800: colors.slate["800"],
+      },
       neutral: colors.neutral["500"],
       emerald: colors.emerald["400"],
       violet: {
