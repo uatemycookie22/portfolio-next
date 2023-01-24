@@ -92,12 +92,9 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 					label="Email address"
 					autoComplete="email"
 					type="email"
-					sx={{
-						backgroundColor: 'none',
-					}}
 
 					inputProps={{
-						style: {WebkitBoxShadow: `0 0 0 100px ${'rgb(15,23,42)'} inset`,},
+						style: {WebkitBoxShadow: `0 0 0 100px ${'rgb(24 24 27)'} inset`,},
 						pattern: emailRegex,
 						title: "email@domain.com",
 					}}
