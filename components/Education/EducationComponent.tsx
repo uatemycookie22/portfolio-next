@@ -22,7 +22,7 @@ export default function EducationComponents({ location, major, school, graduatio
 				<div className={`container mx-auto transition-opacity duration-500
 										${schoolInfoIntersected ? "opacity-100" : "opacity-0"}
 										`}>
-						<h2 className="section-heading">Education</h2>
+						<h2 className="section-heading text-black dark:text-white">Education</h2>
 						<div className="flex flex-wrap">
 							<div className="w-full mb-0">
 								<div className="relative flex flex-col sm:flex-row gap-12 justify-center">
@@ -32,10 +32,10 @@ export default function EducationComponents({ location, major, school, graduatio
 									`}
 									     ref={(element) => {
 												if (element) schoolInfoRef.current = element}}>
-										<h3 className="text-xl font-bold text-white mb-2">{school}</h3>
-										<p className="text-white mb-4">Expected Graduation: {graduation}</p>
-										<p className="text-white mb-4">Major: {major}</p>
-										<p className="text-white mb-4">Location: {location}</p>
+										<h3 className="text-xl font-bold mb-2 text-slate-800 dark:text-slate-300">{school}</h3>
+										<p className="mb-4 text-slate-800 dark:text-slate-300">Expected Graduation: {graduation}</p>
+										<p className="mb-4 text-slate-800 dark:text-slate-300">Major: {major}</p>
+										<p className="mb-4 text-slate-800 dark:text-slate-300">Location: {location}</p>
 										<SchoolProgress />
 									</div>
 								</div>
