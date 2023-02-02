@@ -31,16 +31,30 @@
     }
 
     .section-heading {
-        @apply text-3xl font-bold text-primary mb-8 text-center;
+        @apply text-3xl font-bold mb-8 text-center;
     }
 
-    .contact-icon {
-        transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter !important;
+    .transition-duration-300 {
+        @apply transition duration-300 transition-all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .transition-duration-300i {
+        @apply transition duration-300 transition-all !important;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
-        transition-duration: 300ms !important;
     }
 
-    .btn-transition {
-        @apply transition duration-300;
+    .filter-purple {
+        filter: brightness(40%) sepia(0.4) saturate(25) hue-rotate(238deg);
+    }
+
+    .text-hover-purple {
+        @apply dark:hover:text-violet-600 hover:text-violet-600;
+    }
+
+    .border-hover-purple {
+        @apply dark:hover:border-violet-600/40 dark:border-violet-600/0
+        hover:border-violet-600/40 border-violet-600/0
+        border-b-2;
     }
 }

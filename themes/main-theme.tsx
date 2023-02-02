@@ -49,7 +49,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
 				},
 
 				primary: {
-					main: '#910a19',
+					main: '#ffffff',
 				},
 
 				secondary: {

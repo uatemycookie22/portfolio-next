@@ -11,7 +11,7 @@ export function SendButton(props: Parameters<typeof Button>[0] & { isLoading?: b
 		</>)
 	}
 
-	return <Button {...buttonProps} type="submit" color="secondary" variant="outlined" className="self-start flex gap-2">
+	return <Button {...buttonProps} type="submit" color="secondary" variant="outlined" className="self-start flex gap-2 text-black dark:text-white">
 
 		<MSend fontSize={'small'} />
 		<span>

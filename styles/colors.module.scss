@@ -1,11 +1,11 @@
 $nav-text-color: white;
 $main-text-color: white;
 $unt-primary: #00853e;
-$bg-primary: rgb(17, 9, 33);
+$bg-black: rgb(17, 9, 33);
 
 :export {
   navTextColor: $nav-text-color;
   mainTextColor: $main-text-color;
   untPrimary: $unt-primary;
-  bgPrimary: $bg-primary;
+  bgPrimary: $bg-black;
 }

@@ -4,6 +4,7 @@ import NavBarComponent from "../components/NavBar/NavBarComponent";
 import Providers from "./main-provider";
 import '../public/build/tailwind.css';
 import {getContact} from "@api/global";
+import ClientBackground from "@components/ClientBackground/ClientBackground";
 
 export default async function RootLayout({ children }: {
 	children: ReactNode;
@@ -13,17 +14,19 @@ export default async function RootLayout({ children }: {
 
 	return (
 		<html lang="en" className="scroll-smooth">
-		<body className="bg-primary min-w-[330px]">
+		<body className="bg-transparent min-w-[330px]">
 		<Providers>
-			<header>
-				<nav>
-					<NavBarComponent contact={contact} />
-				</nav>
-			</header>
+			<ClientBackground>
+				<header>
+					<nav>
+						<NavBarComponent contact={contact} />
+					</nav>
+				</header>
 
-			<main className="pb-32">
-				{children}
-			</main>
+				<main>
+					{children}
+				</main>
+			</ClientBackground>
 
 		</Providers>
 		</body>

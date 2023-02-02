@@ -11,3 +11,5 @@ export {default as MSend} from "@icons/MSend";
 export {default as MDownload} from "@icons/MDownload";
 export {default as MPhone} from "@icons/MPhone"
 export {default as MDocument} from "@icons/MDocument"
+export {default as MDay} from "@icons/MDay"
+export {default as MNight} from "@icons/MNight"
