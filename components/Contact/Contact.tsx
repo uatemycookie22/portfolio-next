@@ -14,17 +14,17 @@ export default async function Contact() {
 				<div className="container grid grid-rows-[] grid-cols-[repeat(auto-fit,minmax(340px,1fr))] lg:justify-items-end gap-12">
 
 					<div className="flex flex-col mb-12 relative left-auto right-0 w-fit">
-						<h2 className="section-heading text-left">Contact</h2>
+						<h2 className="section-heading text-left text-black dark:text-white">Contact</h2>
 
 						<div className="flex flex-col gap-8">
 
 							<div className="flex flex-col gap-2">
 
-								<h3 className="text-white">
+								<h3 className="text-black dark:text-white">
 									Want to get in touch? Send me an email!
 								</h3>
 
-								<div className="text-white flex gap-2">
+								<div className="text-black dark:text-white flex gap-2">
 									<MEmail />
 									<a href={`mailto:${email}`} className="hover:underline">{email}</a>
 								</div>
@@ -32,11 +32,11 @@ export default async function Contact() {
 							</div>
 							<div className="flex flex-col gap-2">
 
-								<h3 className="text-white">
+								<h3 className="text-black dark:text-white">
 									Central Time Zone (CST)
 								</h3>
 
-								<div className="text-white flex gap-2">
+								<div className="text-black dark:text-white flex gap-2">
 									<MPhone />
 									<a href={`tel:${phone}`} className="hover:underline">{formattedPhone}</a>
 								</div>
@@ -44,7 +44,7 @@ export default async function Contact() {
 							</div>
 
 							<div className="flex flex-col gap-2">
-								<div className="text-white flex gap-2">
+								<div className="text-black dark:text-white flex gap-2">
 									<MDocument />
 									<a href={`/assets/files/lh-resume.pdf`}
 									   target="_blank"
