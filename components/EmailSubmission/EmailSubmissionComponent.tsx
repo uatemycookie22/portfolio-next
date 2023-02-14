@@ -1,13 +1,13 @@
 'use client';
 
 import {FormEvent, useCallback, useState} from "react";
-import {Alert, Slide, Snackbar, TextField} from "@mui/material";
+import {Alert, Slide, Snackbar} from "@mui/material";
 import {invalidPrompt} from "./mock-post-email";
 import {useMutation} from "react-query";
 import {SendButton} from "@components/EmailSubmission/SendButton";
 import {encode} from "@utils/fetch";
-import {useAtom} from "jotai";
-import {darkModeAtom} from "@atoms/dark-mode";
+import {TextArea} from "@components/TextArea/TextArea";
+import {TextField} from "@components/TextField/TextField";
 
 const emailRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
 const successMessage = 'Email received'
@@ -46,7 +46,6 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 	const [errorMessage, setErrorMessage] = useState('')
 	const [invalidMessage, setInvalidMessage] = useState('')
 	const [statusMessage, setStatusMessage] = useState('')
-	const [darkMode] = useAtom(darkModeAtom)
 
 	const mutation = useMutation((form: FormData) => {
 		setInvalidMessage('')
@@ -72,70 +71,42 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 	return (
 		<>
 
-			<form className="flex flex-col gap-y-8 w-full"
-			      name="contact"
-			      method="POST"
-			      onSubmit={sendEmail}
-			      onInvalid={() => {
-				      setInvalidMessage(invalidPrompt)
-				      setStatusMessage('')
-			      }}
-			      data-netlify="true"
+			<form className="flex flex-col gap-y-8 w-full text-whitei"
+				  name="contact"
+				  method="POST"
+				  onSubmit={sendEmail}
+				  onInvalid={() => {
+					  setInvalidMessage(invalidPrompt)
+					  setStatusMessage('')
+				  }}
+				  data-netlify="true"
 			>
 
 				<h1 className="text-black dark:text-white font-semibold">Send me a message</h1>
 
-				<TextField
-					error={!!invalidMessage}
-					required
-					id="outlined-required"
-					variant="outlined"
-					name="address"
-					color="secondary"
-					label="Email address"
-					autoComplete="email"
-					type="email"
-
-
-					inputProps={{
-						style: {
-							WebkitBoxShadow: `0 0 0 100px ${darkMode ? 'rgb(24 24 27)' : 'rgb(228 228 231)'} inset`,
-							WebkitTextFillColor: `${darkMode ? 'rgb(255,255,255)' : 'rgb(0,0,0)'}`
-						},
-						className: "text-black dark:text-white",
-						pattern: emailRegex,
-						title: "email@domain.com",
-					}}
-
-					value={emailContact}
-
-					onChange={(e) => setEmail(e.target.value)}
+				<TextField value={emailContact}
+						   onChange={(e) => setEmail(e.target.value)}
+						   required
+						   id="outlined-required"
+						   name="address"
+						   label="Email address"
+						   type="email"
+						   autoComplete="email"
+						   error={!!errorMessage}
 				/>
 
-				<TextField
-					error={!!invalidMessage}
-					required
-					multiline
-					id="outlined-multiline-static"
-					variant="outlined"
-					name="body"
-					label="Email body"
-					type="text"
-					helperText={invalidMessage}
-					rows={12}
 
-					inputProps={{
-						className: "text-black dark:text-white",
-						minLength: 8,
-						maxLength: 1000,
-					}}
 
-					value={emailMessage}
-
-					onChange={(e) => setMessage(e.target.value)}
+				<TextArea value={emailMessage}
+						   onChange={(e) => setMessage(e.target.value)}
+						   id="outlined-multiline-static"
+						   name="body"
+						   label="Email body"
+						   required
+						   error={!!errorMessage}
 				/>
 
-				<SendButton isLoading={mutation.isLoading} />
+				<SendButton isLoading={mutation.isLoading}/>
 
 				<Snackbar
 					open={!!statusMessage}
@@ -165,7 +136,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 					autoHideDuration={5000}
 					anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
 					TransitionComponent={Slide}
-					onClose={ () => {
+					onClose={() => {
 						setErrorMessage('')
 					}}
 				>
