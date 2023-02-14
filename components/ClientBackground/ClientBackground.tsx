@@ -5,7 +5,7 @@ import {darkModeAtom} from "@atoms/dark-mode";
 
 export default function ClientBackground({children}: { children: ReactNode }) {
 	const [darkMode] = useAtom(darkModeAtom)
-	console.log(darkMode)
+
 	return (<>
 		<div  className={`bg-transparent
 		${darkMode ? 'dark': ''}

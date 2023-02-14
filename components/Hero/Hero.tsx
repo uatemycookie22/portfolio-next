@@ -50,10 +50,7 @@ export default function Hero(props: HeroProps) {
 									<Image className={`hidden lg:block absolute right-0 left-auto rounded-[5rem]
 									transition-opacity duration-500 delay-200 ease-in-out w-full h-[533px]
 									bg-cover filter-purple
-									`} src={'/assets/wavy-shape.png'} alt={'headshot of Lysander'} width={3000} height={5000} priority={true}
-											       style={{
-
-											       }}
+									`} src={'/assets/wavy-shape.png'} alt={'headshot background'} width={3000} height={5000} priority={true}
 											/>
 
 								<Image className={`hidden lg:block transition-opacity duration-500 delay-200 

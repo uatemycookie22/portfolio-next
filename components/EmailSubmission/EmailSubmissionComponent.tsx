@@ -6,6 +6,8 @@ import {invalidPrompt} from "./mock-post-email";
 import {useMutation} from "react-query";
 import {SendButton} from "@components/EmailSubmission/SendButton";
 import {encode} from "@utils/fetch";
+import {useAtom} from "jotai";
+import {darkModeAtom} from "@atoms/dark-mode";
 
 const emailRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
 const successMessage = 'Email received'
@@ -44,6 +46,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 	const [errorMessage, setErrorMessage] = useState('')
 	const [invalidMessage, setInvalidMessage] = useState('')
 	const [statusMessage, setStatusMessage] = useState('')
+	const [darkMode] = useAtom(darkModeAtom)
 
 	const mutation = useMutation((form: FormData) => {
 		setInvalidMessage('')
@@ -80,7 +83,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 			      data-netlify="true"
 			>
 
-				<h1 className="text-white font-semibold">Send me a message</h1>
+				<h1 className="text-black dark:text-white font-semibold">Send me a message</h1>
 
 				<TextField
 					error={!!invalidMessage}
@@ -93,8 +96,13 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 					autoComplete="email"
 					type="email"
 
+
 					inputProps={{
-						style: {WebkitBoxShadow: `0 0 0 100px ${'rgb(24 24 27)'} inset`,},
+						style: {
+							WebkitBoxShadow: `0 0 0 100px ${darkMode ? 'rgb(24 24 27)' : 'rgb(228 228 231)'} inset`,
+							WebkitTextFillColor: `${darkMode ? 'rgb(255,255,255)' : 'rgb(0,0,0)'}`
+						},
+						className: "text-black dark:text-white",
 						pattern: emailRegex,
 						title: "email@domain.com",
 					}}
@@ -110,7 +118,6 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 					multiline
 					id="outlined-multiline-static"
 					variant="outlined"
-					color="secondary"
 					name="body"
 					label="Email body"
 					type="text"
@@ -118,6 +125,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 					rows={12}
 
 					inputProps={{
+						className: "text-black dark:text-white",
 						minLength: 8,
 						maxLength: 1000,
 					}}
