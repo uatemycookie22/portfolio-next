@@ -16,7 +16,7 @@ export function TextArea(props: TextArea) {
             </label>
             <textarea
                 {...inputProps}
-                className={`appearance-none w-full py-2 px-3 leading-tight h-36
+                className={`appearance-none w-full py-2 px-3 leading-tight h-36 resize-y min-h-[9rem]
 				shadow-lg shadow-neutral dark:shadow-black  
 				border rounded border-black/40 hover:border-black outline-0 dark:border-white/40 dark:hover:border-white
 				transition-all duration-100
