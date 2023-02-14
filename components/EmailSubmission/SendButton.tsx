@@ -7,11 +7,14 @@ export function SendButton(props: Parameters<typeof Button>[0] & { isLoading?: b
 
 	if (props.isLoading) {
 		return (<>
-			<CircularProgress color="secondary" size={30} />
+			<CircularProgress className={"text-black dark:text-white"} size={30} />
 		</>)
 	}
 
-	return <Button {...buttonProps} type="submit" color="secondary" variant="outlined" className="self-start flex gap-2 text-black dark:text-white">
+	return <Button {...buttonProps} type="submit" variant="outlined" className={`self-start flex gap-2 
+		text-black dark:text-white border-black dark:border-neutral
+		border-hover-purple text-hover-purple
+	`}>
 
 		<MSend fontSize={'small'} />
 		<span>
