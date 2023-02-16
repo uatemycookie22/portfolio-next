@@ -36,12 +36,6 @@ module.exports = {
         600: colors.violet["600"],
         700: colors.violet["700"],
       }
-      // primary: colors.slate["900"],
-      // secondary: colors.slate["50"],
-      // interactive: {
-      //   primary: colors.fuchsia["600"],
-      //   secondary: colors.fuchsia["700"],
-      // }
     },
 
     textColor: {

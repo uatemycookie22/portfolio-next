@@ -11,7 +11,7 @@ export default function Experience({ jobs }: ExperienceProps) {
 
 	return (<section id="experience" className="page-section">
 			<div className="container mx-auto">
-				<h2 className="section-heading">Work Experience</h2>
+				<h2 className="section-heading text-black dark:text-white">Work Experience</h2>
 				<div className="grid place-items-center grid-rows-[] grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-4">
 					{jobCards}
 				</div>

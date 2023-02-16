@@ -10,7 +10,7 @@ export default function ToggleDarkmodeButton({onClick, ...rest}: Omit<DarkModeTo
 
 	return (
 		<button
-			className={`font-medium py-2 px-4 w-fit text-hover-purple border-hover-purple
+			className={`font-medium py-2 px-4 w-fit text-hover-purple border-hover-fade-purple
 				transition-duration-300
 				dark:text-white
 				`}
