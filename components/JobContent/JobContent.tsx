@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import {MNewTabIcon} from "@icons";
+import {MAssignmentInd, MDateRange, MGeopin, MNewTabIcon} from "@icons";
 
 type ImageProps = Parameters<typeof Image>[0]
 type TechnologyProps = Pick<ImageProps, 'src' | 'alt'>
@@ -33,7 +33,7 @@ export default function JobContent(props: JobContentProps) {
 		(<Technology {...technologyProps} key={i}/>))
 
 	return <>
-		<div className="h-full w-full place-items-start pb-4  grid grid-rows-[0.5fr_0.5fr]">
+		<div className="h-full w-full grid grid-rows-[1fr_2fr]">
 
 			<div className="ml-auto left-auto right-0 mt-2 mr-2 absolute">
 				<a className="text-secondary text-left" href={props.companyHref} target="_blank" rel="noreferrer"
@@ -43,25 +43,34 @@ export default function JobContent(props: JobContentProps) {
 				</a>
 			</div>
 
-			<div className="bg-center w-full h-[10rem]  flex justify-center border-b-2 border-gray-200 rounded-t-lg">
+			<div className="bg-center w-full h-full flex justify-center border-b-2 border-gray-200 rounded-t-lg">
 				<div className="w-[80%] flex items-center">
 					<Image width={1280} height={640} src={props.companyLogo} alt={props.companyName} />
 				</div>
 			</div>
-			<div className="flex flex-col items-start mb-0 relative rounded-lg h-full w-full">
+			<div className="flex flex-col items-start mb-0 relative h-full w-full p-6">
 
-				<h3 className="text-xl font-bold text-secondary ml-6 mt-10">{props.companyName}</h3>
-				<div className="p-6 block items-start justify-start">
-					<p className="text-secondary text-left">Location: {props.location}</p>
-					<p className="text-secondary text-left">Duration: {props.duration}</p>
-					<p className="text-secondary text-left">Position: {props.position}</p>
-				</div>
-				<h3 className={`text-xl font-bold text-secondary ml-6
+				<h3 className="text-xl font-bold text-secondary mb-2">{props.companyName}</h3>
+				<li className="flex flex-col items-start justify-start gap-y-4">
+					<ul className="flex gap-2 items-center">
+						<MGeopin fontSize='small' />
+						<p className="text-secondary text-left">{props.location}</p>
+					</ul>
+					<ul className="flex gap-2 items-center">
+						<MDateRange fontSize='small' />
+						<p className="text-secondary text-left">{props.duration}</p>
+					</ul>
+					<ul className="flex gap-2 items-center">
+						<MAssignmentInd fontSize='small' />
+						<p className="text-secondary text-left">{props.position}</p>
+					</ul>
+				</li>
+				<h3 className={`text-xl font-bold text-secondary mt-4 mb-2
 				${props.technologiesUsed ? '' : 'hidden'} 
 					`}>
 					Technologies used
 				</h3>
-				<div className="p-6 flex flex-wrap gap-x-4 gap-y-2">
+				<div className="flex flex-wrap gap-x-4 gap-y-2">
 					{technologies}
 				</div>
 			</div>
