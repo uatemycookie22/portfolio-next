@@ -20,9 +20,10 @@
 
 @layer components {
     .transform-perspective {
-        transform: scale(1.04);
+        transform: perspective(3px) translateZ(0);
+        -webkit-transform: scale(1.0621);
         backface-visibility: hidden;
-        filter: blur(0px);
+        -webkit-filter: blur(0);
         -webkit-font-smoothing: subpixel-antialiased;
     }
 
