@@ -31,7 +31,7 @@
     }
 
     .section-heading {
-        @apply text-3xl font-bold text-white mb-8 text-center;
+        @apply text-3xl font-bold mb-8 text-center;
     }
 
     .transition-duration-300 {
@@ -53,8 +53,16 @@
     }
 
     .border-hover-purple {
+        @apply dark:hover:border-violet-600 hover:border-violet-600;
+    }
+
+    .border-hover-fade-purple {
         @apply dark:hover:border-violet-600/40 dark:border-violet-600/0
         hover:border-violet-600/40 border-violet-600/0
         border-b-2;
+    }
+
+    .text-whitei {
+        @apply text-white !important;
     }
 }
