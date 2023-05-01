@@ -26,7 +26,10 @@ export default function Hero(props: HeroProps) {
 
 
 						<div className="mt-56 max-w-lg">
-							<h1 className="text-4xl font-bold mb-2 text-black dark:text-white">Lysander Hernandez</h1>
+							<h1 className={`text-4xl font-extrabold mb-2 text-transparent bg-clip-text 
+								bg-gradient-to-r from-violet-700 to-violet-500`}>
+								Lysander Hernandez
+							</h1>
 							<p className="text-xl mb-8 text-slate-800 dark:text-slate-300">{props.primary}</p>
 							<PdfButton href="/assets/files/lh-resume.pdf">
 								Resume
@@ -64,7 +67,7 @@ export default function Hero(props: HeroProps) {
 
 							<div className="bg-none py-8 self-center lg:px-8">
 								<div className="w-full lg:container">
-									<h2 className="section-heading text-2xl text-left lg:text-center text-black dark:text-white" >Key Facts</h2>
+									<h2 className="section-heading text-2xl text-left lg:text-center text-black dark:text-white" >About Me</h2>
 									<div className="block lg:grid lg:grid-cols-3 gap-x-16">
 										<SimpleCard>
 
