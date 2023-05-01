@@ -33,6 +33,7 @@ module.exports = {
       },
       neutral: colors.neutral["500"],
       violet: {
+        500: colors.violet["300"],
         600: colors.violet["600"],
         700: colors.violet["700"],
       }
