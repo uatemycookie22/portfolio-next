@@ -20,7 +20,7 @@
 
 @layer components {
     .transform-perspective {
-        transform: scale(1.16);
+        transform: scale(1.05);
         backface-visibility: hidden;
         filter: blur(0px);
         -webkit-font-smoothing: subpixel-antialiased;
