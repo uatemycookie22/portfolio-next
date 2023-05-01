@@ -1,7 +1,6 @@
 'use client';
 
-import {useEffect, useMemo, useRef, useState} from "react";
-import {formatPhoneNumber} from "@utils/formatters";
+import {useEffect, useRef, useState} from "react";
 import {useAtom} from "jotai";
 import {darkModeAtom} from "@atoms/dark-mode";
 import NavBarButton from "@components/NavBar/NavBarButton";
@@ -12,11 +11,9 @@ type NavbarProps = {
 }
 
 export default function NavBarComponent(props: NavbarProps) {
-	const { phone, email } = props.contact
+	const { email } = props.contact
 	const [isMenuOpen, setMenuOpen] = useState(false)
 	const scrollDirection = useScrollDirection()
-
-	const phoneFormatted = useMemo(() => formatPhoneNumber(phone), [phone])
 
 	const toggleMenu = () => {
 		setMenuOpen(!isMenuOpen);
@@ -106,9 +103,6 @@ export default function NavBarComponent(props: NavbarProps) {
 						{email}
 					</NavBarButton>
 
-					<NavBarButton href={`tel:${phone}`}>
-						{phoneFormatted}
-					</NavBarButton>
 				</div>
 			</div>
 		</div>
