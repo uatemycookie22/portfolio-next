@@ -58,7 +58,7 @@ export default function Hero(props: HeroProps) {
 
 								<Image className={`hidden lg:block transition-opacity duration-500 delay-200 
 								ease-in-out w-fit h-[533px] z-10 bg-cover
-							`} src={'/assets/headshot1.png'} alt={'headshot of Lysander'} width={400} height={533} priority={true}
+							`} src={'/assets/headshot-prod.png'} alt={'headshot of Lysander'} width={400} height={533} priority={true}
 								/>
 							</div>
 
