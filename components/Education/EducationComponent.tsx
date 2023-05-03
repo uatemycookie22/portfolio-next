@@ -32,7 +32,7 @@ export default function EducationComponents({ location, major, school, graduatio
 									`}
 									     ref={(element) => {
 												if (element) schoolInfoRef.current = element}}>
-										<h3 className="text-xl font-bold mb-2 text-slate-800 dark:text-slate-300">{school}</h3>
+										<h3 className="text-xl font-bold mb-2 text-slate-800 dark:text-white">{school}</h3>
 										<p className="mb-4 text-slate-800 dark:text-slate-300">Expected Graduation: {graduation}</p>
 										<p className="mb-4 text-slate-800 dark:text-slate-300">Major: {major}</p>
 										<p className="mb-4 text-slate-800 dark:text-slate-300">Location: {location}</p>
