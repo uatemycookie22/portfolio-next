@@ -1,7 +1,11 @@
 import {MGraduation} from "@icons";
 import useFirstIntersection from "@hooks/first-intersection";
 
-const SchoolProgress = () => {
+interface SchoolProgressProps {
+	percentage: number
+}
+
+const SchoolProgress = ({percentage}: SchoolProgressProps) => {
 	const [barRef, barIntersected] = useFirstIntersection()
 
 	return (
@@ -9,7 +13,8 @@ const SchoolProgress = () => {
 			<div className="flex w-full mt-4 items-center gap-x-4">
 				<div className="h-2 w-full rounded-full bg-opacity-50 bg-zinc-500 dark:bg-neutral">
 					<div className={`transition-size delay-200 duration-700 rounded-full h-full bg-violet-600 dark:bg-white rounded-full
-					${barIntersected ? "w-[45%]" : "w-0"}`}
+					${barIntersected ? `w-[65%]` : "w-0"}`}
+						 style={{width: `${percentage}%`}}
 					     ref={el => {if (el) barRef.current = el}}>
 					</div>
 				</div>
