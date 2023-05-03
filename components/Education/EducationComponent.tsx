@@ -1,7 +1,7 @@
 'use client';
 
 import SchoolProgress from "@components/Education/SchoolProgress/SchoolProgress";
-import useFirstIntersection from "@hooks/use-first-intersection";
+import useFirstIntersection from "@hooks/first-intersection";
 import Image from "next/image";
 
 interface EducationProps {

@@ -2,11 +2,15 @@ import {useAtom} from "jotai";
 import {darkModeAtom} from "@atoms/dark-mode";
 import {MDay, MNight} from "@icons";
 import {ButtonHTMLAttributes, DetailedHTMLProps} from "react";
+import useLoaded from "@hooks/loaded";
 
 type DarkModeToggle = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
 export default function ToggleDarkmodeButton({onClick, ...rest}: Omit<DarkModeToggle, 'className'>) {
 	const [darkMode] = useAtom(darkModeAtom)
+	const loaded = useLoaded()
+
+	if (!loaded) return (<></>)
 
 	return (
 		<button

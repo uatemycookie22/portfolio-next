@@ -1,5 +1,5 @@
 import {MGraduation} from "@icons";
-import useFirstIntersection from "@hooks/use-first-intersection";
+import useFirstIntersection from "@hooks/first-intersection";
 
 const SchoolProgress = () => {
 	const [barRef, barIntersected] = useFirstIntersection()

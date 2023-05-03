@@ -1,8 +1,8 @@
-import useIdempotent from "@hooks/use-idempotent";
+import useIdempotent from "@hooks/idempotent";
 import {useEffect} from "react";
-import useIntersection from "@hooks/use-intersection";
+import useIntersection from "@hooks/intersection";
 
-export default function useFirstIntersection( options?: Parameters<typeof useIntersection>[0] ): ReturnType<typeof useIntersection> {
+export default function useFirstIntersection(options?: Parameters<typeof useIntersection>[0] ): ReturnType<typeof useIntersection> {
 	const [ref, refIntersecting] = useIntersection(options)
 
 	const [intersected, setIntersected] = useIdempotent(false)

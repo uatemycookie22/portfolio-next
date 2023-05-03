@@ -22,7 +22,7 @@ export default function Hero(props: HeroProps) {
 		<>
 				<div className="bg-center bg-no-repeat px-8 lg:px-0 bg-cover h-min-screen" style={{ backgroundImage: `none` }}>
 					<div className="flex flex-col gap-y-12 h-full justify-center text-white">
-						<div className="w-full pl-4 grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] place-items-start lg:place-items-end">
+						<div className="w-full pl-4 grid grid-cols-[repeat(auto-fit,minmax(min(34rem,90%),1fr))] place-items-start lg:place-items-end">
 
 
 						<div className="mt-56 max-w-lg">

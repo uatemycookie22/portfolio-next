@@ -2,7 +2,7 @@
 
 import {ReactNode, useContext, useEffect} from "react";
 import {IntersectionRefsContext} from "../../context/intersection-refs";
-import useIntersection from "../../hooks/use-intersection";
+import useIntersection from "@hooks/intersection";
 
 export default function TimelineConnectorComponent({children, index}: {children: ReactNode, index: number}) {
 	const { dispatch } = useContext(IntersectionRefsContext)

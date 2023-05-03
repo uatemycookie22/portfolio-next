@@ -9,7 +9,7 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["./components/*"],
-      "@hooks/*": ["./hooks/*.tsx"],
+      "@hooks/*": ["./hooks/*.ts"],
       "@styles/*": ["./styles/*"],
       "@utils/*": ["./utils/*.ts"],
       "@icons": ["./components/WrappedIcons/index.ts"],
