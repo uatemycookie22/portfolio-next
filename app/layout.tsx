@@ -9,11 +9,10 @@ import ClientBackground from "@components/ClientBackground/ClientBackground";
 export default async function RootLayout({ children }: {
 	children: ReactNode;
 }) {
-
 	const contact = await getContact()
 
 	return (
-		<html lang="en" className="scroll-smooth">
+		<html lang="en" className="scroll-smooth bg-zinc-200 dark">
 		<body className="bg-transparent min-w-[330px]">
 		<Providers>
 			<ClientBackground>

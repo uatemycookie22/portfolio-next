@@ -11,7 +11,7 @@ export default async function Contact() {
 	return (<>
 		<section id="contact" className="page-section">
 			<div className="relative w-full flex justify-center">
-				<div className="container grid grid-rows-[] grid-cols-[repeat(auto-fit,minmax(340px,1fr))] lg:justify-items-end gap-12">
+				<div className="container grid grid-rows-[] grid-cols-[repeat(auto-fit,minmax(min(340px,90%),1fr))] lg:justify-items-end gap-12">
 
 					<div className="flex flex-col mb-12 relative left-auto right-0 w-fit">
 						<h2 className="section-heading text-left text-black dark:text-white">Contact</h2>
@@ -61,7 +61,7 @@ export default async function Contact() {
 						</div>
 
 					</div>
-						<div className="w-full min-w-[20rem]">
+						<div className="w-full">
 							<EmailSubmission recipientEmail={email} />
 							<StaticForm />
 						</div>

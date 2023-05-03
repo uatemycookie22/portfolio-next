@@ -66,3 +66,7 @@
         @apply text-white !important;
     }
 }
+
+html.dark {
+    background-color: #18181b;
+}
