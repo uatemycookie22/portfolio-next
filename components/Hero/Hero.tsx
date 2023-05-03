@@ -84,7 +84,7 @@ export default function Hero(props: HeroProps) {
 										<SimpleCard>
 
 											<CardHeading heading={props.facts[1].heading}>
-												<MDnsIcon className="text-4xl text-black dark:text-slate-300" />
+												<MDnsIcon className="text-4xl text-black dark:text-white" />
 											</CardHeading>
 
 											<p className="text-slate-800 text-base dark:text-slate-300">
@@ -96,7 +96,7 @@ export default function Hero(props: HeroProps) {
 										<SimpleCard>
 
 											<CardHeading heading={props.facts[2].heading}>
-												<MEmojiEventsIcon className="text-4xl text-black dark:text-slate-300" />
+												<MEmojiEventsIcon className="text-4xl text-black dark:text-white" />
 											</CardHeading>
 
 											<p className="text-slate-800 text-base dark:text-slate-300">
