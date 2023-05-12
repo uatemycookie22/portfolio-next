@@ -3,17 +3,17 @@
 import {FormEvent, useCallback, useState} from "react";
 import {Alert, Slide, Snackbar} from "@mui/material";
 import {invalidPrompt} from "./mock-post-email";
-import {useMutation} from "react-query";
+import {MutateOptions, useMutation} from "react-query";
 import {SendButton} from "@components/EmailSubmission/SendButton";
 import {encode} from "@utils/fetch";
 import {TextArea} from "@components/TextArea/TextArea";
 import {TextField} from "@components/TextField/TextField";
 
-const emailRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
 const successMessage = 'Email received'
+const failedEmailPost =  'Email submission failed.'
 
-const messageRecords = `http://${process.env.NEXT_PUBLIC_PB_URL}/api/collections/messages/records`
-async function postEmail(body: FormData): Promise<[boolean, string]> {
+type ResponseError = [Response | undefined, string]
+async function postEmail(body: FormData): Promise<ResponseError> {
 	try {
 		const controller = new AbortController();
 		const id = setTimeout(() => controller.abort(), 4000);
@@ -28,11 +28,23 @@ async function postEmail(body: FormData): Promise<[boolean, string]> {
 		})
 		clearTimeout(id)
 
-		return [res.ok, res.ok ? '' : invalidPrompt]
+		let errorReason = ''
+		if (!res.ok) {
+			switch (res.status) {
+				case 500: {
+					errorReason = failedEmailPost
+					break
+				}
+				default: {
+					errorReason = invalidPrompt
+					break
+				}
+			}
+		}
+
+		return [res, errorReason]
 	} catch (err) {
-		console.error('Email submission timed out.')
-		console.error(err)
-		return [false, 'Email submission failed.']
+		return [undefined, 'Email submission timed out.']
 	}
 }
 
@@ -44,29 +56,20 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 	const [emailContact, setEmail] = useState('')
 	const [emailMessage, setMessage] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
-	const [invalidMessage, setInvalidMessage] = useState('')
 	const [statusMessage, setStatusMessage] = useState('')
 
-	const mutation = useMutation((form: FormData) => {
-		setInvalidMessage('')
-		return postEmail(form)
+	const [emailMutation, sendEmail] = useEmail({
+		onSuccess: (res, formData) => {
+			console.log(res, formData)
+			setMessage('')
+			setStatusMessage(successMessage)
+		},
+
+		onError: error => {
+			console.error(error)
+			setErrorMessage(error.message)
+		}
 	})
-
-	const sendEmail = useCallback( (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-
-		mutation.mutate(new FormData(e.currentTarget), {
-			onSuccess: ([success, errorMessage]) => {
-				if (!success) {
-					setErrorMessage(errorMessage)
-					return
-				}
-
-				setMessage('')
-				setStatusMessage(successMessage)
-			},
-		})
-	}, [mutation])
 
 	return (
 		<>
@@ -76,7 +79,6 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 				  method="POST"
 				  onSubmit={sendEmail}
 				  onInvalid={() => {
-					  setInvalidMessage(invalidPrompt)
 					  setStatusMessage('')
 				  }}
 				  data-netlify="true"
@@ -93,6 +95,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 						   type="email"
 						   autoComplete="email"
 						   error={!!errorMessage}
+						   aria-label={'Email address'}
 				/>
 
 
@@ -104,9 +107,10 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 						   label="Email body"
 						   required
 						   error={!!errorMessage}
+						  aria-label={'Message text body'}
 				/>
 
-				<SendButton isLoading={mutation.isLoading}/>
+				<SendButton isLoading={emailMutation.isLoading}/>
 
 				<Snackbar
 					open={!!statusMessage}
@@ -150,7 +154,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 					>
 						{errorMessage}
 
-						&nbsp;Please email me directly at <span>
+						&nbsp;If the issue persists, please email me directly at <span>
 						<a className="text-blue-800 underline" href={`mailto:${recipientEmail}`}>
 							{recipientEmail}
 						</a>
@@ -166,4 +170,23 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 
 		</>
 			)
+}
+
+function useEmail(mutateOptions?:  (MutateOptions<ResponseError, Error, FormData>)) {
+	const emailMutation = useMutation<ResponseError, Error, FormData>(async (form) => {
+		const [_, errorMessage] = await postEmail(form)
+
+		if (errorMessage) {
+			throw new Error(errorMessage)
+		}
+
+		return postEmail(form)
+	})
+
+	const sendEmail = useCallback( (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		emailMutation.mutate(new FormData(e.currentTarget), mutateOptions)
+	}, [emailMutation, mutateOptions])
+
+	return [emailMutation, sendEmail] as const
 }

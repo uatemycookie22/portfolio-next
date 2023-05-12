@@ -53,7 +53,7 @@ export default async function Contact() {
 									>
 										Resume
 									</a>
-									<a href={`/assets/files/lh-resume.pdf`} download>
+									<a href={`/assets/files/lh-resume.pdf`} aria-label={"Lysander's Resume"} download>
 										<MDownload fontSize="small" />
 									</a>
 								</div>
