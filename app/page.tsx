@@ -2,13 +2,13 @@ import IntroComponent from "@components/Intro/IntroComponent";
 import EducationComponents from "@components/Education/EducationComponent";
 import Experience from "@components/Experience/Experience";
 import Contact from "@components/Contact/Contact";
+import {Metadata} from "next";
 
 async function getContent(): Promise<HomeContent> {
 	let content: HomeContent
 
 	try {
-		const res = (await import('public/content.json')).default
-		content = res
+		content = (await import('public/content.json')).default
 	}
 	catch (err) {
 		content = {
@@ -21,6 +21,14 @@ async function getContent(): Promise<HomeContent> {
 
 	return content
 }
+
+export const metadata: Metadata = {
+	title: 'Lysander H',
+	description: 'The personal page of Lysander Hernandez, an aspiring software developer.' +
+		' Interests are in fullstack web development and machine learning.',
+	robots: 'noindex',
+	viewport: {width: 'device-width', initialScale: 1},
+};
 
 export default async function HomePage() {
 	const content = await getContent()
