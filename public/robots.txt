@@ -1,5 +1,3 @@
-//robots.txt
-
 # Block all crawlers for /assets/files/lh-resume.pdf
 User-agent: *
 Disallow: /assets/files/lh-resume.pdf

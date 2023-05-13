@@ -50,10 +50,10 @@ export default function Hero(props: HeroProps) {
 							</div>
 						</div>
 							<div className="w-full relative flex justify-center">
-									<Image className={`hidden lg:block absolute right-0 left-auto rounded-[5rem]
-									transition-opacity duration-500 delay-200 ease-in-out w-full h-[533px]
-									bg-cover filter-purple
-									`} src={'/assets/wavy-shape.png'} alt={'headshot background'} width={3000} height={5000} priority={true}
+									<Image className={`hidden lg:block absolute rounded-[5rem]
+									transition-opacity duration-500 delay-200 ease-in-out w-[911px] h-[533px]
+									bg-cover object-cover filter-purple
+									`} src={'/assets/wavy-shape.png'} alt={'headshot background'} fill={true} priority={true}
 											/>
 
 								<Image className={`hidden lg:block transition-opacity duration-500 delay-200 
