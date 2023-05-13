@@ -53,8 +53,11 @@ export default function Hero(props: HeroProps) {
 									<Image className={`hidden lg:block absolute rounded-[5rem]
 									transition-opacity duration-500 delay-200 ease-in-out w-[911px] h-[533px]
 									bg-cover object-cover filter-purple
-									`} src={'/assets/wavy-shape.png'} alt={'headshot background'} fill={true} priority={true}
-											/>
+									`}
+										   src={'/assets/wavy-shape.png'} alt={'headshot background'}
+										   fill={true} sizes={'sizes="50vw"'}
+										   priority={true}
+									/>
 
 								<Image className={`hidden lg:block transition-opacity duration-500 delay-200 
 								ease-in-out w-fit h-[533px] z-10 bg-cover
