@@ -18,6 +18,7 @@ export default function ToggleDarkmodeButton({onClick, ...rest}: Omit<DarkModeTo
 				transition-duration-300
 				dark:text-white
 				`}
+			aria-label={'Toggle dark mode'}
 			onClick={onClick}
 			{...rest}
 		>

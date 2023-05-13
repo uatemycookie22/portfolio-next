@@ -1,0 +1,1 @@
+export const invalidPrompt = 'Message must be at least 8 characters.'

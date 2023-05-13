@@ -2,38 +2,32 @@
 
 import {FormEvent, useCallback, useState} from "react";
 import {Alert, Slide, Snackbar} from "@mui/material";
-import {invalidPrompt} from "./mock-post-email";
-import {useMutation} from "react-query";
+import {MutateOptions, useMutation} from "react-query";
 import {SendButton} from "@components/EmailSubmission/SendButton";
 import {encode} from "@utils/fetch";
 import {TextArea} from "@components/TextArea/TextArea";
 import {TextField} from "@components/TextField/TextField";
+import {invalidPrompt} from "@utils/api-constants";
 
-const emailRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
-const successMessage = 'Email received'
+const successMessage = 'Email received.'
+const failedEmailPost =  'Email submission failed.'
 
-const messageRecords = `http://${process.env.NEXT_PUBLIC_PB_URL}/api/collections/messages/records`
-async function postEmail(body: FormData): Promise<[boolean, string]> {
-	try {
-		const controller = new AbortController();
-		const id = setTimeout(() => controller.abort(), 4000);
+const ErrorMessage = ({ errorMessage, recipientEmail }: {errorMessage: string, recipientEmail: string}) => {
+	if (!errorMessage) return null
 
-		const res = await fetch('/', {
-			method: 'POST',
-			headers: { "Content-Type": "application/x-www-form-urlencoded" },
-			// headers: {'Content-Type': 'application/json',},
-			body: encode({"form-name": 'contact', ...Object.fromEntries(body.entries())}),
-			// signal: AbortSignal.timeout(4000)
-			signal: controller.signal
-		})
-		clearTimeout(id)
-
-		return [res.ok, res.ok ? '' : invalidPrompt]
-	} catch (err) {
-		console.error('Email submission timed out.')
-		console.error(err)
-		return [false, 'Email submission failed.']
+	if (errorMessage == invalidPrompt) {
+		return (<>{invalidPrompt}</>)
 	}
+
+	return (<>
+		{errorMessage}
+
+		&nbsp;If the issue persists, please email me directly at <span>
+				<a className="text-blue-800 underline" href={`mailto:${recipientEmail}`}>
+					{recipientEmail}
+				</a>
+			</span>
+	</>)
 }
 
 interface EmailSubmissionProps {
@@ -44,29 +38,18 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 	const [emailContact, setEmail] = useState('')
 	const [emailMessage, setMessage] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
-	const [invalidMessage, setInvalidMessage] = useState('')
 	const [statusMessage, setStatusMessage] = useState('')
 
-	const mutation = useMutation((form: FormData) => {
-		setInvalidMessage('')
-		return postEmail(form)
+	const [emailMutation, sendEmail] = useEmail({
+		onSuccess: () => {
+			setMessage('')
+			setStatusMessage(successMessage)
+		},
+
+		onError: error => {
+			setErrorMessage(error.message)
+		}
 	})
-
-	const sendEmail = useCallback( (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-
-		mutation.mutate(new FormData(e.currentTarget), {
-			onSuccess: ([success, errorMessage]) => {
-				if (!success) {
-					setErrorMessage(errorMessage)
-					return
-				}
-
-				setMessage('')
-				setStatusMessage(successMessage)
-			},
-		})
-	}, [mutation])
 
 	return (
 		<>
@@ -74,9 +57,9 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 			<form className="flex flex-col gap-y-8 w-full text-whitei"
 				  name="contact"
 				  method="POST"
+				// @ts-ignore
 				  onSubmit={sendEmail}
 				  onInvalid={() => {
-					  setInvalidMessage(invalidPrompt)
 					  setStatusMessage('')
 				  }}
 				  data-netlify="true"
@@ -93,6 +76,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 						   type="email"
 						   autoComplete="email"
 						   error={!!errorMessage}
+						   aria-label={'Email address'}
 				/>
 
 
@@ -104,9 +88,10 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 						   label="Email body"
 						   required
 						   error={!!errorMessage}
+						  aria-label={'Message text body'}
 				/>
 
-				<SendButton isLoading={mutation.isLoading}/>
+				<SendButton isLoading={emailMutation.isLoading}/>
 
 				<Snackbar
 					open={!!statusMessage}
@@ -148,14 +133,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 							setErrorMessage('')
 						}}
 					>
-						{errorMessage}
-
-						&nbsp;Please email me directly at <span>
-						<a className="text-blue-800 underline" href={`mailto:${recipientEmail}`}>
-							{recipientEmail}
-						</a>
-
-						</span>
+						<ErrorMessage errorMessage={errorMessage} recipientEmail={recipientEmail} />
 					</Alert>
 
 
@@ -166,4 +144,79 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 
 		</>
 			)
+}
+
+
+type ResponseError = [Response | undefined, string]
+async function postEmail(body: FormData): Promise<ResponseError> {
+	let errorReason = ''
+
+	try {
+		const controller = new AbortController();
+		const id = setTimeout(() => controller.abort(), 4000);
+
+		const res = await fetch('/api/email', {
+			method: 'POST',
+			headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			// headers: {'Content-Type': 'application/json',},
+			body: encode({"form-name": 'contact', ...Object.fromEntries(body.entries())}),
+			// signal: AbortSignal.timeout(4000)
+			signal: controller.signal
+		})
+		clearTimeout(id)
+
+		if (!res.ok) {
+			switch (res.status) {
+				case 400: {
+					errorReason = invalidPrompt
+					break
+				}
+				default: {
+					errorReason = failedEmailPost
+					break
+				}
+			}
+		}
+
+		return [res, errorReason]
+	} catch (err) {
+		if (err instanceof Error) {
+			switch (err.name) {
+				case 'AbortError': {
+					errorReason = 'Email submission timed out.'
+					break
+				}
+				case 'TypeError': {
+					errorReason = 'No connection.'
+					break
+				}
+				default: {
+					errorReason = failedEmailPost
+				}
+			}
+			console.error(err)
+		}
+
+		return [undefined, errorReason]
+	}
+}
+
+
+function useEmail(mutateOptions?:  (MutateOptions<ResponseError, Error, FormData>)) {
+	const emailMutation = useMutation<ResponseError, Error, FormData>(async (form) => {
+		const [res, errorMessage] = await postEmail(form)
+
+		if (errorMessage) {
+			throw new Error(errorMessage)
+		}
+
+		return [res, errorMessage]
+	})
+
+	const sendEmail = useCallback( (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		emailMutation.mutate(new FormData(e.currentTarget), mutateOptions)
+	}, [emailMutation, mutateOptions])
+
+	return [emailMutation, sendEmail] as const
 }
