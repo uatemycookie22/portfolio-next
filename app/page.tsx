@@ -28,6 +28,9 @@ export const metadata: Metadata = {
 		' Interests are in fullstack web development and machine learning.',
 	robots: 'noindex',
 	viewport: {width: 'device-width', initialScale: 1},
+	icons: [
+		{rel: 'shortcut icon', url: '/favicon.ico'}
+	],
 };
 
 export default async function HomePage() {
