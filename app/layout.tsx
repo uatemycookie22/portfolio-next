@@ -12,8 +12,7 @@ export default async function RootLayout({ children }: {
 	const contact = await getContact()
 
 	return (
-		<html title={`The personal page of Lysander Hernandez`}
-			  lang="en"
+		<html lang="en"
 			  className="scroll-smooth bg-zinc-200 dark">
 		<body className="bg-transparent min-w-[330px]">
 		<Providers>

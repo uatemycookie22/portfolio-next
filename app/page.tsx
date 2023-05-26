@@ -26,7 +26,6 @@ export const metadata: Metadata = {
 	title: 'Lysander H',
 	description: 'The personal page of Lysander Hernandez, an aspiring software developer.' +
 		' Interests are in fullstack web development and machine learning.',
-	robots: 'noindex',
 	viewport: {width: 'device-width', initialScale: 1},
 	icons: [
 		{rel: 'shortcut icon', url: '/favicon.ico'}

@@ -2,6 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import {Blog} from "./blogs";
 import {pb} from "@pb/pocketbase";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: `Blogs | Lysander H`,
+    description: `List of blogs`,
+    viewport: {width: 'device-width', initialScale: 1},
+    icons: [
+        {rel: 'shortcut icon', url: '/favicon.ico'}
+    ],
+};
 
 function BlogListing({blogRecord} : { blogRecord: Blog }) {
     const { title, created, description, id } = blogRecord
