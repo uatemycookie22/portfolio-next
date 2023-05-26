@@ -1,6 +1,7 @@
 import Image from "next/image";
 import {pb} from "@pb/pocketbase";
 import {Blog} from "../blogs";
+import {Metadata} from "next";
 
 async function getBlog(id: string) {
     return await pb.collection('blogs').getOne<Blog>(id)
@@ -54,3 +55,15 @@ export async function generateStaticParams() {
         id: blog.id,
     }));
 }
+
+export async function generateMetadata({ params }: { params: { id: string }}) {
+    const { title, description } = await getBlog(params.id)
+    return { title: `${title} | Lysander H`, description };
+}
+
+export const metadata: Metadata = {
+    viewport: {width: 'device-width', initialScale: 1},
+    icons: [
+        {rel: 'shortcut icon', url: '/favicon.ico'}
+    ],
+};

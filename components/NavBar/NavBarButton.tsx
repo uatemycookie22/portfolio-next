@@ -1,12 +1,14 @@
 import {AnchorHTMLAttributes, DetailedHTMLProps} from "react";
+import Link from "next/link";
 
 export default function NavBarButton(anchorProps:
 	                             DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) {
 
-	const {className: _, ...rest} = anchorProps
+	const {className: _, href, ref: __, ...rest} = anchorProps
 
 	return (
-		<a {...rest}
+		<Link {...rest}
+			href={`${href}`}
 		   className={`block lg:inline-block py-2 px-4 text-hover-purple border-hover-fade-purple
 				font-semibold text-black
 			  transition-duration-300

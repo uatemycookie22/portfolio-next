@@ -99,6 +99,10 @@ export default function NavBarComponent(props: NavbarProps) {
 						{/*	Projects*/}
 						{/*</NavBarButton>*/}
 
+					<NavBarButton href='/blogs'>
+						Blogs
+					</NavBarButton>
+
 					<NavBarButton href={`mailto:${email}`}>
 						{email}
 					</NavBarButton>
