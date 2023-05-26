@@ -1,5 +1,6 @@
-import {pb} from "../../pocketbase/pocketbase";
+import {pb} from "@pb/pocketbase";
 import Image from "next/image";
+import Link from "next/link";
 
 export const revalidate = 3;
 
@@ -17,7 +18,7 @@ async function getBlogs() {
 }
 
 function BlogListing({blogRecord} : { blogRecord: Blog }) {
-    const { title, created, description } = blogRecord
+    const { title, created, description, id } = blogRecord
     const date = new Date(Date.parse(created)).toDateString()
 
     return (
@@ -28,7 +29,7 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
 
 
 
-            <a href='#' className={`relative flex items-center 
+            <Link href={`/blogs/${id}`} className={`relative flex items-center 
             h-full w-full
             rounded-lg shadow flex-row
             hover:bg-zinc-500 hover:bg-opacity-10
@@ -53,7 +54,7 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
                     text-sm md:text-[16px]
                     `}>{description}</p>
                 </div>
-            </a>
+            </Link>
         </li>
     )
 }

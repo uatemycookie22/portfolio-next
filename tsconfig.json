@@ -15,6 +15,7 @@
       "@icons": ["./components/WrappedIcons/index.ts"],
       "@icons/*": ["./components/WrappedIcons/*.tsx"],
       "@atoms/*": ["./atoms/*.ts"],
+      "@pb/*": ["./pocketbase/*.ts"],
       "@api/*": ["./api/*.ts"]
     },
     "allowJs": true,
