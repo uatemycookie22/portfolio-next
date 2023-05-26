@@ -1,8 +1,6 @@
 import Image from "next/image";
 import {pb} from "@pb/pocketbase";
 
-export const revalidate = 3;
-
 interface Blog {
     id: string
     title: string
@@ -16,7 +14,7 @@ async function getBlog(id: string) {
     return await pb.collection('blogs').getOne<Blog>(id)
 }
 
-export default async function BlogPage({ params }: any) {
+export default async function BlogPage({ params }: { params: { id: string }}) {
     const { title, description, content, created } = await getBlog(params.id)
     const date = new Date(Date.parse(created)).toDateString()
 
@@ -56,4 +54,11 @@ export default async function BlogPage({ params }: any) {
         </section>
 
     </>)
+}
+
+export async function generateStaticParams() {
+    const blogs = await pb.collection('blogs').getFullList<Blog>()
+    return blogs.map((blog) => ({
+        id: blog.id,
+    }));
 }

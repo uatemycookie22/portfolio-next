@@ -2,8 +2,6 @@ import {pb} from "@pb/pocketbase";
 import Image from "next/image";
 import Link from "next/link";
 
-export const revalidate = 3;
-
 interface Blog {
     id: string
     title: string
@@ -14,7 +12,7 @@ interface Blog {
 }
 
 async function getBlogs() {
-    return await pb.collection('blogs').getList<Blog>(1, 10)
+    return pb.collection('blogs').getList<Blog>(1, 10)
 }
 
 function BlogListing({blogRecord} : { blogRecord: Blog }) {
