@@ -57,6 +57,6 @@ export default async function BlogsPage() {
     </section>)
 }
 
-export async function getBlogs() {
+async function getBlogs() {
     return pb.collection('blogs').getList<Blog>(1, 10)
 }
