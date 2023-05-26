@@ -1,14 +1,6 @@
 import Image from "next/image";
 import {pb} from "@pb/pocketbase";
-
-interface Blog {
-    id: string
-    title: string
-    description: string
-    content: string
-    created: string
-    updated: string
-}
+import {Blog} from "../blogs";
 
 async function getBlog(id: string) {
     return await pb.collection('blogs').getOne<Blog>(id)

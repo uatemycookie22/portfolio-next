@@ -1,19 +1,7 @@
-import {pb} from "@pb/pocketbase";
 import Image from "next/image";
 import Link from "next/link";
-
-interface Blog {
-    id: string
-    title: string
-    description: string
-    content: string
-    created: string
-    updated: string
-}
-
-async function getBlogs() {
-    return pb.collection('blogs').getList<Blog>(1, 10)
-}
+import {Blog} from "./blogs";
+import {pb} from "@pb/pocketbase";
 
 function BlogListing({blogRecord} : { blogRecord: Blog }) {
     const { title, created, description, id } = blogRecord
@@ -67,4 +55,8 @@ export default async function BlogsPage() {
             {blogs}
         </ul>
     </section>)
+}
+
+export async function getBlogs() {
+    return pb.collection('blogs').getList<Blog>(1, 10)
 }
