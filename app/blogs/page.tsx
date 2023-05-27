@@ -68,5 +68,5 @@ export default async function BlogsPage() {
 }
 
 async function getBlogs() {
-    return pb.collection('blogs').getList<Blog>(1, 10)
+    return pb.collection('blogs').getList<Blog>(1, 10, { '$autoCancel': false })
 }
