@@ -5,7 +5,3 @@ Disallow: /assets/files/lh-resume.pdf
 # Block all crawlers for /assets
 User-agent: *
 Disallow: /assets
-
-# Allow all crawlers
-User-agent: *
-Allow: /

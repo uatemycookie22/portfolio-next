@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "concurrently \"tailwindcss --input ./styles/input.css --output ./public/build/tailwind.css --watch\" \"next dev\"",
     "build": "concurrently \"postcss styles/input.css -o public/build/tailwind.css\" \"next build\"",
-    "start": "next start",
+    "start": "next start --keepAliveTimeout 70000",
     "lint": "next lint",
     "build:css": "postcss styles/input.css -o public/build/tailwind.css",
     "dev:css": "tailwindcss --input ./styles/input.css --output ./public/build/tailwind.css --watch"
