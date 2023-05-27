@@ -3,7 +3,7 @@ import {pb} from "@pb/pocketbase";
 import {Blog} from "../blogs";
 
 async function getBlog(id: string) {
-    return await pb.collection('blogs').getOne<Blog>(id)
+    return await pb.collection('blogs').getOne<Blog>(id, { '$autoCancel': false })
 }
 
 export default async function BlogPage({ params }: { params: { id: string }}) {
@@ -49,7 +49,7 @@ export default async function BlogPage({ params }: { params: { id: string }}) {
 }
 
 export async function generateStaticParams() {
-    const blogs = await pb.collection('blogs').getFullList<Blog>()
+    const blogs = await pb.collection('blogs').getFullList<Blog>({ '$autoCancel': false })
     return blogs.map((blog) => ({
         id: blog.id,
     }));
