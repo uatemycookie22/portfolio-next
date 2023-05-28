@@ -21,6 +21,31 @@ const nextConfig = {
       transform: '@mui/icons-material/{{member}}',
     }
   },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'fastly.picsum.photos',
+        port: '',
+        pathname: '/id/**',
+      },
+
+      {
+        protocol: 'http',
+        hostname: '127.0.0.1',
+        port: '8090',
+        pathname: '/api/**',
+      },
+
+      {
+        protocol: 'https',
+        hostname: 'db.lysanderh.com',
+        port: '',
+        pathname: '/api/**',
+      },
+    ],
+  }
 }
 
 module.exports = withBundleAnalyzer(nextConfig)

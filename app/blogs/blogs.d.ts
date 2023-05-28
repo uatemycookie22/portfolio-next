@@ -5,4 +5,7 @@ export interface Blog {
     content: string
     created: string
     updated: string
+    thumbnail: string
+    collectionId: string
+    collectionName: string
 }

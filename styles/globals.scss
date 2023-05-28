@@ -25,3 +25,7 @@ body {
 section {
 
 }
+
+.markdown > *{
+  all: revert !important;
+}
