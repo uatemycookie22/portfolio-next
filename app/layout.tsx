@@ -3,6 +3,7 @@ import {ReactNode} from "react";
 import NavBarComponent from "../components/NavBar/NavBarComponent";
 import Providers from "./main-provider";
 import '../public/build/tailwind.css';
+import '../styles/globals.scss'
 import {getContact} from "@api/global";
 import ClientBackground from "@components/ClientBackground/ClientBackground";
 

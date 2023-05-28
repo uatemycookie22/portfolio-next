@@ -1,6 +1,7 @@
 import Image from "next/image";
 import {pb} from "@pb/pocketbase";
 import {Blog} from "../blogs";
+import BlogContent from "./(blog)/blog-content";
 
 async function getBlog(id: string) {
     return await pb.collection('blogs').getOne<Blog>(id, { '$autoCancel': false })
@@ -14,7 +15,7 @@ export default async function BlogPage({ params }: { params: { id: string }}) {
 
         <section className={`flex justify-center content-center mt-24`}>
 
-            <div className={`self-center flex flex-col justify-center max-w-[42rem] p-4`}>
+            <div className={`self-center flex flex-col justify-center max-w-[42rem] p-4 w-full`}>
                 <div className={`flex flex-col gap-2`}>
                     <h1 className={`text-4xl font-extrabold mb-2 text-transparent 
                                     text-violet-600`}>
@@ -38,9 +39,9 @@ export default async function BlogPage({ params }: { params: { id: string }}) {
                            priority={true} />
                 </div>
 
-                <p className={`dark:text-slate-300 md:text-lg`}>
+                <BlogContent>
                     {content}
-                </p>
+                </BlogContent>
 
             </div>
         </section>
