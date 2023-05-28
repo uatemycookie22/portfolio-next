@@ -14,7 +14,9 @@ export const metadata: Metadata = {
 };
 
 function BlogListing({blogRecord} : { blogRecord: Blog }) {
-    const { title, created, description, id } = blogRecord
+    const { title, created, description, id, thumbnail } = blogRecord
+
+    const imageUrl = thumbnail ? pb.files.getUrl(blogRecord, thumbnail) : '/assets/ts.png'
     const date = new Date(Date.parse(created)).toDateString()
 
     return (
@@ -37,7 +39,7 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
                  h-full
                  w-[8rem]
                 `}>
-                    <Image src={'/assets/ts.png'} alt={''} fill={true} sizes={'sizes="10vw, 10vw, 10vw"'}
+                    <Image src={imageUrl} alt={''} fill={true} sizes={'sizes="10vw, 10vw, 10vw"'}
                            objectFit={'cover'}
                     />
                 </div>
@@ -68,5 +70,5 @@ export default async function BlogsPage() {
 }
 
 async function getBlogs() {
-    return pb.collection('blogs').getList<Blog>(1, 10, { '$autoCancel': false })
+    return pb.collection('blogs').getList<Blog>(1, 10, { '$autoCancel': false, fields: '' })
 }

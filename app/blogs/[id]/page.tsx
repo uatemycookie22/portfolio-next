@@ -8,7 +8,10 @@ async function getBlog(id: string) {
 }
 
 export default async function BlogPage({ params }: { params: { id: string }}) {
-    const { title, description, content, created } = await getBlog(params.id)
+    const blogRecord = await getBlog(params.id)
+    const { title, created, description, thumbnail, content } = blogRecord
+
+    const imageUrl = thumbnail ? pb.files.getUrl(blogRecord, thumbnail) : '/assets/ts.png'
     const date = new Date(Date.parse(created)).toDateString()
 
     return (<>
@@ -34,7 +37,7 @@ export default async function BlogPage({ params }: { params: { id: string }}) {
                 <div className={`mt-14 mb-8 relative flex justify-center w-auto max-h-[400px] h-[70vw] p-2`}>
                     <Image className={`absolute]
 									transition-opacity duration-500 delay-200 ease-in-out 
-									bg-cover object-cover`} src={'/assets/ts.png'} alt={''} fill={true}
+									bg-cover object-cover`} src={imageUrl} alt={''} fill={true}
                            objectFit={'contain'} sizes={'sizes="50vw"'}
                            priority={true} />
                 </div>
