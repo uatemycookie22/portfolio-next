@@ -7,6 +7,13 @@ export interface BlogContentProps {
 
 const components: Components = {
     code: (props) => {
+
+        if (props.inline) {
+            return (<>
+                <code>{props.children}</code>
+            </>)
+        }
+
         return (<>
             <pre>
                 <code className={`${props.className} whitespace-pre-wrap`}>
