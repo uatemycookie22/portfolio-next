@@ -34,7 +34,7 @@ export default async function BlogPage({ params }: { params: { id: string }}) {
                     </p>
                 </div>
 
-                <div className={`mt-14 mb-8 relative flex justify-center w-auto max-h-[400px] h-[70vw] p-2`}>
+                <div className={`mt-14 mb-8 relative flex justify-center h-auto min-h-[100px] p-2`}>
                     <Image className={`absolute]
 									transition-opacity duration-500 delay-200 ease-in-out 
 									bg-cover object-cover`} src={imageUrl} alt={''} fill={true}
