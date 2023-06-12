@@ -6,11 +6,13 @@ import {Metadata} from "next";
 
 export const metadata: Metadata = {
     title: `Blogs | Lysander H`,
-    description: `List of blogs`,
+    description: `List of blogs from Lysander Hernandez.`,
     viewport: {width: 'device-width', initialScale: 1},
     icons: [
         {rel: 'shortcut icon', url: '/favicon.ico'}
     ],
+    robots: 'index',
+    keywords: ['Python', 'Machine Learning', 'Deep Learning', 'MNIST', 'Neural Network'],
 };
 
 function BlogListing({blogRecord} : { blogRecord: Blog }) {

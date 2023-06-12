@@ -2,6 +2,7 @@ import Image from "next/image";
 import {pb} from "@pb/pocketbase";
 import {Blog} from "../blogs";
 import BlogContent from "./(blog)/blog-content";
+import {Metadata} from "next";
 
 async function getBlog(id: string) {
     return await pb.collection('blogs').getOne<Blog>(id, { '$autoCancel': false })
@@ -59,7 +60,7 @@ export async function generateStaticParams() {
     }));
 }
 
-export async function generateMetadata({ params }: { params: { id: string }}) {
+export async function generateMetadata({ params }: { params: { id: string }}): Promise<Metadata> {
     const { title, description } = await getBlog(params.id)
     return {
         title: `${title} | Lysander H`,
@@ -68,5 +69,8 @@ export async function generateMetadata({ params }: { params: { id: string }}) {
         icons: [
             {rel: 'shortcut icon', url: '/favicon.ico'}
         ],
+        robots: 'index',
+        authors: [{name: 'Lysander Hernandez',}],
+        keywords: ['Python', 'Machine Learning', 'Deep Learning', 'MNIST', 'Neural Network'],
     }
 }
