@@ -2,6 +2,7 @@ import Image from "next/image";
 import {pb} from "@pb/pocketbase";
 import {Blog} from "../blogs";
 import BlogContent from "./(blog)/blog-content";
+import {Metadata} from "next";
 
 async function getBlog(id: string) {
     return await pb.collection('blogs').getOne<Blog>(id, { '$autoCancel': false })
@@ -34,7 +35,7 @@ export default async function BlogPage({ params }: { params: { id: string }}) {
                     </p>
                 </div>
 
-                <div className={`mt-14 mb-8 relative flex justify-center w-auto max-h-[400px] h-[70vw] p-2`}>
+                <div className={`mt-14 mb-8 relative flex justify-center h-auto min-h-[100px] p-2`}>
                     <Image className={`absolute]
 									transition-opacity duration-500 delay-200 ease-in-out 
 									bg-cover object-cover`} src={imageUrl} alt={''} fill={true}
@@ -59,7 +60,7 @@ export async function generateStaticParams() {
     }));
 }
 
-export async function generateMetadata({ params }: { params: { id: string }}) {
+export async function generateMetadata({ params }: { params: { id: string }}): Promise<Metadata> {
     const { title, description } = await getBlog(params.id)
     return {
         title: `${title} | Lysander H`,
@@ -68,5 +69,8 @@ export async function generateMetadata({ params }: { params: { id: string }}) {
         icons: [
             {rel: 'shortcut icon', url: '/favicon.ico'}
         ],
+        robots: 'index',
+        authors: [{name: 'Lysander Hernandez',}],
+        keywords: ['Python', 'Machine Learning', 'Deep Learning', 'MNIST', 'Neural Network'],
     }
 }
