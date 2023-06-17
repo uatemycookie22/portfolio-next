@@ -1,0 +1,1 @@
+docker run -d --restart unless-stopped -p 3000:3000 uatemycookie/lhportfolionextbuild:dev
