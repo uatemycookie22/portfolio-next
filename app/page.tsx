@@ -3,6 +3,7 @@ import EducationComponents from "@components/Education/EducationComponent";
 import Experience from "@components/Experience/Experience";
 import Contact from "@components/Contact/Contact";
 import {Metadata} from "next";
+import {redirect} from "next/navigation";
 
 async function getContent(): Promise<HomeContent> {
 	let content: HomeContent
@@ -34,14 +35,14 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
 	const content = await getContent()
-
+	redirect('/blogs')
 	return (
 		<>
-			<IntroComponent {...content.intro} />
-			<EducationComponents {...content.education} />
-			<Experience {...content.experience} />
+			{/*<IntroComponent {...content.intro} />*/}
+			{/*<EducationComponents {...content.education} />*/}
+			{/*<Experience {...content.experience} />*/}
 			{/*// @ts-ignore*/}
-			<Contact />
+			{/*<Contact />*/}
 		</>
 
 	)
