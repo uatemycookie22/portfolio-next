@@ -85,9 +85,8 @@ async function getBlogs(): Promise<GetBlogs> {
         return [fetchedBlogs, undefined]
     } catch (error) {
         if (error instanceof ClientResponseError) {
-            console.log(pb.baseUrl)
             const errorMessage = `${error.originalError} ${error.originalError.cause} ${pb.baseUrl}`
-            throw new ClientResponseError(`${error.originalError} ${error.originalError.cause}`)
+            throw new ClientResponseError(errorMessage)
         }
 
         throw error

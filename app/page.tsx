@@ -3,7 +3,6 @@ import EducationComponents from "@components/Education/EducationComponent";
 import Experience from "@components/Experience/Experience";
 import Contact from "@components/Contact/Contact";
 import {Metadata, Viewport} from "next";
-import {redirect} from "next/navigation";
 
 async function getContent(): Promise<HomeContent> {
 	let content: HomeContent
