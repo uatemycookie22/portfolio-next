@@ -1,12 +1,10 @@
 import EmailSubmission from "@components/EmailSubmission/EmailSubmissionComponent";
-import {MDocument, MDownload, MEmail, MPhone} from "@icons";
+import {MDocument, MDownload, MEmail} from "@icons";
 import StaticForm from "@components/StaticForms/StaticForms";
-import {formatPhoneNumber} from "@utils/formatters";
 import {getContact} from "@api/global";
 
 export default async function Contact() {
-	const { phone, email } = await getContact()
-	const formattedPhone = formatPhoneNumber(phone)
+	const {email } = await getContact()
 
 	return (<>
 		<section id="contact" className="page-section">
