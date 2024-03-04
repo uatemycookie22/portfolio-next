@@ -1,5 +1,6 @@
 import {Button, CircularProgress} from "@mui/material";
 import {MSend} from "@icons";
+// @ts-ignore
 import { useFormStatus } from "react-dom"
 
 

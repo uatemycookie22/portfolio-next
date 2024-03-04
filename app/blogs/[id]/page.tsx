@@ -48,7 +48,7 @@ export default async function BlogPage({ params }: { params: { id: string }}) {
                 <BlogContent>
                     {content}
                 </BlogContent>
-
+                {/*// @ts-ignore*/}
                 <Comments comments={[]} recipientEmail={'mail@mail.mail'} />
             </div>
         </section>
@@ -58,6 +58,7 @@ export default async function BlogPage({ params }: { params: { id: string }}) {
 
 export async function generateStaticParams() {
     const blogs = await pb.collection('blogs').getFullList<Blog>({ '$autoCancel': false })
+   console.log(blogs.map(blog => blog.id))
     return blogs.map((blog) => ({
         id: blog.id,
     }));

@@ -18,11 +18,13 @@ export default function CommentSubmission({ recipientEmail, postComment }: Comme
 	const [errorMessage, setErrorMessage] = useState('')
 	const [statusMessage, setStatusMessage] = useState('')
 
+
 	return (<>
 			<div className="relative w-full justify-center">
 
 				<form className="flex flex-col gap-y-8 w-full text-whitei"
 					  name="comment"
+					// @ts-ignore
 					  action={async (formData: FormData) => {
 						  const {result, error} = await postComment(formData)
 						  console.log(result, error)
