@@ -3,6 +3,8 @@ import {pb} from "@pb/pocketbase";
 import {Blog} from "../blogs";
 import BlogContent from "./(blog)/blog-content";
 import {Metadata} from "next";
+import Comments from "./(comments)/comments";
+import {toDateString} from "@utils/parse-date";
 
 async function getBlog(id: string) {
     return await pb.collection('blogs').getOne<Blog>(id, { '$autoCancel': false })
@@ -13,7 +15,7 @@ export default async function BlogPage({ params }: { params: { id: string }}) {
     const { title, created, description, thumbnail, content } = blogRecord
 
     const imageUrl = thumbnail ? pb.files.getUrl(blogRecord, thumbnail) : '/assets/ts.png'
-    const date = new Date(Date.parse(created)).toDateString()
+    const date = toDateString(created)
 
     return (<>
 
@@ -47,6 +49,7 @@ export default async function BlogPage({ params }: { params: { id: string }}) {
                     {content}
                 </BlogContent>
 
+                <Comments comments={[]} recipientEmail={'mail@mail.mail'} />
             </div>
         </section>
 

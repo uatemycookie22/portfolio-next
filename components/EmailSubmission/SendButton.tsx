@@ -1,10 +1,13 @@
 import {Button, CircularProgress} from "@mui/material";
 import {MSend} from "@icons";
+import { useFormStatus } from "react-dom"
+
 
 export function SendButton(props: Parameters<typeof Button>[0] & { isLoading?: boolean }) {
 	const {isLoading, ...buttonProps} = props
+	const { pending } = useFormStatus()
 
-	if (props.isLoading) {
+	if (props.isLoading || pending) {
 		return (<>
 			<CircularProgress className={"text-black dark:text-white"} size={30} />
 		</>)
