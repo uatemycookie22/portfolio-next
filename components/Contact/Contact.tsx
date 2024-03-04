@@ -36,10 +36,10 @@ export default async function Contact() {
 									Central Time Zone (CST)
 								</h3>
 
-								<div className="text-black dark:text-white flex gap-2">
-									<MPhone />
-									<a href={`tel:${phone}`} className="hover:underline">{formattedPhone}</a>
-								</div>
+								{/*<div className="text-black dark:text-white flex gap-2">*/}
+								{/*	<MPhone />*/}
+								{/*	<a href={`tel:${phone}`} className="hover:underline">{formattedPhone}</a>*/}
+								{/*</div>*/}
 
 							</div>
 
