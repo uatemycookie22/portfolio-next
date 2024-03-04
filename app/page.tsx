@@ -2,7 +2,7 @@ import IntroComponent from "@components/Intro/IntroComponent";
 import EducationComponents from "@components/Education/EducationComponent";
 import Experience from "@components/Experience/Experience";
 import Contact from "@components/Contact/Contact";
-import {Metadata} from "next";
+import {Metadata, Viewport} from "next";
 import {redirect} from "next/navigation";
 
 async function getContent(): Promise<HomeContent> {
@@ -27,22 +27,26 @@ export const metadata: Metadata = {
 	title: 'Lysander H',
 	description: 'The personal page of Lysander Hernandez, an aspiring software developer.' +
 		' Interests are in fullstack web development and machine learning.',
-	viewport: {width: 'device-width', initialScale: 1},
 	icons: [
 		{rel: 'shortcut icon', url: '/favicon.ico'}
 	],
 };
 
+export const viewport: Viewport = {
+	width: 'device-width',
+	initialScale: 1,
+}
+
 export default async function HomePage() {
 	const content = await getContent()
-	redirect('/blogs')
+
 	return (
 		<>
-			{/*<IntroComponent {...content.intro} />*/}
-			{/*<EducationComponents {...content.education} />*/}
-			{/*<Experience {...content.experience} />*/}
+			<IntroComponent {...content.intro} />
+			<EducationComponents {...content.education} />
+			<Experience {...content.experience} />
 			{/*// @ts-ignore*/}
-			{/*<Contact />*/}
+			<Contact />
 		</>
 
 	)

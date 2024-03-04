@@ -65,12 +65,18 @@ export async function generateMetadata({ params }: { params: { id: string }}): P
     return {
         title: `${title} | Lysander H`,
         description,
-        viewport: {width: 'device-width', initialScale: 1},
         icons: [
             {rel: 'shortcut icon', url: '/favicon.ico'}
         ],
         robots: 'index',
         authors: [{name: 'Lysander Hernandez',}],
         keywords: ['Python', 'Machine Learning', 'Deep Learning', 'MNIST', 'Neural Network'],
+    }
+}
+
+export function generateViewport() {
+    return {
+        width: 'device-width',
+        initialScale: 1,
     }
 }
