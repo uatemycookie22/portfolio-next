@@ -8,27 +8,10 @@ import {encode} from "@utils/fetch";
 import {TextArea} from "@components/TextArea/TextArea";
 import {TextField} from "@components/TextField/TextField";
 import {invalidPrompt} from "@utils/api-constants";
+import {ErrorMessage} from "@components/ErrorMessage/ErrorMessage";
 
 const successMessage = 'Email received.'
 const failedEmailPost =  'Email submission failed.'
-
-const ErrorMessage = ({ errorMessage, recipientEmail }: {errorMessage: string, recipientEmail: string}) => {
-	if (!errorMessage) return null
-
-	if (errorMessage == invalidPrompt) {
-		return (<>{invalidPrompt}</>)
-	}
-
-	return (<>
-		{errorMessage}
-
-		&nbsp;If the issue persists, please email me directly at <span>
-				<a className="text-blue-800 underline" href={`mailto:${recipientEmail}`}>
-					{recipientEmail}
-				</a>
-			</span>
-	</>)
-}
 
 interface EmailSubmissionProps {
 	recipientEmail: string
@@ -214,8 +197,8 @@ function useEmail(mutateOptions?:  (MutateOptions<ResponseError, Error, FormData
 	})
 
 	const sendEmail = useCallback( (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-		emailMutation.mutate(new FormData(e.currentTarget), mutateOptions)
+		e.preventDefault() // Prevent reloading
+		emailMutation.mutate(new FormData(e.currentTarget), mutateOptions) // Calls emailMutation()
 	}, [emailMutation, mutateOptions])
 
 	return [emailMutation, sendEmail] as const

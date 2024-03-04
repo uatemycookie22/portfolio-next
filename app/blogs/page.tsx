@@ -2,18 +2,23 @@ import Image from "next/image";
 import Link from "next/link";
 import {Blog} from "./blogs";
 import {pb} from "@pb/pocketbase";
-import {Metadata} from "next";
+import {Metadata, Viewport} from "next";
+import {ClientResponseError, ListResult} from "pocketbase";
 
 export const metadata: Metadata = {
     title: `Blogs | Lysander H`,
     description: `List of blogs from Lysander Hernandez.`,
-    viewport: {width: 'device-width', initialScale: 1},
     icons: [
         {rel: 'shortcut icon', url: '/favicon.ico'}
     ],
     robots: 'index',
     keywords: ['Python', 'Machine Learning', 'Deep Learning', 'MNIST', 'Neural Network'],
 };
+
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+}
 
 function BlogListing({blogRecord} : { blogRecord: Blog }) {
     const { title, created, description, id, thumbnail } = blogRecord
@@ -60,8 +65,8 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
 }
 
 export default async function BlogsPage() {
-    const blogPage = await getBlogs()
-    const blogs = blogPage.items.map((blogRecord, i) => (<BlogListing key={i} blogRecord={blogRecord}/>))
+    const [blogItems] = await getBlogs()
+    const blogs = blogItems?.items.map((blogRecord, i) => (<BlogListing key={i} blogRecord={blogRecord}/>))
 
     return (<section className={`justify-center content-center mt-24`}>
         <ul className={`flex flex-wrap flex-col justify-center content-center
@@ -71,6 +76,19 @@ export default async function BlogsPage() {
     </section>)
 }
 
-async function getBlogs() {
-    return pb.collection('blogs').getList<Blog>(1, 10, { '$autoCancel': false, fields: '' })
+type GetBlogs = [ListResult<Blog> | undefined, unknown | undefined]
+async function getBlogs(): Promise<GetBlogs> {
+    try {
+        const fetchedBlogs = await pb.collection('blogs')
+            .getList<Blog>(1, 10, { '$autoCancel': false, fields: '' })
+
+        return [fetchedBlogs, undefined]
+    } catch (error) {
+        if (error instanceof ClientResponseError) {
+            const errorMessage = `${error.originalError} ${error.originalError.cause} ${pb.baseUrl}`
+            throw new ClientResponseError(errorMessage)
+        }
+
+        throw error
+    }
 }

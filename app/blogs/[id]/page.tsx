@@ -3,6 +3,8 @@ import {pb} from "@pb/pocketbase";
 import {Blog} from "../blogs";
 import BlogContent from "./(blog)/blog-content";
 import {Metadata} from "next";
+import Comments from "./(comments)/comments";
+import {toDateString} from "@utils/parse-date";
 
 async function getBlog(id: string) {
     return await pb.collection('blogs').getOne<Blog>(id, { '$autoCancel': false })
@@ -13,7 +15,7 @@ export default async function BlogPage({ params }: { params: { id: string }}) {
     const { title, created, description, thumbnail, content } = blogRecord
 
     const imageUrl = thumbnail ? pb.files.getUrl(blogRecord, thumbnail) : '/assets/ts.png'
-    const date = new Date(Date.parse(created)).toDateString()
+    const date = toDateString(created)
 
     return (<>
 
@@ -46,7 +48,8 @@ export default async function BlogPage({ params }: { params: { id: string }}) {
                 <BlogContent>
                     {content}
                 </BlogContent>
-
+                {/*// @ts-ignore*/}
+                <Comments comments={[]} recipientEmail={'mail@mail.mail'} />
             </div>
         </section>
 
@@ -55,6 +58,7 @@ export default async function BlogPage({ params }: { params: { id: string }}) {
 
 export async function generateStaticParams() {
     const blogs = await pb.collection('blogs').getFullList<Blog>({ '$autoCancel': false })
+   console.log(blogs.map(blog => blog.id))
     return blogs.map((blog) => ({
         id: blog.id,
     }));
@@ -65,12 +69,18 @@ export async function generateMetadata({ params }: { params: { id: string }}): P
     return {
         title: `${title} | Lysander H`,
         description,
-        viewport: {width: 'device-width', initialScale: 1},
         icons: [
             {rel: 'shortcut icon', url: '/favicon.ico'}
         ],
         robots: 'index',
         authors: [{name: 'Lysander Hernandez',}],
         keywords: ['Python', 'Machine Learning', 'Deep Learning', 'MNIST', 'Neural Network'],
+    }
+}
+
+export function generateViewport() {
+    return {
+        width: 'device-width',
+        initialScale: 1,
     }
 }
