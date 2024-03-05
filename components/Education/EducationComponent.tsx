@@ -50,7 +50,7 @@ export default function EducationComponents({ location, major, school, graduatio
 											</li>
 
 											<li className="flex flex-col gap-2">
-												<SchoolProgress percentage={65} />
+												<SchoolProgress percentage={80} />
 												<p className="text-xs self-end">{graduation}</p>
 											</li>
 										</ul>
