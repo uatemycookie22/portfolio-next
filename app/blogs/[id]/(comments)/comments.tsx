@@ -54,6 +54,7 @@ async function getCommentList(): Promise<Comment[]> {
 		const id = setTimeout(() => controller.abort(), 4000);
 
 		const res = await fetch(`${commentsApiBase}/api/v1/comment`, {
+			next: { tags: ['postComment']},
 			method: 'GET',
 			headers: {'Content-Type': 'application/json',},
 			// signal: AbortSignal.timeout(4000)

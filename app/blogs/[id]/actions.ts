@@ -1,8 +1,8 @@
 'use server';
 
 import {invalidPrompt} from "@utils/api-constants";
-import {commentsApiBase} from "../../../api-config/comments-api";
-import {revalidatePath} from "next/cache";
+import {commentsApiBase} from "@api-config/comments-api";
+import {revalidateTag} from "next/cache";
 
 
 
@@ -42,7 +42,7 @@ export async function postComment(formData: FormData): Promise<{response?: strin
             {setTimeout(() => {resolve('')}, 500)}
         )
 
-        revalidatePath('/blogs', 'page')
+        revalidateTag('postComment')
 
         return {response: 'Success', error: undefined}
     } catch (err) {
