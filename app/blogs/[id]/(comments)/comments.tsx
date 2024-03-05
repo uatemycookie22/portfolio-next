@@ -1,6 +1,7 @@
 import CommentSubmission from "@components/CommentSubmission/comment-submission";
 import {postComment} from "../actions";
-import {commentsApiBase} from "../../../../api-config/comments-api";
+import {commentsApiBase} from "@api-config/comments-api";
+import CommentBox from "@components/Comment/comment";
 
 interface Comment {
 	text: string
@@ -14,13 +15,7 @@ export interface CommentsProps {
 export default async function Comments({ comments }: CommentsProps) {
 	const commentList = await getCommentList()
 	const commentElements = commentList.length > 0
-		? commentList.map(comment => (<>
-			<li className="rounded-lg shadow-md hover:shadow-lg transition duration-200 text-black dark:text-white
-            max-h-[50rem] max-w-3xl h-auto mt-12 p-8
-            flex flex-col bg-transparent">
-				{comment.text}
-			</li>
-		</>))
+		? commentList.map((comment, i) => (<CommentBox {...comment} key={i} />))
 		: 'Be the first to comment!'
 
 	return (<>
