@@ -5,7 +5,7 @@
     "facts": [
       {
         "heading": "6+ years of experience",
-        "text": "I have over 6 years of experience as a self taught programmer. I also have 2 amazing internships of experience with a strong background in both front-end and back-end web development."
+        "text": "I have over 6 years of experience as a self taught programmer. I also have 3 amazing internships of experience with a strong background in both front-end and back-end web development."
       },
       {
         "heading": "Fullstack skills",
@@ -41,11 +41,49 @@
     "jobs": [
       {
         "front": {
+          "companyName": "Amazon",
+          "companyLogo": "/assets/amazon.png",
+          "companyHref": "https://amazon.com/",
+          "location": "Austin, Texas",
+          "duration": "May 2024 - August 2024",
+          "position": "SDE Intern",
+          "technologiesUsed": [
+            {
+              "src": "/assets/java.png",
+              "alt": "Java"
+            },
+            {
+              "src": "/assets/dynamodb.png",
+              "alt": "DynamoDB"
+            },
+            {
+              "src": "/assets/stepfunctions.png",
+              "alt": "Step Functions"
+            },
+            {
+              "src": "/assets/ubuntu.png",
+              "alt": "Ubuntu"
+            },
+            {
+              "src": "/assets/docker.png",
+              "alt": "Docker"
+            }
+          ]
+        },
+        "back": {
+          "items": [
+            "Resolved redundant tasks in case management system saving $14,000 annually",
+            "Used AWS Step Functions to process 700 manual investigation outcomes per week."
+          ]
+        }
+      },
+      {
+        "front": {
           "companyName": "TriTech Software",
           "companyLogo": "/assets/tritech.png",
           "companyHref": "https://tritechsoft.com/",
           "location": "Allen, Texas",
-          "duration": "May 2022 - Present",
+          "duration": "May 2022 - April 2023",
           "position": "Intern",
           "technologiesUsed": [
             {
