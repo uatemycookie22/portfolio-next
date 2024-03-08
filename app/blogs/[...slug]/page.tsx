@@ -74,7 +74,7 @@ export async function generateStaticParams(): Promise<BlogPageParams[]> {
 }
 
 export async function generateMetadata({ params }: { params: BlogPageParams}): Promise<Metadata> {
-    const [id, encodedTitle] = params.slug
+    const [id] = params.slug
     const { title, description } = await getBlog(id)
     return {
         title: `${title} | Lysander H`,
