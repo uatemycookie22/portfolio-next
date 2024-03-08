@@ -5,6 +5,7 @@ import {pb} from "@pb/pocketbase";
 import {Metadata, Viewport} from "next";
 import {ClientResponseError, ListResult} from "pocketbase";
 import {toDateString} from "@utils/parse-date";
+import {formatAndEncode} from "@utils/formatters";
 
 export const metadata: Metadata = {
     title: `Blogs | Lysander H`,
@@ -27,6 +28,7 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
     const imageUrl = thumbnail ? pb.files.getUrl(blogRecord, thumbnail) : '/assets/ts.png'
     const date = toDateString(created)
 
+    const encodedTitle = formatAndEncode(title)
     return (
         <li className={`rounded-lg shadow-md hover:shadow-lg transition duration-200 text-black dark:text-white
             max-h-[50rem] max-w-3xl h-[10rem] w-[90%]
@@ -35,7 +37,7 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
 
 
 
-            <Link href={`/blogs/${id}`} className={`relative flex items-center 
+            <Link href={`/blogs/${id}/${encodedTitle}`} className={`relative flex items-center 
             h-full w-full
             rounded-lg shadow flex-row
             hover:bg-zinc-500 hover:bg-opacity-10

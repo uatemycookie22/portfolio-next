@@ -13,6 +13,8 @@
 /out/
 
 # production
+/dist/output.css
+/public/build
 /build
 
 # misc

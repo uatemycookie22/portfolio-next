@@ -12,3 +12,10 @@ export function formatPhoneNumber(str: string): string | undefined {
         return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('')
     }
 }
+
+export function formatAndEncode(component: string) {
+    const formattedComponent = component.replace(/\s+/g, '-').toLowerCase()
+    const encodedComponent = encodeURIComponent(formattedComponent)
+
+    return encodedComponent
+}
