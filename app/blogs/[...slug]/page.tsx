@@ -6,13 +6,22 @@ import {Metadata} from "next";
 import Comments from "./(comments)/comments";
 import {toDateString} from "@utils/parse-date";
 
+type BlogPageParams = {
+    slug: [string, string]
+}
+
+type BlogPageProps = {
+    params: BlogPageParams
+}
+
 async function getBlog(id: string) {
     return await pb.collection('blogs').getOne<Blog>(id, { '$autoCancel': false })
 }
 
-export default async function BlogPage({ params }: { params: { id: string }}) {
-    const blogRecord = await getBlog(params.id)
-    const { title, created, description, thumbnail, content } = blogRecord
+export default async function BlogPage({ params }: BlogPageProps) {
+    const [id] = params.slug
+    const blogRecord = await getBlog(id)
+    const {title, created, description, thumbnail, content } = blogRecord
 
     const imageUrl = thumbnail ? pb.files.getUrl(blogRecord, thumbnail) : '/assets/ts.png'
     const date = toDateString(created)
@@ -56,16 +65,17 @@ export default async function BlogPage({ params }: { params: { id: string }}) {
     </>)
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<BlogPageParams[]> {
     const blogs = await pb.collection('blogs').getFullList<Blog>({ '$autoCancel': false })
-   console.log(blogs.map(blog => blog.id))
+
     return blogs.map((blog) => ({
-        id: blog.id,
+        slug: [blog.id, blog.title], // Matches /:id and /:id/:title
     }));
 }
 
-export async function generateMetadata({ params }: { params: { id: string }}): Promise<Metadata> {
-    const { title, description } = await getBlog(params.id)
+export async function generateMetadata({ params }: { params: BlogPageParams}): Promise<Metadata> {
+    const [id, encodedTitle] = params.slug
+    const { title, description } = await getBlog(id)
     return {
         title: `${title} | Lysander H`,
         description,

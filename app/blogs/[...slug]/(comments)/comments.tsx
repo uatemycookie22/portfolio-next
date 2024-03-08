@@ -13,7 +13,7 @@ export interface CommentsProps {
 	recipientEmail: string
 }
 export default async function Comments({ comments }: CommentsProps) {
-	const commentList = await getCommentList()
+	const commentList = await getCommentList().catch(() => [])
 	const commentElements = commentList.length > 0
 		? commentList.map((comment, i) => (<CommentBox {...comment} key={i} />))
 		: 'Be the first to comment!'
