@@ -4,20 +4,10 @@ import Experience from "@components/Experience/Experience";
 import Contact from "@components/Contact/Contact";
 import {Metadata, Viewport} from "next";
 
-async function getContent(): Promise<HomeContent> {
+async function getContent() {
 	let content: HomeContent
 
-	try {
-		content = (await import('public/content.json')).default
-	}
-	catch (err) {
-		content = {
-			experience: {jobs: []},
-			about: {text: ["", "", ""]},
-			education: {college: "", graduation: "", location: "", major: "", school: ""},
-			intro: {primary: "", secondary: "", facts: []}
-		}
-	}
+	content = (await import('public/content.json')).default
 
 	return content
 }

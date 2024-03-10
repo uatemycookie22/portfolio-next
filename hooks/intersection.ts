@@ -2,11 +2,11 @@ import {useEffect, useRef, useState} from "react";
 
 export default function useIntersection(options?: ConstructorParameters<typeof IntersectionObserver>[1]) {
 	const [intersecting, setIntersecting] = useState(false)
-	const elementRef = useRef<Element>(undefined!)
+	const elementRef = useRef(null)
 
 	useEffect(() => {
 		const target = elementRef.current
-		if (!(target instanceof Element)) return
+		if (target == null) return
 
 		const observer = new IntersectionObserver(entries => entries.forEach(entry => {
 			setIntersecting(entry.isIntersecting)

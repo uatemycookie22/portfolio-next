@@ -2,6 +2,10 @@
   "intro": {
     "primary": "I am a computer science student with an early passion for fullstack web development.",
     "secondary": "",
+    "social": {
+      "github": "https://github.com/uatemycookie22",
+      "linkedin": "https://www.linkedin.com/in/lysanderh/"
+    },
     "facts": [
       {
         "heading": "6+ years of experience",

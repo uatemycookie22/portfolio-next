@@ -49,8 +49,13 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
                  h-full
                  w-[8rem]
                 `}>
-                    <Image src={imageUrl} alt={''} fill={true} sizes={'sizes="10vw, 10vw, 10vw"'}
-                           objectFit={'cover'}
+                    <Image className="object-cover"
+                           src={imageUrl}
+                           alt={''}
+                           width={120}
+                           height={40}
+                           sizes={'sizes="10vw, 10vw, 10vw"'}
+                           quality={25}
                     />
                 </div>
 

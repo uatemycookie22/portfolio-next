@@ -3,6 +3,7 @@ import SimpleCard from "@components/SimpleCard/SimpleCard";
 import {ReactNode} from "react";
 import {MDnsIcon, MEmojiEventsIcon, MAccessTimeIcon, MGitHub, MLinkedIn} from '@icons'
 import PdfButton from "@components/PdfButton/PdfButton";
+import wavyback from "@images/wavyback.png"
 
 const CardHeading = ({ children, heading }: { children?: ReactNode, heading?: string }) => (<>
 	<div className="flex justify-between lg:gap-4">
@@ -14,6 +15,10 @@ const CardHeading = ({ children, heading }: { children?: ReactNode, heading?: st
 
 interface HeroProps {
 	primary: string
+	"social": {
+		"github": string,
+		"linkedin": string
+	},
 	facts: { heading: string, text: string }[]
 }
 
@@ -35,13 +40,13 @@ export default function Hero(props: HeroProps) {
 								Resume
 							</PdfButton>
 							<div className="relative top-10 h-16 flex gap-x-3">
-								<a href="https://github.com/uatemycookie22" target="_blank" rel="noreferrer" aria-label="My GitHub">
+								<a href={props.social.github} target="_blank" rel="noreferrer" aria-label="My GitHub">
 									<MGitHub fontSize='large' className={`text-neutral
 									hover:cursor-pointer transition-duration-300i
 									text-hover-purple
 									`} />
 								</a>
-								<a href="https://linkedin.com/in/lysander-hernandez-cs-unt/" target="_blank" rel="noreferrer" aria-label="My LinkedIn">
+								<a href={props.social.linkedin} target="_blank" rel="noreferrer" aria-label="My LinkedIn">
 									<MLinkedIn fontSize='large' className={`text-neutral 
 										hover:cursor-pointer transition-duration-300i
 									  text-hover-purple
@@ -51,12 +56,14 @@ export default function Hero(props: HeroProps) {
 						</div>
 							<div className="w-full relative flex justify-center">
 									<Image className={`hidden lg:block absolute rounded-[5rem]
-									transition-opacity duration-500 delay-200 ease-in-out w-[911px] h-[533px]
+									w-[911px] h-[533px]
 									bg-cover object-cover filter-purple
 									`}
-										   src={'/assets/wavy-shape.png'} alt={'headshot background'}
-										   fill={true} sizes={'sizes="50vw"'}
+										   src={wavyback} alt={'headshot background'}
+										   fill={true}
+										   sizes={'sizes="50vw"'}
 										   priority={true}
+										   quality={40}
 									/>
 
 								<Image className={`hidden lg:block transition-opacity duration-500 delay-200 

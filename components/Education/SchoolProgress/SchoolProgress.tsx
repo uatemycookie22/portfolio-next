@@ -15,7 +15,7 @@ const SchoolProgress = ({percentage}: SchoolProgressProps) => {
 					<div className={`transition-size delay-200 duration-700 rounded-full h-full 
 					bg-violet-600 dark:bg-white rounded-full`}
 						 style={{width: `${barIntersected ? percentage : 0}%`}}
-					     ref={el => {if (el) barRef.current = el}}>
+					     ref={barRef}>
 					</div>
 				</div>
 				<MGraduation className="text-black dark:text-white"/>
