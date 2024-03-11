@@ -1,0 +1,11 @@
+@use '../../../styles/media' as m;
+
+.Stepper {
+  margin-top: 5vh;
+}
+
+@media screen and (max-width: m.$mobile-threshold) {
+  .Stepper {
+    display: none;
+  }
+}

@@ -1,0 +1,76 @@
+@use '../../../styles/media' as m;
+@use '../../../styles/colors.module' as c;
+
+@mixin navbarButton {
+  border: none;
+  border-radius: 30px;
+  font-family: Arial, serif;
+  box-shadow: none;
+  font-size: .8rem;
+  white-space: nowrap;
+}
+
+.navToolbar {
+  display: grid;
+  grid-template-areas: 'left middle right';
+  grid-template-columns: .9fr .5fr 1.5fr;
+  gap: 15px;
+}
+
+.linkButton {
+  min-width: 50px;
+  width: 100px;
+
+  @include navbarButton;
+}
+
+@media screen and (max-width: m.$mobile-threshold) {
+  .linkButton {
+    height: 56px;
+  }
+}
+
+.linkGroup {
+  grid-area: right;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+
+  gap: clamp(0px, 1vw, 100px);
+
+  height: 100%;
+  max-width: 500px;
+}
+
+@mixin icon-text {
+  @include navbarButton;
+
+  width: fit-content;
+  text-transform: lowercase;
+}
+
+.iconText.email  {
+  @include icon-text();
+
+  grid-area: left;
+}
+
+.iconText.phone  {
+  @include icon-text();
+
+  grid-area: middle;
+}
+
+@media screen and (max-width: 825px) {
+  .iconText.phone,
+  .iconText.email {
+    display: none;
+  }
+
+  .navToolbar {
+    display: flex;
+    gap: 0;
+    justify-content: center;
+  }
+}
