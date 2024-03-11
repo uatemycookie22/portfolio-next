@@ -1,6 +1,6 @@
 'use server';
 
-import {invalidPrompt} from "../../../utils/api-constants";
+import {invalidPrompt} from "@utils/api-constants";
 import {commentsApiBase} from "@api-config/comments-api";
 import {revalidateTag} from "next/cache";
 

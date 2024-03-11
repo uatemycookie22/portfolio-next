@@ -4,8 +4,8 @@ import {Blog} from "./blogs";
 import {pb} from "@api-config/pocketbase";
 import {Metadata, Viewport} from "next";
 import {ClientResponseError, ListResult} from "pocketbase";
-import {toDateString} from "../../utils/parse-date";
-import {formatAndEncode} from "../../utils/formatters";
+import {toDateString} from "@utils/parse-date";
+import {formatAndEncode} from "@utils/formatters";
 
 export const metadata: Metadata = {
     title: `Blogs | Lysander H`,

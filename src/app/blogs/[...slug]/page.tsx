@@ -4,7 +4,8 @@ import {Blog} from "../blogs";
 import BlogContent from "./(blog)/blog-content";
 import {Metadata} from "next";
 import Comments from "./(comments)/comments";
-import {toDateString} from "../../../utils/parse-date";
+import {toDateString} from "@utils/parse-date";
+import {ClientResponseError} from "pocketbase";
 
 type BlogPageParams = {
     slug: [string, string]
@@ -15,7 +16,29 @@ type BlogPageProps = {
 }
 
 async function getBlog(id: string) {
-    return await pb.collection('blogs').getOne<Blog>(id, { '$autoCancel': false })
+    try {
+        return await pb.collection('blogs').getOne<Blog>(id, {'$autoCancel': false})
+    } catch (error) {
+        if (error instanceof ClientResponseError) {
+
+            const { url, isAbort } = error
+
+            if (isAbort) {
+                console.log('Connection timed out')
+            }
+
+            if (error.originalError.name == 'TypeError') {
+                if (url) {
+                    console.log(`Could not connect to ${url}`)
+                } else {
+                    console.warn(`The URL for this request is empty. Did you forget to assign the environment variable NEXT_PUBLIC_PB_URL?`)
+                }
+            }
+
+            console.error(`STATUS ${error.status}`)
+        }
+        throw error
+    }
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
@@ -65,8 +88,34 @@ export default async function BlogPage({ params }: BlogPageProps) {
     </>)
 }
 
+
+async function getBlogs() {
+    try {
+        return await pb.collection('blogs').getFullList<Blog>({ '$autoCancel': false })
+    } catch (error) {
+        if (error instanceof ClientResponseError) {
+
+            const { url, isAbort } = error
+
+            if (isAbort) {
+                console.log('Connection timed out')
+            }
+
+            if (error.originalError.name == 'TypeError') {
+                if (url) {
+                    console.log(`Could not connect to ${url}`)
+                } else {
+                    console.warn(`The URL for this request is empty. Did you forget to assign the environment variable NEXT_PUBLIC_PB_URL?`)
+                }
+            }
+
+            console.error(`STATUS ${error.status}`)
+        }
+        throw error
+    }
+}
 export async function generateStaticParams(): Promise<BlogPageParams[]> {
-    const blogs = await pb.collection('blogs').getFullList<Blog>({ '$autoCancel': false })
+    const blogs = await getBlogs()
 
     return blogs.map((blog) => ({
         slug: [blog.id, blog.title], // Matches /:id and /:id/:title

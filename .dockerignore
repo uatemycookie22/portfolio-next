@@ -1,0 +1,7 @@
+.git
+node_modules
+.next
+pocketbase.exe
+.netlify
+/**/.docker_temp*
+/**/*.tar
