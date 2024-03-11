@@ -3,6 +3,10 @@ interface HomeContent {
     intro: {
         primary: string
         secondary: string
+        "social": {
+            "github": string,
+            "linkedin": string
+        },
         facts: Fact[]
     }
 

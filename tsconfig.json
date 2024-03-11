@@ -17,7 +17,8 @@
       "@atoms/*": ["./atoms/*.ts"],
       "@pb/*": ["./pocketbase/*.ts"],
       "@api-config/*": ["./api-config/*.ts"],
-      "@api/*": ["./api/*.ts"]
+      "@api/*": ["./api/*.ts"],
+      "@images/*": ["./public/assets/*"],
     },
     "allowJs": true,
     "skipLibCheck": true,

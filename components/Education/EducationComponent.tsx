@@ -4,6 +4,7 @@ import SchoolProgress from "@components/Education/SchoolProgress/SchoolProgress"
 import useFirstIntersection from "@hooks/first-intersection";
 import Image from "next/image";
 import {MLocation, MMajor} from "@icons";
+import unt from "@images/unt.png"
 
 interface EducationProps {
 	school: string
@@ -27,12 +28,20 @@ export default function EducationComponents({ location, major, school, graduatio
 						<div className="flex flex-wrap text-slate-800 dark:text-slate-300">
 							<div className="w-full mb-0">
 								<div className="relative flex flex-col sm:flex-row gap-12 justify-center">
-									<Image width={600} height={400} src="/assets/unt.png" alt="University" className="w-full h-auto object-fit sm:w-1/2 max-w-lg rounded-t-lg" />
+									<Image
+										width={600}
+										height={400}
+										src={unt}
+										alt="University"
+										className={`w-full h-auto object-fit sm:w-1/2 max-w-lg rounded-t-lg
+											${schoolInfoIntersected ? "inline" : "hidden"}
+										`}
+										quality={65}
+									/>
 									<div className={`p-6 transition-opacity duration-500
 										${schoolInfoIntersected ? "opacity-100" : "opacity-0"}
 									`}
-									     ref={(element) => {
-												if (element) schoolInfoRef.current = element}}>
+									     ref={schoolInfoRef}>
 
 										<h3 className="text-xl font-bold mb-2 text-slate-800 dark:text-white">{school}</h3>
 
