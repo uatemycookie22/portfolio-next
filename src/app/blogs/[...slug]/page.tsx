@@ -1,11 +1,14 @@
 import Image from "next/image";
-import {pb} from "@api-config/pocketbase";
 import {Blog} from "../blogs";
 import BlogContent from "./(blog)/blog-content";
 import {Metadata} from "next";
 import Comments from "./(comments)/comments";
 import {toDateString} from "@utils/parse-date";
-import {ClientResponseError} from "pocketbase";
+import {notFound} from "next/navigation";
+
+// ISR: Revalidate every day
+export const revalidate = 60 * 60 * 24
+export const dynamicParams = true  // Generate pages on-demand
 
 type BlogPageParams = {
     slug: [string, string]
@@ -15,39 +18,25 @@ type BlogPageProps = {
     params: Promise<BlogPageParams>
 }
 
-async function getBlog(id: string) {
-    try {
-        return await pb.collection('blogs').getOne<Blog>(id, {'$autoCancel': false})
-    } catch (error) {
-        if (error instanceof ClientResponseError) {
-
-            const { url, isAbort } = error
-
-            if (isAbort) {
-                console.log('Connection timed out')
-            }
-
-            if (error.originalError.name == 'TypeError') {
-                if (url) {
-                    console.log(`Could not connect to ${url}`)
-                } else {
-                    console.warn(`The URL for this request is empty. Did you forget to assign the environment variable NEXT_PUBLIC_PB_URL?`)
-                }
-            }
-
-            console.error(`STATUS ${error.status}`)
-        }
-        throw error
-    }
+async function getBlog(id: string): Promise<Blog | null> {
+    // Mock: return null (blog not found - no PocketBase)
+    return null
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
     const resolvedParams = await params
     const [id] = resolvedParams.slug
     const blogRecord = await getBlog(id)
+    
+    // Check for null blog - return 404 if not found
+    if (!blogRecord) {
+        notFound()
+    }
+    
     const {title, created, description, thumbnail, content } = blogRecord
 
-    const imageUrl = thumbnail ? pb.files.getUrl(blogRecord, thumbnail) : '/assets/ts.png'
+    // Mock: would normally use pb.files.getUrl(blogRecord, thumbnail)
+    const imageUrl = thumbnail ? '/assets/ts.png' : '/assets/ts.png'
     const date = toDateString(created)
 
     return (<>
@@ -90,43 +79,20 @@ export default async function BlogPage({ params }: BlogPageProps) {
 }
 
 
-async function getBlogs() {
-    try {
-        return await pb.collection('blogs').getFullList<Blog>({ '$autoCancel': false })
-    } catch (error) {
-        if (error instanceof ClientResponseError) {
-
-            const { url, isAbort } = error
-
-            if (isAbort) {
-                console.log('Connection timed out')
-            }
-
-            if (error.originalError.name == 'TypeError') {
-                if (url) {
-                    console.log(`Could not connect to ${url}`)
-                } else {
-                    console.warn(`The URL for this request is empty. Did you forget to assign the environment variable NEXT_PUBLIC_PB_URL?`)
-                }
-            }
-
-            console.error(`STATUS ${error.status}`)
-        }
-        throw error
-    }
-}
-export async function generateStaticParams(): Promise<BlogPageParams[]> {
-    const blogs = await getBlogs()
-
-    return blogs.map((blog) => ({
-        slug: [blog.id, blog.title], // Matches /:id and /:id/:title
-    }));
-}
-
 export async function generateMetadata({ params }: { params: Promise<BlogPageParams>}): Promise<Metadata> {
     const resolvedParams = await params
     const [id] = resolvedParams.slug
-    const { title, description } = await getBlog(id)
+    const blog = await getBlog(id)
+    
+    // Return default metadata if blog not found
+    if (!blog) {
+        return {
+            title: 'Blog Not Found | Lysander H',
+            description: 'This blog post is not available.',
+        }
+    }
+    
+    const { title, description } = blog
     return {
         title: `${title} | Lysander H`,
         description,

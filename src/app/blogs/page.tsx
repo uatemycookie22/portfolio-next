@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import {Blog} from "./blogs";
-import {pb} from "@api-config/pocketbase";
 import {Metadata, Viewport} from "next";
-import {ClientResponseError, ListResult} from "pocketbase";
+import {ListResult} from "pocketbase";
 import {toDateString} from "@utils/parse-date";
 import {formatAndEncode} from "@utils/formatters";
+
+// ISR: Revalidate every hour
+export const revalidate = 3600
 
 export const metadata: Metadata = {
     title: `Blogs | Lysander H`,
@@ -25,7 +27,8 @@ export const viewport: Viewport = {
 function BlogListing({blogRecord} : { blogRecord: Blog }) {
     const { title, created, description, id, thumbnail } = blogRecord
 
-    const imageUrl = thumbnail ? pb.files.getUrl(blogRecord, thumbnail) : '/assets/ts.png'
+    // Mock: would normally use pb.files.getUrl(blogRecord, thumbnail)
+    const imageUrl = thumbnail ? '/assets/ts.png' : '/assets/ts.png'
     const date = toDateString(created)
 
     const encodedTitle = formatAndEncode(title)
@@ -79,24 +82,19 @@ export default async function BlogsPage() {
     return (<section className={`justify-center content-center mt-24`}>
         <ul className={`flex flex-wrap flex-col justify-center content-center justify-items-center
         gap-12`}>
-            {blogs}
+            {blogs && blogs.length > 0 ? blogs : (
+                <li className="text-center p-8">
+                    <p className="text-xl text-neutral dark:text-slate-300">
+                        Looks kinda empty here... 👻
+                    </p>
+                </li>
+            )}
         </ul>
     </section>)
 }
 
 type GetBlogs = [ListResult<Blog> | undefined, unknown | undefined]
 async function getBlogs(): Promise<GetBlogs> {
-    try {
-        const fetchedBlogs = await pb.collection('blogs')
-            .getList<Blog>(1, 10, { '$autoCancel': false, fields: '' })
-
-        return [fetchedBlogs, undefined]
-    } catch (error) {
-        if (error instanceof ClientResponseError) {
-            const errorMessage = `${error.originalError} ${error.originalError.cause} ${pb.baseUrl}`
-            throw new ClientResponseError(errorMessage)
-        }
-
-        throw error
-    }
+    // Mock: return empty blogs array
+    return [{ items: [], page: 1, perPage: 10, totalItems: 0, totalPages: 0 }, undefined]
 }
