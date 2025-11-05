@@ -7,7 +7,7 @@ import {toDateString} from "@utils/parse-date";
 import {notFound} from "next/navigation";
 
 // ISR: Revalidate every day
-export const revalidate = 60 * 60 * 24
+export const revalidate = 86400  // 24 hours in seconds
 export const dynamicParams = true  // Generate pages on-demand
 
 type BlogPageParams = {

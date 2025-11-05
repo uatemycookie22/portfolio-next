@@ -21,7 +21,7 @@
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "autoprefixer": "^10.4.13",
-    "eslint": "8.22.0",
+    "eslint": "^9.39.1",
     "eslint-config-next": "^16.0.1",
     "jotai": "^1.13.1",
     "next": "^16.0.1",

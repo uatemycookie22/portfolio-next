@@ -6,6 +6,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const nextConfig = {
   reactStrictMode: true,
   turbopack: {},
+  output: 'standalone',
   sassOptions: {
     includePaths: ['./styles']
   },
@@ -20,6 +21,7 @@ const nextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
+    qualities: [25, 40, 65, 75],
     remotePatterns: [
       {
         protocol: 'https',

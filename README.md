@@ -1,37 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Lysander H - Portfolio Website
+
+A modern, high-performance portfolio website built with Next.js 16, React 19, and TypeScript 5.
 
 ## Getting Started
 
-First, run the development server:
+### Development
+
+Run the development server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-## Build locally and push to lysanderh.com
-Run `bash bin/build-with-push.sh`
+### Build
 
-This will build the docker image locally, scp it to lysanderh.com:root/portfolio-next, and load the image on the remote
+Create a production build:
 
-Use this if the local computer is powerful. On the remote it takes roughly 3 minutes.
+```bash
+npm run build
+npm start
+```
 
-## Start container
-`docker run -d --restart unless-stopped -p 3000:3000 uatemycookie/lhportfolionextbuild:dev`
+## Docker Deployment
 
-## Nginx
-### Configuration
-`cd etc/nginx/sites-available`
+### Build the Docker Image
 
-### Encryption
-`sudo certbot --nginx -d *.lysanderh.com -d *.www.lysanderh.com`
+```bash
+docker build -t portfolio-next .
+```
 
-### Enabling
-After doing configuration and encryption
-`sudo systemctl reload nginx`
+### Run Locally
 
-Confirming renew works
-`sudo certbot renew --dry-run`
+```bash
+docker run -d -p 3000:3000 --name my-portfolio portfolio-next
+```
+
+### View Logs
+
+```bash
+docker logs -f my-portfolio
+```
+
+### Stop Container
+
+```bash
+docker stop my-portfolio
+```
+
+## Project Structure
+
+```
+├── src/
+│   ├── app/           # Next.js 16 App Router
+│   ├── components/    # React components
+│   ├── hooks/         # Custom React hooks
+│   └── utils/         # Utility functions
+├── public/            # Static assets
+├── styles/            # Global styles (SCSS)
+└── Dockerfile         # Docker configuration
+```
