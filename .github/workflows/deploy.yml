@@ -13,6 +13,9 @@ env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: blogapplicationstack-containerblogrepositorybd4123b3-nallmzmpvnia
   IMAGE_TAG: ${{ github.sha }}
+  LIGHTSAIL_SERVICE_NAME: blog-container-service
+  LIGHTSAIL_CONTAINER_NAME: blog
+  LIGHTSAIL_REGION: us-east-1
 
 jobs:
   build-and-deploy:
@@ -37,24 +40,80 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build Docker image
+        id: build
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
           push: true
+          load: true
           tags: |
             ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
             ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
+            ${{ env.LIGHTSAIL_CONTAINER_NAME }}:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
       - name: Image digest
-        run: echo "Image pushed with digest ${{ steps.build.outputs.digest }}"
+        run: echo "Image pushed to ECR with digest ${{ steps.build.outputs.digest }}"
+
+      - name: Push to AWS Lightsail
+        run: |
+          aws lightsail push-container-image \
+            --service-name ${{ env.LIGHTSAIL_SERVICE_NAME }} \
+            --image ${{ env.LIGHTSAIL_CONTAINER_NAME }}:${{ github.sha }} \
+            --region ${{ env.LIGHTSAIL_REGION }} \
+            --label git-push
+
+      - name: Get Lightsail image name
+        run: |
+          echo "LIGHTSAIL_IMAGE=$(aws lightsail get-container-images \
+            --service-name ${{ env.LIGHTSAIL_SERVICE_NAME }} \
+            --region ${{ env.LIGHTSAIL_REGION }} \
+            | jq -r '.containerImages[0].image')" >> $GITHUB_ENV
+
+      - name: Deploy to Lightsail
+        run: |
+          aws lightsail create-container-service-deployment \
+            --region ${{ env.LIGHTSAIL_REGION }} \
+            --service-name ${{ env.LIGHTSAIL_SERVICE_NAME }} \
+            --containers "{
+              \"${{ env.LIGHTSAIL_CONTAINER_NAME }}\": {
+                \"image\": \"$LIGHTSAIL_IMAGE\",
+                \"environment\": {
+                  \"VERSION\": \"${{ github.run_number }}\",
+                  \"NODE_ENV\": \"production\"
+                },
+                \"ports\": {
+                  \"3000\": \"HTTP\"
+                }
+              }
+            }" \
+            --public-endpoint "{
+              \"containerName\": \"${{ env.LIGHTSAIL_CONTAINER_NAME }}\",
+              \"containerPort\": 3000,
+              \"healthCheck\": {
+                \"path\": \"/\",
+                \"intervalSeconds\": 30,
+                \"timeoutSeconds\": 10,
+                \"healthyThreshold\": 2,
+                \"unhealthyThreshold\": 5,
+                \"successCodes\": \"200-499\"
+              }
+            }"
 
       - name: Deploy Summary
         run: |
           echo "### Deployment Successful! :rocket:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**ECR:**" >> $GITHUB_STEP_SUMMARY
           echo "- **Image**: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest" >> $GITHUB_STEP_SUMMARY
           echo "- **Tag**: ${{ env.IMAGE_TAG }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Region**: ${{ env.AWS_REGION }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Lightsail:**" >> $GITHUB_STEP_SUMMARY
+          echo "- **Service**: ${{ env.LIGHTSAIL_SERVICE_NAME }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Container**: ${{ env.LIGHTSAIL_CONTAINER_NAME }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Image**: $LIGHTSAIL_IMAGE" >> $GITHUB_STEP_SUMMARY
+          echo "- **Version**: ${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Region**: ${{ env.LIGHTSAIL_REGION }}" >> $GITHUB_STEP_SUMMARY
