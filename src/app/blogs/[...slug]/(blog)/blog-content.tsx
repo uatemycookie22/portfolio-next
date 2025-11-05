@@ -6,28 +6,31 @@ export interface BlogContentProps {
 }
 
 const components: Components = {
-    code: (props) => {
-
-        if (props.inline) {
-            return (<>
-                <code>{props.children}</code>
-            </>)
+    code: ({node, className, children, ...props}) => {
+        const isInline = !className;
+        
+        if (isInline) {
+            return (
+                <code {...props}>{children}</code>
+            )
         }
 
-        return (<>
+        return (
             <pre>
-                <code className={`${props.className} whitespace-pre-wrap`}>
-                    {props.children}
+                <code className={`${className} whitespace-pre-wrap`} {...props}>
+                    {children}
                 </code>
             </pre>
-        </>)
+        )
     }
 }
 
 export default function BlogContent({  children }: BlogContentProps ) {
-    return (<>
-        <ReactMarkdown className={`dark:text-slate-300 markdown w-full`} components={components}>
-            {children.replace(/\\n/g, "\n")}
-        </ReactMarkdown>
-    </>)
+    return (
+        <div className="dark:text-slate-300 markdown w-full">
+            <ReactMarkdown components={components}>
+                {children.replace(/\\n/g, "\n")}
+            </ReactMarkdown>
+        </div>
+    )
 }

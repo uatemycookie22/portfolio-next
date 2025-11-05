@@ -12,7 +12,7 @@ type BlogPageParams = {
 }
 
 type BlogPageProps = {
-    params: BlogPageParams
+    params: Promise<BlogPageParams>
 }
 
 async function getBlog(id: string) {
@@ -42,7 +42,8 @@ async function getBlog(id: string) {
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
-    const [id] = params.slug
+    const resolvedParams = await params
+    const [id] = resolvedParams.slug
     const blogRecord = await getBlog(id)
     const {title, created, description, thumbnail, content } = blogRecord
 
@@ -122,8 +123,9 @@ export async function generateStaticParams(): Promise<BlogPageParams[]> {
     }));
 }
 
-export async function generateMetadata({ params }: { params: BlogPageParams}): Promise<Metadata> {
-    const [id] = params.slug
+export async function generateMetadata({ params }: { params: Promise<BlogPageParams>}): Promise<Metadata> {
+    const resolvedParams = await params
+    const [id] = resolvedParams.slug
     const { title, description } = await getBlog(id)
     return {
         title: `${title} | Lysander H`,

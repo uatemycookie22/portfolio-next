@@ -2,7 +2,7 @@
 
 import {FormEvent, useCallback, useState} from "react";
 import {Alert, Slide, Snackbar} from "@mui/material";
-import {MutateOptions, useMutation} from "react-query";
+import {MutateOptions, useMutation} from "@tanstack/react-query";
 import {SendButton} from "./SendButton";
 import {encode} from "../../utils/fetch";
 import {TextArea} from "../TextArea/TextArea";
@@ -74,7 +74,7 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 						  aria-label={'Message text body'}
 				/>
 
-				<SendButton isLoading={emailMutation.isLoading}/>
+				<SendButton isLoading={emailMutation.isPending}/>
 
 				<Snackbar
 					open={!!statusMessage}
@@ -186,14 +186,16 @@ async function postEmail(body: FormData): Promise<ResponseError> {
 
 
 function useEmail(mutateOptions?:  (MutateOptions<ResponseError, Error, FormData>)) {
-	const emailMutation = useMutation<ResponseError, Error, FormData>(async (form) => {
-		const [res, errorMessage] = await postEmail(form)
+	const emailMutation = useMutation<ResponseError, Error, FormData>({
+		mutationFn: async (form) => {
+			const [res, errorMessage] = await postEmail(form)
 
-		if (errorMessage) {
-			throw new Error(errorMessage)
+			if (errorMessage) {
+				throw new Error(errorMessage)
+			}
+
+			return [res, errorMessage]
 		}
-
-		return [res, errorMessage]
 	})
 
 	const sendEmail = useCallback( (e: FormEvent<HTMLFormElement>) => {
