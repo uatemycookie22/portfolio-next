@@ -1,0 +1,27 @@
+{
+  "containers": {
+    "blog": {
+      "image": "814155132173.dkr.ecr.us-east-1.amazonaws.com/blogapplicationstack-containerblogrepositorybd4123b3-nallmzmpvnia:latest",
+      "ports": {
+        "3000": "HTTP"
+      },
+      "environment": {
+        "NODE_ENV": "production",
+        "PORT": "3000",
+        "HOSTNAME": "0.0.0.0"
+      }
+    }
+  },
+  "publicEndpoint": {
+    "containerName": "blog",
+    "containerPort": 3000,
+    "healthCheck": {
+      "path": "/",
+      "intervalSeconds": 30,
+      "timeoutSeconds": 10,
+      "healthyThreshold": 2,
+      "unhealthyThreshold": 5,
+      "successCodes": "200-499"
+    }
+  }
+}
