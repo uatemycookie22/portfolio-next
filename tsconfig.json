@@ -8,17 +8,46 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["./src/components/*", "./components/*"],
-      "@hooks/*": ["./src/hooks/*.ts","./hooks/*.ts"],
-      "@styles/*": ["./src/styles/*", "./styles/*"],
-      "@utils/*": ["./src/utils/*.ts", "./utils/*.ts"],
-      "@icons": ["./src/components/WrappedIcons/index.ts", "./components/WrappedIcons/index.ts"],
-      "@icons/*": ["./src/components/WrappedIcons/*.tsx", "./components/WrappedIcons/*.tsx"],
-      "@atoms/*": ["./src/atoms/*.ts", "./atoms/*.ts"],
-      "@pb/*": ["./pocketbase/*.ts"],
-      "@api-config/*": ["./api-config/*.ts"],
-      "@api/*": ["./api/*.ts"],
-      "@images/*": ["./public/assets/*"]
+      "@components/*": [
+        "./src/components/*",
+        "./components/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*.ts",
+        "./hooks/*.ts"
+      ],
+      "@styles/*": [
+        "./src/styles/*",
+        "./styles/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*.ts",
+        "./utils/*.ts"
+      ],
+      "@icons": [
+        "./src/components/WrappedIcons/index.ts",
+        "./components/WrappedIcons/index.ts"
+      ],
+      "@icons/*": [
+        "./src/components/WrappedIcons/*.tsx",
+        "./components/WrappedIcons/*.tsx"
+      ],
+      "@atoms/*": [
+        "./src/atoms/*.ts",
+        "./atoms/*.ts"
+      ],
+      "@pb/*": [
+        "./pocketbase/*.ts"
+      ],
+      "@api-config/*": [
+        "./api-config/*.ts"
+      ],
+      "@api/*": [
+        "./api/*.ts"
+      ],
+      "@images/*": [
+        "./public/assets/*"
+      ]
     },
     "allowJs": true,
     "skipLibCheck": true,
@@ -30,7 +59,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -42,7 +71,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

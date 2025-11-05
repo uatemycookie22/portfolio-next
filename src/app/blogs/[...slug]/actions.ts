@@ -42,7 +42,7 @@ export async function postComment(formData: FormData): Promise<{response?: strin
             {setTimeout(() => {resolve('')}, 500)}
         )
 
-        revalidateTag('postComment')
+        await revalidateTag('postComment', {})
 
         return {response: 'Success', error: undefined}
     } catch (err) {
