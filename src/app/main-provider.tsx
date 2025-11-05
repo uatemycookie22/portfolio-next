@@ -2,7 +2,7 @@
 
 import {ReactNode} from "react";
 import {IntersectionProvider} from "../context/intersection-refs";
-import {QueryClient, QueryClientProvider} from "react-query";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 const queryClient = new QueryClient()
 
