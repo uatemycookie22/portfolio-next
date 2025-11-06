@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { listBlogs } from '@/services/blog-service'
+import { listBlogs } from '../../../services/blog-service'
 
 export const dynamic = 'force-dynamic'
 
