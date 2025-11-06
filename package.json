@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"tailwindcss --input ./styles/input.css --output ./public/build/tailwind.css --watch\" \"next dev --turbopack\"",
-    "build": "concurrently \"postcss styles/input.css -o public/build/tailwind.css\" \"next build\"",
+    "dev": "AWS_PROFILE=personal-website concurrently \"tailwindcss --input ./styles/input.css --output ./public/build/tailwind.css --watch\" \"next dev --turbopack\"",
+    "build": "AWS_PROFILE=personal-website concurrently \"postcss styles/input.css -o public/build/tailwind.css\" \"next build\"",
     "start": "next start --keepAliveTimeout 70000",
     "lint": "next lint",
     "build:css": "postcss styles/input.css -o public/build/tailwind.css",
     "dev:css": "tailwindcss --input ./styles/input.css --output ./public/build/tailwind.css --watch"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.925.0",
+    "@aws-sdk/client-ses": "^3.925.0",
+    "@aws-sdk/lib-dynamodb": "^3.925.0",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^7.3.5",

@@ -5,6 +5,7 @@ import {Metadata} from "next";
 import Comments from "./(comments)/comments";
 import {toDateString} from "@utils/parse-date";
 import {notFound} from "next/navigation";
+import {getBlog} from "../../../services/blog-service";
 
 // ISR: Revalidate every day
 export const revalidate = 86400  // 24 hours in seconds
@@ -18,11 +19,6 @@ type BlogPageProps = {
     params: Promise<BlogPageParams>
 }
 
-async function getBlog(id: string): Promise<Blog | null> {
-    // Mock: return null (blog not found - no PocketBase)
-    return null
-}
-
 export default async function BlogPage({ params }: BlogPageProps) {
     const resolvedParams = await params
     const [id] = resolvedParams.slug
@@ -33,11 +29,11 @@ export default async function BlogPage({ params }: BlogPageProps) {
         notFound()
     }
     
-    const {title, created, description, thumbnail, content } = blogRecord
+    const {title, publishedDate, excerpt, coverImage, content } = blogRecord
 
-    // Mock: would normally use pb.files.getUrl(blogRecord, thumbnail)
-    const imageUrl = thumbnail ? '/assets/ts.png' : '/assets/ts.png'
-    const date = toDateString(created)
+    // Use cover image from S3 or fallback
+    const imageUrl = coverImage ? `/assets/${coverImage}` : '/assets/ts.png'
+    const date = toDateString(new Date(publishedDate).toISOString())
 
     return (<>
 
@@ -51,7 +47,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
                     </h1>
 
                     <p className={`text-2xl text-black dark:text-white`}>
-                        {description}
+                        {excerpt}
                     </p>
 
                     <p className={`dark:text-neutral`}>
@@ -92,16 +88,16 @@ export async function generateMetadata({ params }: { params: Promise<BlogPagePar
         }
     }
     
-    const { title, description } = blog
+    const { title, metaDescription, tags } = blog
     return {
         title: `${title} | Lysander H`,
-        description,
+        description: metaDescription,
         icons: [
             {rel: 'shortcut icon', url: '/favicon.ico'}
         ],
         robots: 'index',
         authors: [{name: 'Lysander Hernandez',}],
-        keywords: ['Python', 'Machine Learning', 'Deep Learning', 'MNIST', 'Neural Network'],
+        keywords: tags,
     }
 }
 

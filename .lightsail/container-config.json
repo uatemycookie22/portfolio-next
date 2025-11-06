@@ -6,6 +6,10 @@
         "3000": "HTTP"
       },
       "environment": {
+        "DYNAMODB_TABLE_NAME": "BlogDatabaseStack-DatabaseBlogPostsTable12519031-66XYIQYLVNBY",
+        "S3_BUCKET_NAME": "blogstoragestack-storageblogimagesbuckete71fadd1-1yjbhzk68klr",
+        "AWS_REGION": "us-east-1",
+        "AWS_ROLE_ARN": "arn:aws:iam::814155132173:role/BlogApplicationStack-ContainerContainerServiceRole9-gZn4PoQrlGdT",
         "NODE_ENV": "production",
         "PORT": "3000",
         "HOSTNAME": "0.0.0.0"
