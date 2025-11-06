@@ -42,6 +42,9 @@ export async function listBlogs(options?: {
     limit?: number;
     lastEvaluatedKey?: Record<string, any>;
 }): Promise<BlogListResult> {
+    console.log('[listBlogs] Starting query with options:', options);
+    console.log('[listBlogs] Table name:', BLOG_POSTS_TABLE);
+    
     try {
         const {limit = 10, lastEvaluatedKey} = options || {};
 
@@ -66,8 +69,13 @@ export async function listBlogs(options?: {
             queryParams.ExclusiveStartKey = lastEvaluatedKey;
         }
 
+        console.log('[listBlogs] Query params:', JSON.stringify(queryParams, null, 2));
+        
         const command = new QueryCommand(queryParams);
         const result = await docClient.send(command);
+
+        console.log('[listBlogs] Query result - Count:', result.Count, 'Items:', result.Items?.length);
+        console.log('[listBlogs] First item:', result.Items?.[0]);
 
         return {
             items: (result.Items || []) as Blog[],
@@ -75,7 +83,8 @@ export async function listBlogs(options?: {
             hasMore: !!result.LastEvaluatedKey,
         };
     } catch (error) {
-        console.error('Error listing blogs from DynamoDB:', error);
+        console.error('[listBlogs] Error listing blogs from DynamoDB:', error);
+        console.error('[listBlogs] Error details:', JSON.stringify(error, null, 2));
         // Return empty result on error
         return {
             items: [],
