@@ -7,7 +7,7 @@ import {formatAndEncode} from "@utils/formatters";
 import {listBlogs} from "../../services/blog-service";
 
 // ISR: Revalidate every hour
-export const revalidate = 3600
+export const revalidate = 30
 
 export const metadata: Metadata = {
     title: `Blogs | Lysander H`,
