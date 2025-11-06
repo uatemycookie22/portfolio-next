@@ -2,10 +2,22 @@
 
 import {SESClient, SendEmailCommand} from "@aws-sdk/client-ses";
 import {revalidateTag} from "next/cache";
+import {fromTemporaryCredentials} from "@aws-sdk/credential-providers";
 
-// Initialize SES client with environment credentials
+// Configure credentials for Lightsail (requires explicit role assumption)
+const credentials = process.env.AWS_ROLE_ARN
+    ? fromTemporaryCredentials({
+          params: {
+              RoleArn: process.env.AWS_ROLE_ARN,
+              RoleSessionName: 'blog-ses-session',
+          },
+      })
+    : undefined; // Use default credential chain for local development
+
+// Initialize SES client
 const sesClient = new SESClient({
     region: process.env.AWS_REGION || 'us-east-1',
+    credentials,
 });
 
 type EmailState = {response?: string, error?: string} | null

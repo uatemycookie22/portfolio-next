@@ -1,9 +1,21 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+import { fromTemporaryCredentials } from "@aws-sdk/credential-providers";
+
+// Configure credentials for Lightsail (requires explicit role assumption)
+const credentials = process.env.AWS_ROLE_ARN
+    ? fromTemporaryCredentials({
+          params: {
+              RoleArn: process.env.AWS_ROLE_ARN,
+              RoleSessionName: 'blog-dynamodb-session',
+          },
+      })
+    : undefined; // Use default credential chain for local development
 
 // Create DynamoDB client
 const client = new DynamoDBClient({
     region: process.env.AWS_REGION || 'us-east-1',
+    credentials,
 });
 
 // Create DocumentClient for easier operations (handles marshalling/unmarshalling)
