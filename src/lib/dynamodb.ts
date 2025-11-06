@@ -18,6 +18,8 @@ const client = new DynamoDBClient({
     credentials,
 });
 
+console.log(`Created DDB client ${client.config}`)
+
 // Create DocumentClient for easier operations (handles marshalling/unmarshalling)
 export const docClient = DynamoDBDocumentClient.from(client, {
     marshallOptions: {
