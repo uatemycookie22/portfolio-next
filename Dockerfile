@@ -29,30 +29,25 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED=1
 
-# Accept build args for environment variables and credentials needed during build
+# Accept build args for non-sensitive environment variables
 ARG DYNAMODB_TABLE_NAME
-ARG AWS_ACCESS_KEY_ID
-ARG AWS_SECRET_ACCESS_KEY
-ARG AWS_SESSION_TOKEN
 ARG AWS_REGION
 
 ENV DYNAMODB_TABLE_NAME=$DYNAMODB_TABLE_NAME
-ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-ENV AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN
 ENV AWS_REGION=$AWS_REGION
 
-RUN \
-  if [ -f yarn.lock ]; then yarn run build; \
-  elif [ -f package-lock.json ]; then npm run build; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
-
-# Unset credentials after build (security)
-ENV AWS_ACCESS_KEY_ID=
-ENV AWS_SECRET_ACCESS_KEY=
-ENV AWS_SESSION_TOKEN=
+# Use BuildKit secrets for AWS credentials (more secure - not stored in layers)
+RUN --mount=type=secret,id=aws_access_key_id \
+    --mount=type=secret,id=aws_secret_access_key \
+    --mount=type=secret,id=aws_session_token \
+    export AWS_ACCESS_KEY_ID=$(cat /run/secrets/aws_access_key_id 2>/dev/null || echo "") && \
+    export AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/aws_secret_access_key 2>/dev/null || echo "") && \
+    export AWS_SESSION_TOKEN=$(cat /run/secrets/aws_session_token 2>/dev/null || echo "") && \
+    if [ -f yarn.lock ]; then yarn run build; \
+    elif [ -f package-lock.json ]; then npm run build; \
+    elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
+    else echo "Lockfile not found." && exit 1; \
+    fi
 
 # Production image, copy all the files and run next
 FROM base AS runner
