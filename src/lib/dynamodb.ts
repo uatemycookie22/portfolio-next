@@ -4,7 +4,11 @@ import { fromTemporaryCredentials } from "@aws-sdk/credential-providers";
 
 // Configure credentials based on environment
 // - In Lightsail: Use explicit role assumption (AWS_ROLE_ARN set)
-// - In GitHub Actions/Local: Use default credential chain (env vars or ~/.aws/credentials)
+// - In Docker build: Use explicit env credentials (AWS_ACCESS_KEY_ID set)
+// - In local dev: Use default credential chain (profile)
+const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
+const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
+
 const credentials = process.env.AWS_ROLE_ARN
     ? fromTemporaryCredentials({
           params: {
@@ -12,7 +16,12 @@ const credentials = process.env.AWS_ROLE_ARN
               RoleSessionName: 'blog-dynamodb-session',
           },
       })
-    : undefined; // undefined = use default chain (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, etc.)
+    : accessKeyId && secretAccessKey
+    ? {
+          accessKeyId,
+          secretAccessKey,
+      }
+    : undefined; // undefined = use default chain (profile, instance profile, etc.)
 
 console.log('Created DDB client', {
     hasRoleArn: !!process.env.AWS_ROLE_ARN,
