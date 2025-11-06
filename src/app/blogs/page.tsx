@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import {Blog} from "./blogs";
 import {Metadata, Viewport} from "next";
-import {ListResult} from "pocketbase";
 import {toDateString} from "@utils/parse-date";
 import {formatAndEncode} from "@utils/formatters";
+import {listBlogs} from "../../services/blog-service";
 
 // ISR: Revalidate every hour
 export const revalidate = 3600
@@ -25,11 +25,11 @@ export const viewport: Viewport = {
 }
 
 function BlogListing({blogRecord} : { blogRecord: Blog }) {
-    const { title, created, description, id, thumbnail } = blogRecord
+    const { title, publishedDate, excerpt, id, coverImage } = blogRecord
 
-    // Mock: would normally use pb.files.getUrl(blogRecord, thumbnail)
-    const imageUrl = thumbnail ? '/assets/ts.png' : '/assets/ts.png'
-    const date = toDateString(created)
+    // Use cover image from S3 or fallback
+    const imageUrl = coverImage ? `/assets/${coverImage}` : '/assets/ts.png'
+    const date = toDateString(new Date(publishedDate).toISOString())
 
     const encodedTitle = formatAndEncode(title)
     return (
@@ -68,7 +68,7 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
                     <p className={`dark:text-slate-300 mb-auto
                     whitespace-nowrap overflow-ellipsis overflow-hidden md:whitespace-normal
                     text-sm md:text-[16px]
-                    `}>{description}</p>
+                    `}>{excerpt}</p>
                 </div>
             </Link>
         </li>
@@ -76,8 +76,8 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
 }
 
 export default async function BlogsPage() {
-    const [blogItems] = await getBlogs()
-    const blogs = blogItems?.items.map((blogRecord, i) => (<BlogListing key={i} blogRecord={blogRecord}/>))
+    const blogItems = await listBlogs({limit: 10})
+    const blogs = blogItems.items.map((blogRecord, i) => (<BlogListing key={i} blogRecord={blogRecord}/>))
 
     return (<section className={`justify-center content-center mt-24`}>
         <ul className={`flex flex-wrap flex-col justify-center content-center justify-items-center
@@ -91,10 +91,4 @@ export default async function BlogsPage() {
             )}
         </ul>
     </section>)
-}
-
-type GetBlogs = [ListResult<Blog> | undefined, unknown | undefined]
-async function getBlogs(): Promise<GetBlogs> {
-    // Mock: return empty blogs array
-    return [{ items: [], page: 1, perPage: 10, totalItems: 0, totalPages: 0 }, undefined]
 }
