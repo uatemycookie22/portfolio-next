@@ -8,6 +8,7 @@ import { fromTemporaryCredentials } from "@aws-sdk/credential-providers";
 // - In local dev: Use default credential chain (profile)
 const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
 const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
+const sessionToken = process.env.AWS_SESSION_TOKEN;
 
 const credentials = process.env.AWS_ROLE_ARN
     ? fromTemporaryCredentials({
@@ -20,6 +21,7 @@ const credentials = process.env.AWS_ROLE_ARN
     ? {
           accessKeyId,
           secretAccessKey,
+          ...(sessionToken && { sessionToken }), // Include session token if present (OIDC/temporary creds)
       }
     : undefined; // undefined = use default chain (profile, instance profile, etc.)
 
