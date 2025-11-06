@@ -29,6 +29,10 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED=1
 
+# Accept build args for environment variables needed during build
+ARG DYNAMODB_TABLE_NAME
+ENV DYNAMODB_TABLE_NAME=$DYNAMODB_TABLE_NAME
+
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
   elif [ -f package-lock.json ]; then npm run build; \
