@@ -2,7 +2,9 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { fromTemporaryCredentials } from "@aws-sdk/credential-providers";
 
-// Configure credentials for Lightsail (requires explicit role assumption)
+// Configure credentials based on environment
+// - In Lightsail: Use explicit role assumption (AWS_ROLE_ARN set)
+// - In GitHub Actions/Local: Use default credential chain (env vars or ~/.aws/credentials)
 const credentials = process.env.AWS_ROLE_ARN
     ? fromTemporaryCredentials({
           params: {
@@ -10,7 +12,14 @@ const credentials = process.env.AWS_ROLE_ARN
               RoleSessionName: 'blog-dynamodb-session',
           },
       })
-    : undefined; // Use default credential chain for local development
+    : undefined; // undefined = use default chain (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, etc.)
+
+console.log('Created DDB client', {
+    hasRoleArn: !!process.env.AWS_ROLE_ARN,
+    hasAccessKey: !!process.env.AWS_ACCESS_KEY_ID,
+    region: process.env.AWS_REGION,
+    tableName: process.env.DYNAMODB_TABLE_NAME
+});
 
 // Create DynamoDB client
 const client = new DynamoDBClient({
