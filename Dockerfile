@@ -29,9 +29,18 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED=1
 
-# Accept build args for environment variables needed during build
+# Accept build args for environment variables and credentials needed during build
 ARG DYNAMODB_TABLE_NAME
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
+ARG AWS_SESSION_TOKEN
+ARG AWS_REGION
+
 ENV DYNAMODB_TABLE_NAME=$DYNAMODB_TABLE_NAME
+ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+ENV AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN
+ENV AWS_REGION=$AWS_REGION
 
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
@@ -39,6 +48,11 @@ RUN \
   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
   else echo "Lockfile not found." && exit 1; \
   fi
+
+# Unset credentials after build (security)
+ENV AWS_ACCESS_KEY_ID=
+ENV AWS_SECRET_ACCESS_KEY=
+ENV AWS_SESSION_TOKEN=
 
 # Production image, copy all the files and run next
 FROM base AS runner
