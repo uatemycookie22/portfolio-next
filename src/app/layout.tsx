@@ -9,6 +9,9 @@ import {Metadata} from "next";
 
 export const metadata: Metadata = {
 	metadataBase: new URL('https://blog-container-service.vcyrgcw67m07y.us-east-1.cs.amazonlightsail.com'),
+	verification: {
+		google: 'hnue4ZCbfhcEZk_eqx94YfUfQXiByi1KL-CSkm6Rhu0',
+	},
 }
 
 import contactjson from "public/contact.json"
