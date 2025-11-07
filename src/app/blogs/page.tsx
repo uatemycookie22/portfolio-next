@@ -27,8 +27,10 @@ export const viewport: Viewport = {
 function BlogListing({blogRecord} : { blogRecord: Blog }) {
     const { title, publishedDate, excerpt, id, coverImage } = blogRecord
 
-    // Use cover image from S3 or fallback
-    const imageUrl = coverImage ? `/assets/${coverImage}` : '/assets/ts.png'
+    // Support both S3 URLs and local assets
+    const imageUrl = coverImage
+        ? (coverImage.startsWith('https://') ? coverImage : `/assets/${coverImage}`)
+        : '/assets/ts.png'
     const date = toDateString(new Date(publishedDate).toISOString())
 
     const encodedTitle = formatAndEncode(title)
