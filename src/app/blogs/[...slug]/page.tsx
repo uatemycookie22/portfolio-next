@@ -90,7 +90,13 @@ export async function generateMetadata({ params }: { params: Promise<BlogPagePar
         }
     }
     
-    const { title, metaDescription, tags } = blog
+    const { title, metaDescription, tags, ogImage } = blog
+    
+    // Support both S3 URLs and local assets for OG image
+    const ogImageUrl = ogImage
+        ? (ogImage.startsWith('https://') ? ogImage : `/assets/${ogImage}`)
+        : '/assets/ts.png'
+    
     return {
         title: `${title} | Lysander H`,
         description: metaDescription,
@@ -100,6 +106,18 @@ export async function generateMetadata({ params }: { params: Promise<BlogPagePar
         robots: 'index',
         authors: [{name: 'Lysander Hernandez',}],
         keywords: tags,
+        openGraph: {
+            title: title,
+            description: metaDescription,
+            images: [ogImageUrl],
+            type: 'article',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: title,
+            description: metaDescription,
+            images: [ogImageUrl],
+        },
     }
 }
 
