@@ -27,7 +27,7 @@ const components: Components = {
 
 export default function BlogContent({  children }: BlogContentProps ) {
     return (
-        <div className="dark:text-slate-300 markdown w-full">
+        <div className="prose prose-slate dark:prose-invert max-w-none w-full">
             <ReactMarkdown components={components}>
                 {children.replace(/\\n/g, "\n")}
             </ReactMarkdown>
