@@ -4,6 +4,7 @@ import Experience from "@components/Experience/Experience";
 import Contact from "@components/Contact/Contact";
 import {Metadata, Viewport} from "next";
 import contentjson from "public/content.json"
+import { getCurrentMonthCost } from "../services/cost-service";
 
 export const metadata: Metadata = {
 	title: 'Lysander H',
@@ -21,6 +22,10 @@ export const viewport: Viewport = {
 
 export default async function HomePage() {
 	const content = contentjson
+
+	// Fetch current month AWS costs
+	const costData = await getCurrentMonthCost();
+	console.log('[HomePage] AWS Cost Data:', costData);
 
 	return (
 		<>
