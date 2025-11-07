@@ -35,7 +35,8 @@ export default async function BlogPage({ params }: BlogPageProps) {
     const imageUrl = coverImage
         ? (coverImage.startsWith('https://') ? coverImage : `/assets/${coverImage}`)
         : '/assets/ts.png'
-    const date = toDateString(new Date(publishedDate).toISOString())
+    // Convert Unix timestamp (seconds) to milliseconds for JavaScript Date
+    const date = toDateString(new Date(publishedDate * 1000).toISOString())
 
     return (<>
 
