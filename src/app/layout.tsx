@@ -5,6 +5,12 @@ import Providers from "./main-provider";
 import '../../public/build/tailwind.css';
 import '@styles/globals.scss'
 import ClientBackground from "@components/ClientBackground/ClientBackground";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+	metadataBase: new URL('https://blog-container-service.vcyrgcw67m07y.us-east-1.cs.amazonlightsail.com'),
+}
+
 import contactjson from "public/contact.json"
 
 export default async function RootLayout({ children }: {
