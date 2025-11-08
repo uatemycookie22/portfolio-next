@@ -45,6 +45,9 @@
       "@api/*": [
         "./api/*.ts"
       ],
+      "@services/*": [
+        "./src/services/*.ts"
+      ],
       "@images/*": [
         "./public/assets/*"
       ]

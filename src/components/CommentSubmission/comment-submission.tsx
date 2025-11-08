@@ -1,20 +1,24 @@
 'use client';
 import {TextArea} from "../TextArea/TextArea";
+import {TextField} from "../TextField/TextField";
 import {SendButton} from "../EmailSubmission/SendButton";
 import {Alert, Slide, Snackbar} from "@mui/material";
 import {ErrorMessage} from "../ErrorMessage/ErrorMessage";
 import { useState } from "react";
 
-const successMessage = 'Comment received.'
-const failedCommentPost =  'Comment submission failed.'
+const successMessage = 'Comment posted successfully!'
 
 
 export interface CommentSubmissionProps {
 	recipientEmail: string
-	postComment: (formData: FormData) => Promise<{result?: string, error?: string}>
+	blogId: string
+	postComment: (blogId: string, formData: FormData, parentId?: string | null, parentDepth?: number) => Promise<{response?: string, error?: string}>
+	parentId?: string | null
+	parentDepth?: number
 }
-export default function CommentSubmission({ recipientEmail, postComment }: CommentSubmissionProps) {
+export default function CommentSubmission({ recipientEmail, blogId, postComment, parentId, parentDepth }: CommentSubmissionProps) {
 	const [commentMessage, setMessage] = useState('')
+	const [authorName, setAuthorName] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
 	const [statusMessage, setStatusMessage] = useState('')
 
@@ -26,25 +30,41 @@ export default function CommentSubmission({ recipientEmail, postComment }: Comme
 					  name="comment"
 					// @ts-ignore
 					  action={async (formData: FormData) => {
-						  const {result, error} = await postComment(formData)
-						  console.log(result, error)
-						  if (error) {
-							setErrorMessage(error)
-						  } else {
-						  	setStatusMessage(successMessage)
-						  }
+					   const {response, error} = await postComment(blogId, formData, parentId, parentDepth)
+					   if (error) {
+					  setErrorMessage(error)
+					   } else {
+					   	setStatusMessage(successMessage)
+					  // Clear form on success
+					  setMessage('')
+					  setAuthorName('')
+					   }
 					  }}
 					  onInvalid={() => {
 						  setStatusMessage('')
 					  }}
 
 				>
+					<TextField
+						value={authorName}
+						onChange={(e) => setAuthorName(e.target.value)}
+						id="author-name"
+						name="authorName"
+						label="Your Name"
+						placeholder="John Doe"
+						required
+						error={!!errorMessage}
+						aria-label="Your name"
+						type="text"
+						maxLength={50}
+					/>
 
 					<TextArea value={commentMessage}
 							  onChange={(e) => setMessage(e.target.value)}
 							  id="outlined-multiline-static"
 							  name="body"
 							  label="Comment body"
+							  placeholder="Share your thoughts..."
 							  required
 							  error={!!errorMessage}
 							  aria-label={'Message text body'}

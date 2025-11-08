@@ -77,14 +77,10 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
         </li>
     )
 }
-
 export default async function BlogsPage() {
-    console.log('[BlogsPage] Starting to render blogs page');
     const blogItems = await listBlogs({limit: 10})
-    console.log('[BlogsPage] Got blog items:', blogItems.items.length, 'blogs');
-    console.log('[BlogsPage] Has more:', blogItems.hasMore);
     const blogs = blogItems.items.map((blogRecord, i) => (<BlogListing key={i} blogRecord={blogRecord}/>))
-    console.log('[BlogsPage] Mapped to', blogs.length, 'blog components');
+
 
     return (<section className={`justify-center content-center mt-24`}>
         <ul className={`flex flex-wrap flex-col justify-center content-center justify-items-center

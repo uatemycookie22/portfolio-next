@@ -71,9 +71,8 @@ export async function sendEmailToOwner(
             },
             ReplyToAddresses: [senderEmail],
         });
+const result = await sesClient.send(command);
 
-        const result = await sesClient.send(command);
-        console.log('SES Email sent successfully:', result.MessageId);
         
         await revalidateTag('sendEmail', {})
 

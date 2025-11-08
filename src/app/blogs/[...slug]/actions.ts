@@ -1,68 +1,87 @@
 'use server';
 
 import {invalidPrompt} from "@utils/api-constants";
-import {commentsApiBase} from "@api-config/comments-api";
-import {revalidateTag} from "next/cache";
+import {revalidatePath} from "next/cache";
+import {createComment, likeComment as likeCommentService} from "@services/comments-service";
 
+export async function postComment(
+    blogId: string,
+    formData: FormData,
+    parentId?: string | null,
+    parentDepth?: number,
+    parentSk?: string
+): Promise<{response?: string, error?: string}> {
+    const text = formData.get('body') as string;
+    const authorName = formData.get('authorName') as string;
 
+    // Validation
+    if (!text || text.trim().length === 0) {
+        return {error: 'Comment text is required'};
+    }
+    
+    if (!authorName || authorName.trim().length === 0) {
+        return {error: 'Author name is required'};
+    }
 
-export async function postComment(formData: FormData): Promise<{response?: string, error?: string}> {
-    const failedCommentPost = "Comment post failed"
-    const message = formData.get('body')
-
-    let errorReason = ''
+    if (text.length > 1000) {
+        return {error: 'Comment is too long (max 1000 characters)'};
+    }
 
     try {
-        const controller = new AbortController();
-        const id = setTimeout(() => controller.abort(), 4000);
+        await createComment({
+            blogId,
+            text: text.trim(),
+            authorName: authorName.trim(),
+            parentId: parentId || null,
+            parentDepth: parentDepth ?? -1,
+            parentSk: parentSk
+        });
 
-        const res = await fetch(`${commentsApiBase}/api/v1/comment`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json',},
-            body: JSON.stringify({message}),
-            // signal: AbortSignal.timeout(4000)
-            signal: controller.signal
-        })
-        clearTimeout(id)
+        // Revalidate the blog page to show new comment
+        revalidatePath(`/blogs/${blogId}`);
 
-        if (!res.ok) {
-            switch (res.status) {
-                case 400: {
-                    errorReason = invalidPrompt
-                    break
-                }
-                default: {
-                    errorReason = failedCommentPost
-                    break
-                }
-            }
-        }
-
-        await new Promise(resolve =>
-            {setTimeout(() => {resolve('')}, 500)}
-        )
-
-        await revalidateTag('postComment', {})
-
-        return {response: 'Success', error: undefined}
+        return {response: 'Comment posted successfully', error: undefined};
     } catch (err) {
-        if (err instanceof Error) {
-            switch (err.name) {
-                case 'AbortError': {
-                    errorReason = 'Comment submission timed out.'
-                    break
-                }
-                case 'TypeError': {
-                    errorReason = 'No connection.'
-                    break
-                }
-                default: {
-                    errorReason = failedCommentPost
-                }
-            }
-        }
+        console.error('[postComment] Error:', err);
+        return {response: undefined, error: 'Failed to post comment'};
+    }
+}
 
-        return {response: undefined, error: errorReason}
+export async function likeComment(
+    blogId: string,
+    commentSk: string
+): Promise<{response?: string, error?: string}> {
+    try {
+        await likeCommentService(blogId, commentSk);
+        
+        // Revalidate to show updated like count
+        revalidatePath(`/blogs/${blogId}`);
+        
+        return {response: 'Comment liked!', error: undefined};
+    } catch (err) {
+        console.error('[likeComment] Error:', err);
+        return {response: undefined, error: 'Failed to like comment'};
+    }
+}
+
+export async function loadReplies(
+    blogId: string,
+    parentId: string,
+    parentDepth: number
+): Promise<{replies?: any[], error?: string}> {
+    try {
+        const {getReplies} = await import('@services/comments-service');
+        const replies = await getReplies({
+            blogId,
+            parentId,
+            parentDepth,
+            limit: 50
+        });
+        
+        return {replies, error: undefined};
+    } catch (err) {
+        console.error('[loadReplies] Error:', err);
+        return {replies: undefined, error: 'Failed to load replies'};
     }
 }
 

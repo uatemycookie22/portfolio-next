@@ -7,6 +7,8 @@ import {toDateString} from "@utils/parse-date";
 import {calculateReadingTime} from "@utils/reading-time";
 import {notFound} from "next/navigation";
 import {getBlog} from "../../../services/blog-service";
+import {Suspense} from "react";
+import CommentSkeleton from "@components/CommentSkeleton/CommentSkeleton";
 
 // ISR: Revalidate every day
 export const revalidate = 86400  // 24 hours in seconds
@@ -91,8 +93,11 @@ export default async function BlogPage({ params }: BlogPageProps) {
                 <BlogContent>
                     {content}
                 </BlogContent>
-                {/*// @ts-ignore*/}
-                <Comments comments={[]} recipientEmail={'mail@mail.mail'} />
+                
+                <Suspense fallback={<CommentSkeleton count={3} />}>
+                    {/*// @ts-ignore*/}
+                    <Comments blogId={id} recipientEmail={'hernandezlysander22@gmail.com'} />
+                </Suspense>
             </div>
         </section>
 

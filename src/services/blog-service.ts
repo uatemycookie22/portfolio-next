@@ -10,7 +10,10 @@ export async function getBlog(id: string): Promise<Blog | null> {
     try {
         const command = new GetCommand({
             TableName: BLOG_POSTS_TABLE,
-            Key: {id},
+            Key: {
+                id,
+                sk: 'METADATA'
+            },
         });
 
         const result = await docClient.send(command);
@@ -68,13 +71,9 @@ export async function listBlogs(options?: {
         if (lastEvaluatedKey) {
             queryParams.ExclusiveStartKey = lastEvaluatedKey;
         }
+const command = new QueryCommand(queryParams);
+const result = await docClient.send(command);
 
-        console.log('[listBlogs] Query params:', JSON.stringify(queryParams, null, 2));
-        
-        const command = new QueryCommand(queryParams);
-        const result = await docClient.send(command);
-
-        console.log('[listBlogs] Query result - Count:', result.Count, 'Items:', result.Items?.length);
 
         return {
             items: (result.Items || []) as Blog[],
@@ -101,7 +100,10 @@ export async function incrementBlogViews(id: string): Promise<void> {
         
         await docClient.send(new UpdateCommand({
             TableName: BLOG_POSTS_TABLE,
-            Key: {id},
+            Key: {
+                id,
+                sk: 'METADATA'
+            },
             UpdateExpression: 'SET #views = if_not_exists(#views, :zero) + :inc',
             ExpressionAttributeNames: {
                 '#views': 'views',
