@@ -16,7 +16,7 @@ export default function AboutComponent({ text }: AboutProps) {
 			{aboutTypography}
 			<ul className={styles.imageTextList}>
 				<li>
-					<ImageText src={'/assets/ts.png'}>TypeScript</ImageText>
+					<ImageText src={'/assets/ts.webp'}>TypeScript</ImageText>
 
 				</li>
 			</ul>

@@ -34,7 +34,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
     // Support both S3 URLs and local assets
     const imageUrl = coverImage
         ? (coverImage.startsWith('https://') ? coverImage : `/assets/${coverImage}`)
-        : '/assets/ts.png'
+        : '/assets/ts.webp'
     // Convert Unix timestamp (seconds) to milliseconds for JavaScript Date
     const date = toDateString(new Date(publishedDate * 1000).toISOString())
 
@@ -99,7 +99,7 @@ export async function generateMetadata({ params }: { params: Promise<BlogPagePar
     // Support both S3 URLs and local assets for OG image
     const ogImageUrl = ogImage
         ? (ogImage.startsWith('https://') ? ogImage : `/assets/${ogImage}`)
-        : '/assets/ts.png'
+        : '/assets/ts.webp'
     
     return {
         title: `${title} | Lysander H`,

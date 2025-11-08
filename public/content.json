@@ -53,23 +53,23 @@
           "position": "SDE Intern",
           "technologiesUsed": [
             {
-              "src": "/assets/java.png",
+              "src": "/assets/java.webp",
               "alt": "Java"
             },
             {
-              "src": "/assets/dynamodb.png",
+              "src": "/assets/dynamodb.webp",
               "alt": "DynamoDB"
             },
             {
-              "src": "/assets/stepfunctions.png",
+              "src": "/assets/stepfunctions.webp",
               "alt": "Step Functions"
             },
             {
-              "src": "/assets/ubuntu.png",
+              "src": "/assets/ubuntu.webp",
               "alt": "Ubuntu"
             },
             {
-              "src": "/assets/docker.png",
+              "src": "/assets/docker.webp",
               "alt": "Docker"
             }
           ]
@@ -91,39 +91,39 @@
           "position": "Intern",
           "technologiesUsed": [
             {
-              "src": "/assets/angular3.png",
+              "src": "/assets/angular3.webp",
               "alt": "Angular"
             },
             {
-              "src": "/assets/ts.png",
+              "src": "/assets/ts.webp",
               "alt": "TypeScript"
             },
             {
-              "src": "/assets/rxjs.png",
+              "src": "/assets/rxjs.webp",
               "alt": "RxJs"
             },
             {
-              "src": "/assets/jest.png",
+              "src": "/assets/jest.webp",
               "alt": "Jest"
             },
             {
-              "src": "/assets/kotlin.png",
+              "src": "/assets/kotlin.webp",
               "alt": "Kotlin"
             },
             {
-              "src": "/assets/postgresql.png",
+              "src": "/assets/postgresql.webp",
               "alt": "PostgresSQL"
             },
             {
-              "src": "/assets/graphql.png",
+              "src": "/assets/graphql.webp",
               "alt": "GraphQL"
             },
             {
-              "src": "/assets/docker.png",
+              "src": "/assets/docker.webp",
               "alt": "Docker"
             },
             {
-              "src": "/assets/sass.png",
+              "src": "/assets/sass.webp",
               "alt": "SCSS"
             }
           ]
@@ -147,23 +147,23 @@
           "position": "Intern",
           "technologiesUsed": [
             {
-              "src": "/assets/html.png",
+              "src": "/assets/html.webp",
               "alt": "HTML5"
             },
             {
-              "src": "/assets/js.png",
+              "src": "/assets/js.webp",
               "alt": "JavaScript"
             },
             {
-              "src": "/assets/python.png",
+              "src": "/assets/python.webp",
               "alt": "Python"
             },
             {
-              "src": "/assets/ubuntu.png",
+              "src": "/assets/ubuntu.webp",
               "alt": "Ubuntu"
             },
             {
-              "src": "/assets/docker.png",
+              "src": "/assets/docker.webp",
               "alt": "Docker"
             }
           ]

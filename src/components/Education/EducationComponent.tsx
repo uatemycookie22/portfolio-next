@@ -4,7 +4,7 @@ import SchoolProgress from "./SchoolProgress/SchoolProgress";
 import useFirstIntersection from "../../hooks/first-intersection";
 import Image from "next/image";
 import {MLocation, MMajor} from "../WrappedIcons";
-import unt from "@images/unt.png"
+import unt from "@images/unt.webp"
 
 interface EducationProps {
 	school: string

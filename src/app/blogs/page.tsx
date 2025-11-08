@@ -30,7 +30,7 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
     // Support both S3 URLs and local assets
     const imageUrl = coverImage
         ? (coverImage.startsWith('https://') ? coverImage : `/assets/${coverImage}`)
-        : '/assets/ts.png'
+        : '/assets/ts.webp'
     // Convert Unix timestamp (seconds) to milliseconds for JavaScript Date
     const date = toDateString(new Date(publishedDate * 1000).toISOString())
 
