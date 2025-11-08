@@ -47,7 +47,7 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'blogstoragestack-storageblogimagesbuckete71fadd1-1yjbhzk68klr.s3.us-east-1.amazonaws.com',
         port: '',
-        pathname: '/blog-images/**',
+        pathname: '/**',
       },
     ],
   }

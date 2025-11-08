@@ -75,7 +75,6 @@ export async function listBlogs(options?: {
         const result = await docClient.send(command);
 
         console.log('[listBlogs] Query result - Count:', result.Count, 'Items:', result.Items?.length);
-        console.log('[listBlogs] First item:', result.Items?.[0]);
 
         return {
             items: (result.Items || []) as Blog[],
