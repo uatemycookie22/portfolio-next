@@ -4,6 +4,7 @@ import BlogContent from "./(blog)/blog-content";
 import {Metadata} from "next";
 import Comments from "./(comments)/comments";
 import {toDateString} from "@utils/parse-date";
+import {calculateReadingTime} from "@utils/reading-time";
 import {notFound} from "next/navigation";
 import {getBlog} from "../../../services/blog-service";
 
@@ -29,7 +30,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         notFound()
     }
     
-    const {title, publishedDate, excerpt, coverImage, content } = blogRecord
+    const {title, publishedDate, excerpt, coverImage, content, author } = blogRecord
 
     // Support both S3 URLs and local assets
     const imageUrl = coverImage
@@ -37,13 +38,16 @@ export default async function BlogPage({ params }: BlogPageProps) {
         : '/assets/ts.webp'
     // Convert Unix timestamp (seconds) to milliseconds for JavaScript Date
     const date = toDateString(new Date(publishedDate * 1000).toISOString())
+    
+    // Calculate reading time
+    const readingTime = calculateReadingTime(content)
 
     return (<>
 
         <section className={`flex justify-center content-center mt-24`}>
 
             <div className={`self-center flex flex-col justify-center max-w-[42rem] p-4 w-full`}>
-                <div className={`flex flex-col gap-2`}>
+                <div className={`flex flex-col gap-4`}>
                     <h1 className={`text-4xl font-extrabold mb-2 text-transparent 
                                     text-violet-600`}>
                         {title}
@@ -53,9 +57,24 @@ export default async function BlogPage({ params }: BlogPageProps) {
                         {excerpt}
                     </p>
 
-                    <p className={`dark:text-neutral`}>
-                        {date}
-                    </p>
+                    <div className={`flex items-start gap-2.5`}>
+                        {/* Avatar */}
+                        <div className={`w-10 h-10 rounded-full bg-violet-600 flex items-center justify-center text-white font-semibold flex-shrink-0`}>
+                            {author.charAt(0).toUpperCase()}
+                        </div>
+                        
+                        {/* Author info */}
+                        <div className={`flex flex-col gap-1`}>
+                            <span className={`text-sm font-medium text-black dark:text-white`}>
+                                {author}
+                            </span>
+                            <div className={`flex items-center gap-1 text-xs text-neutral dark:text-slate-300`}>
+                                <span>{date}</span>
+                                <span className={`text-[10px]`}>•</span>
+                                <span>{readingTime} min read</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div className={`mt-14 mb-8 flex justify-center w-full`}>

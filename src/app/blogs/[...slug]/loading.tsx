@@ -3,7 +3,7 @@ export default function BlogPageLoading() {
     <section className="flex justify-center content-center mt-24">
       <div className="self-center flex flex-col justify-center max-w-[42rem] p-4 w-full">
         {/* Header section */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-4">
           {/* Title skeleton - large, violet-like */}
           <div className="w-full md:w-3/4 h-12 bg-zinc-500 dark:bg-zinc-500 rounded-lg relative overflow-hidden mb-2">
             <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-zinc-200/50 to-transparent" />
@@ -19,9 +19,31 @@ export default function BlogPageLoading() {
             </div>
           </div>
           
-          {/* Date skeleton */}
-          <div className="w-32 h-4 bg-zinc-500 dark:bg-zinc-500 rounded-full relative overflow-hidden">
-            <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-zinc-200/50 to-transparent" />
+          {/* Author section with avatar */}
+          <div className="flex items-start gap-2.5">
+            {/* Avatar circle */}
+            <div className="w-10 h-10 bg-zinc-500 dark:bg-zinc-500 rounded-full flex-shrink-0 relative overflow-hidden">
+              <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-zinc-200/50 to-transparent" />
+            </div>
+            
+            {/* Author name and metadata */}
+            <div className="flex flex-col gap-1 flex-1">
+              {/* Author name */}
+              <div className="w-32 h-4 bg-zinc-500 dark:bg-zinc-500 rounded relative overflow-hidden">
+                <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-zinc-200/50 to-transparent" />
+              </div>
+              
+              {/* Date and reading time */}
+              <div className="flex items-center gap-1">
+                <div className="w-24 h-3 bg-zinc-500 dark:bg-zinc-500 rounded relative overflow-hidden">
+                  <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-zinc-200/50 to-transparent" />
+                </div>
+                <div className="w-1 h-1 bg-zinc-500 dark:bg-zinc-500 rounded-full" />
+                <div className="w-16 h-3 bg-zinc-500 dark:bg-zinc-500 rounded relative overflow-hidden">
+                  <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-zinc-200/50 to-transparent" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         

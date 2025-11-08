@@ -6,6 +6,7 @@ import '../../public/build/tailwind.css';
 import '@styles/globals.scss'
 import ClientBackground from "@components/ClientBackground/ClientBackground";
 import {Metadata} from "next";
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 
 export const metadata: Metadata = {
 	metadataBase: new URL('https://blog-container-service.vcyrgcw67m07y.us-east-1.cs.amazonlightsail.com'),
@@ -36,20 +37,22 @@ export default async function RootLayout({ children }: {
 		<html lang="en"
 			  className="scroll-smooth bg-zinc-200 dark">
 		<body className="bg-transparent min-w-[330px]">
-		<Providers>
-			<ClientBackground>
-				<header>
-					<nav>
-						<NavBarComponent contact={contact} />
-					</nav>
-				</header>
+		<AppRouterCacheProvider>
+			<Providers>
+				<ClientBackground>
+					<header>
+						<nav>
+							<NavBarComponent contact={contact} />
+						</nav>
+					</header>
 
-				<main>
-					{children}
-				</main>
-			</ClientBackground>
+					<main>
+						{children}
+					</main>
+				</ClientBackground>
 
-		</Providers>
+			</Providers>
+		</AppRouterCacheProvider>
 		</body>
 		</html>
 	);

@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import {Blog} from "./blogs";
+import {Blog} from "../blogs";
 import {Metadata, Viewport} from "next";
 import {toDateString} from "@utils/parse-date";
 import {formatAndEncode} from "@utils/formatters";
-import {listBlogs} from "../../services/blog-service";
+import {listBlogs} from "../../../services/blog-service";
 
 // ISR: Revalidate every hour
 export const revalidate = 3600
