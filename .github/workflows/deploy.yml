@@ -51,6 +51,7 @@ jobs:
           build-args: |
             DYNAMODB_TABLE_NAME=BlogDatabaseStack-DatabaseBlogPostsTable12519031-66XYIQYLVNBY
             AWS_REGION=${{ env.AWS_REGION }}
+            NEXT_PUBLIC_CLOUDFRONT_URL=https://d2vzlvkulv2h1v.cloudfront.net
           secrets: |
             aws_access_key_id=${{ steps.aws-creds.outputs.aws-access-key-id }}
             aws_secret_access_key=${{ steps.aws-creds.outputs.aws-secret-access-key }}
