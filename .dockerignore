@@ -5,3 +5,31 @@ pocketbase.exe
 .netlify
 /**/.docker_temp*
 /**/*.tar
+
+# Documentation (not needed in runtime)
+*.md
+!README.md
+
+# Design/Architecture images (not used in app)
+arch-*.png
+arch-*.webp
+blog-hosting-nextjs-aws-10-dollars.md
+
+# Original image files (only .webp used in production)
+# Keep favicons (needed for site icons)
+public/assets/*.png
+public/assets/*.jpg
+!public/favicon*.png
+!public/android-chrome*.png
+!public/apple-touch-icon.png
+
+# Development files
+.github
+scripts
+.vscode
+.idea
+.run-config
+
+# Local config files
+.lightsail
+.env*.local

@@ -41,6 +41,15 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Fetch Lightsail config from CDK repo
+        run: |
+          echo "Fetching latest Lightsail configuration..."
+          curl -f -o .lightsail/container-config.json \
+               https://raw.githubusercontent.com/uatemycookie22/personal-site-cdk/main/lightsail-deployment.json
+          
+          echo "Config fetched successfully:"
+          cat .lightsail/container-config.json
+
       - name: Build and push to ECR
         id: build
         uses: docker/build-push-action@v5

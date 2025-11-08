@@ -7,6 +7,7 @@ const nextConfig = {
   reactStrictMode: true,
   turbopack: {},
   output: 'standalone',
+  transpilePackages: ["@mui/material-nextjs"],
   sassOptions: {
     includePaths: ['./styles']
   },

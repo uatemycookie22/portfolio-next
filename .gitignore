@@ -54,3 +54,6 @@ next-env.d.ts
 # docker
 /**/*.tar
 /**/.docker_temp*
+
+# lightsail (fetched from CDK repo during deployment)
+.lightsail/container-config.json
