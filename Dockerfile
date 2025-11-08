@@ -32,9 +32,11 @@ COPY . .
 # Accept build args for non-sensitive environment variables
 ARG DYNAMODB_TABLE_NAME
 ARG AWS_REGION
+ARG NEXT_PUBLIC_CLOUDFRONT_URL
 
 ENV DYNAMODB_TABLE_NAME=$DYNAMODB_TABLE_NAME
 ENV AWS_REGION=$AWS_REGION
+ENV NEXT_PUBLIC_CLOUDFRONT_URL=$NEXT_PUBLIC_CLOUDFRONT_URL
 
 # Use BuildKit secrets for AWS credentials (more secure - not stored in layers)
 RUN --mount=type=secret,id=aws_access_key_id \

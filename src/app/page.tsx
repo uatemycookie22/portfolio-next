@@ -23,10 +23,6 @@ export const viewport: Viewport = {
 export default async function HomePage() {
 	const content = contentjson
 
-	// Fetch current month AWS costs
-	const costData = await getCurrentMonthCost();
-	console.log('[HomePage] AWS Cost Data:', costData);
-
 	return (
 		<>
 			<IntroComponent {...content.intro} />
