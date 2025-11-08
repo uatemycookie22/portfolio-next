@@ -46,7 +46,7 @@
       {
         "front": {
           "companyName": "Amazon",
-          "companyLogo": "/assets/amazon.png",
+          "companyLogo": "/assets/amazon.webp",
           "companyHref": "https://amazon.com/",
           "location": "Austin, Texas",
           "duration": "May 2024 - August 2024",
@@ -84,7 +84,7 @@
       {
         "front": {
           "companyName": "TriTech Software",
-          "companyLogo": "/assets/tritech.png",
+          "companyLogo": "/assets/tritech.webp",
           "companyHref": "https://tritechsoft.com/",
           "location": "Allen, Texas",
           "duration": "May 2022 - April 2023",
@@ -140,7 +140,7 @@
       {
         "front": {
           "companyName": "IBM",
-          "companyLogo": "/assets/ibm.png",
+          "companyLogo": "/assets/ibm.webp",
           "companyHref": "https://ibm.com/",
           "location": "Copell, Texas",
           "duration": "June 2021 - July 2021",

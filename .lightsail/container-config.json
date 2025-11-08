@@ -8,6 +8,7 @@
       "environment": {
         "DYNAMODB_TABLE_NAME": "BlogDatabaseStack-DatabaseBlogPostsTable12519031-66XYIQYLVNBY",
         "S3_BUCKET_NAME": "blogstoragestack-storageblogimagesbuckete71fadd1-1yjbhzk68klr",
+        "NEXT_PUBLIC_CLOUDFRONT_URL": "https://d2vzlvkulv2h1v.cloudfront.net",
         "AWS_REGION": "us-east-1",
         "AWS_ROLE_ARN": "arn:aws:iam::814155132173:role/BlogApplicationStack-ContainerContainerServiceRole9-gZn4PoQrlGdT",
         "NODE_ENV": "production",

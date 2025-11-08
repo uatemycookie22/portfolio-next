@@ -1,3 +1,8 @@
 export function toDateString(input: string) {
-    return new Date(Date.parse(input)).toDateString()
+    const date = new Date(Date.parse(input))
+    return date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+    })
 }

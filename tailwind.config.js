@@ -10,6 +10,15 @@ module.exports = {
       transitionProperty: {
         'size': 'width , height',
         'position': 'left, top, height, right'
+      },
+      keyframes: {
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        }
+      },
+      animation: {
+        shimmer: 'shimmer 2s infinite',
       }
     },
     screens: {
@@ -25,6 +34,7 @@ module.exports = {
       black: colors.black,
       white: colors.white,
 
+      gray: colors.gray,
       emerald: colors.emerald["500"],
       zinc: {
         900: colors.zinc["900"],

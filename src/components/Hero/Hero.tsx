@@ -3,7 +3,6 @@ import SimpleCard from "../SimpleCard/SimpleCard";
 import {ReactNode} from "react";
 import {MDnsIcon, MEmojiEventsIcon, MAccessTimeIcon, MGitHub, MLinkedIn} from '../WrappedIcons'
 import PdfButton from "../PdfButton/PdfButton";
-import wavyback from "@images/wavyback.webp"
 
 const CardHeading = ({ children, heading }: { children?: ReactNode, heading?: string }) => (<>
 	<div className="flex justify-between lg:gap-4">
@@ -59,16 +58,17 @@ export default function Hero(props: HeroProps) {
 									w-[911px] h-[533px]
 									bg-cover object-cover filter-purple
 									`}
-										   src={wavyback} alt={'headshot background'}
+										   src="/assets/wavyback.webp" alt={'headshot background'}
 										   fill={true}
 										   sizes={'sizes="50vw"'}
 										   priority={true}
 										   quality={40}
+										   fetchPriority="high"
 									/>
 
-								<Image className={`hidden lg:block transition-opacity duration-500 delay-200 
+								<Image className={`hidden lg:block transition-opacity duration-500 delay-200
 								ease-in-out w-fit h-[533px] z-10 bg-cover
-							`} src={'/assets/headshot-prod.webp'} alt={'headshot of Lysander'} width={400} height={533} priority={true}
+							`} src={'/assets/headshot-prod.webp'} alt={'headshot of Lysander'} width={400} height={533} priority fetchPriority="high"
 								/>
 							</div>
 

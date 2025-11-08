@@ -59,14 +59,14 @@ export default async function BlogPage({ params }: BlogPageProps) {
                 </div>
 
                 <div className={`mt-14 mb-8 flex justify-center w-full`}>
-                    <div className={`relative w-full h-[400px] md:h-[500px]`}>
-                        <Image className={`transition-opacity duration-500 delay-200 ease-in-out object-contain`}
-                               src={imageUrl}
-                               alt={''}
-                               fill
-                               sizes="(max-width: 768px) 100vw, 672px"
-                               priority />
-                    </div>
+                    <Image className={`transition-opacity duration-500 delay-200 ease-in-out w-full h-auto`}
+                           src={imageUrl}
+                           alt={''}
+                           width={672}
+                           height={500}
+                           sizes="(max-width: 768px) 100vw, 672px"
+                           fetchPriority="high"
+                           priority />
                 </div>
 
                 <BlogContent>

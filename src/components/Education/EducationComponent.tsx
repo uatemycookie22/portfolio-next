@@ -4,7 +4,6 @@ import SchoolProgress from "./SchoolProgress/SchoolProgress";
 import useFirstIntersection from "../../hooks/first-intersection";
 import Image from "next/image";
 import {MLocation, MMajor} from "../WrappedIcons";
-import unt from "@images/unt.webp"
 
 interface EducationProps {
 	school: string
@@ -31,7 +30,7 @@ export default function EducationComponents({ location, major, school, graduatio
 									<Image
 										width={600}
 										height={400}
-										src={unt}
+										src="/assets/unt.webp"
 										alt="University"
 										className={`w-full h-auto object-fit sm:w-1/2 max-w-lg rounded-t-lg
 											${schoolInfoIntersected ? "inline" : "hidden"}

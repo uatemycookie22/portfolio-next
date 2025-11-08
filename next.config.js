@@ -20,6 +20,8 @@ const nextConfig = {
     }
   },
   images: {
+    loader: 'custom',
+    loaderFile: './src/lib/cloudfront-loader.ts',
     formats: ['image/avif', 'image/webp'],
     qualities: [25, 40, 65, 75],
     remotePatterns: [
