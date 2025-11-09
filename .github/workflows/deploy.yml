@@ -50,6 +50,11 @@ jobs:
           
           echo "Config fetched successfully:"
           cat .lightsail/container-config.json
+          
+          # Extract environment variables from config
+          echo "DYNAMODB_TABLE_NAME=$(jq -r '.containers.blog.environment.DYNAMODB_TABLE_NAME' .lightsail/container-config.json)" >> $GITHUB_ENV
+          echo "CLOUDFRONT_URL=$(jq -r '.containers.blog.environment.NEXT_PUBLIC_CLOUDFRONT_URL' .lightsail/container-config.json)" >> $GITHUB_ENV
+          echo "S3_BUCKET=$(jq -r '.containers.blog.environment.S3_BUCKET_NAME' .lightsail/container-config.json)" >> $GITHUB_ENV
 
       - name: Build and push to ECR
         id: build
@@ -59,9 +64,9 @@ jobs:
           file: ./Dockerfile
           push: true
           build-args: |
-            DYNAMODB_TABLE_NAME=BlogDatabaseStack-DatabaseBlogPostsTableV27E09E00A-215UFR0337H9
+            DYNAMODB_TABLE_NAME=${{ env.DYNAMODB_TABLE_NAME }}
             AWS_REGION=${{ env.AWS_REGION }}
-            NEXT_PUBLIC_CLOUDFRONT_URL=https://d2vzlvkulv2h1v.cloudfront.net
+            NEXT_PUBLIC_CLOUDFRONT_URL=${{ env.CLOUDFRONT_URL }}
           secrets: |
             aws_access_key_id=${{ steps.aws-creds.outputs.aws-access-key-id }}
             aws_secret_access_key=${{ steps.aws-creds.outputs.aws-secret-access-key }}
