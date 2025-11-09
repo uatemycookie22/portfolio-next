@@ -44,6 +44,7 @@ jobs:
       - name: Fetch Lightsail config from CDK repo
         run: |
           echo "Fetching latest Lightsail configuration..."
+          mkdir -p .lightsail
           curl -f -o .lightsail/container-config.json \
                https://raw.githubusercontent.com/uatemycookie22/personal-site-cdk/main/lightsail-deployment.json
           
