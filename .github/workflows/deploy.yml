@@ -59,7 +59,7 @@ jobs:
           file: ./Dockerfile
           push: true
           build-args: |
-            DYNAMODB_TABLE_NAME=BlogDatabaseStack-DatabaseBlogPostsTable12519031-66XYIQYLVNBY
+            DYNAMODB_TABLE_NAME=BlogDatabaseStack-DatabaseBlogPostsTableV27E09E00A-215UFR0337H9
             AWS_REGION=${{ env.AWS_REGION }}
             NEXT_PUBLIC_CLOUDFRONT_URL=https://d2vzlvkulv2h1v.cloudfront.net
           secrets: |
