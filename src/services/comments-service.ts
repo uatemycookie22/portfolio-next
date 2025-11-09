@@ -1,6 +1,49 @@
 import docClient, {BLOG_POSTS_TABLE} from '../lib/dynamodb';
-import {PutCommand, QueryCommand, UpdateCommand, QueryCommandInput} from '@aws-sdk/lib-dynamodb';
+import {DeleteCommand, GetCommand, PutCommand, QueryCommand, UpdateCommand, QueryCommandInput} from '@aws-sdk/lib-dynamodb';
 import {v4 as uuidv4} from 'uuid';
+
+/**
+ * Fetch admin password from DynamoDB
+ */
+export async function getAdminPassword(): Promise<string | null> {
+    try {
+        const command = new GetCommand({
+            TableName: BLOG_POSTS_TABLE,
+            Key: {
+                id: 'admin-user',
+                sk: 'password'
+            }
+        });
+
+        const result = await docClient.send(command);
+        return result.Item?.value as string || null;
+    } catch (error) {
+        console.error('[getAdminPassword] Error:', error);
+        return null;
+    }
+}
+
+/**
+ * Delete a comment (admin only)
+ */
+export async function deleteComment(blogId: string, sk: string): Promise<boolean> {
+    try {
+        const command = new DeleteCommand({
+            TableName: BLOG_POSTS_TABLE,
+            Key: {
+                id: blogId,
+                sk: sk
+            }
+        });
+
+        await docClient.send(command);
+        console.log('[deleteComment] Deleted comment:', {blogId, sk});
+        return true;
+    } catch (error) {
+        console.error('[deleteComment] Error:', error);
+        return false;
+    }
+}
 
 export interface Comment {
     commentId: string;

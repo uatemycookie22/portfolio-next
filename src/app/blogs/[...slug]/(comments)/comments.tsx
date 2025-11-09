@@ -1,13 +1,14 @@
-import {postComment, likeComment} from "../actions";
+import {postComment, likeComment, deleteCommentAction} from "../actions";
 import {getComments} from "@services/comments-service";
 import CommentsList from "@components/CommentsList/CommentsList";
 
 export interface CommentsProps {
 	blogId: string
 	recipientEmail: string
+	adminPassword?: string | null
 }
 
-export default async function Comments({ blogId, recipientEmail }: CommentsProps) {
+export default async function Comments({ blogId, recipientEmail, adminPassword }: CommentsProps) {
 	// Fetch initial batch of top-level comments (depth 0) with pagination
 	const result = await getComments({ blogId, depth: 0, limit: 10 });
 	
@@ -28,6 +29,8 @@ export default async function Comments({ blogId, recipientEmail }: CommentsProps
 						initialLastKey={result.lastEvaluatedKey}
 						likeComment={likeComment}
 						postComment={postComment}
+						deleteComment={deleteCommentAction}
+						adminPassword={adminPassword}
 					/>
 				</div>
 

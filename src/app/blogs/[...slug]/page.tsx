@@ -21,11 +21,14 @@ type BlogPageParams = {
 
 type BlogPageProps = {
     params: Promise<BlogPageParams>
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-export default async function BlogPage({ params }: BlogPageProps) {
+export default async function BlogPage({ params, searchParams }: BlogPageProps) {
     const resolvedParams = await params
+    const resolvedSearchParams = await searchParams
     const [id] = resolvedParams.slug
+    const adminPassword = resolvedSearchParams.admin as string | undefined
     
     // Fetch blog for SEO-critical data (header) - this is fast and must be immediate
     const blogRecord = await getBlog(id)
@@ -111,7 +114,11 @@ export default async function BlogPage({ params }: BlogPageProps) {
                 {/* Comments - already streaming */}
                 <Suspense fallback={<CommentSkeleton count={3} />}>
                     {/*// @ts-ignore*/}
-                    <Comments blogId={id} recipientEmail={'hernandezlysander22@gmail.com'} />
+                    <Comments
+                        blogId={id}
+                        recipientEmail={'hernandezlysander22@gmail.com'}
+                        adminPassword={adminPassword}
+                    />
                 </Suspense>
             </div>
         </article>

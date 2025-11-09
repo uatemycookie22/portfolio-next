@@ -14,6 +14,8 @@ interface CommentsListProps {
     initialLastKey?: Record<string, any>;
     likeComment: (blogId: string, commentSk: string) => Promise<{response?: string, error?: string}>;
     postComment: (blogId: string, formData: FormData, parentId?: string | null, parentDepth?: number, parentSk?: string) => Promise<{response?: string, error?: string}>;
+    deleteComment?: (blogId: string, sk: string, adminPassword: string) => Promise<{success?: boolean, error?: string}>;
+    adminPassword?: string | null;
 }
 
 export default function CommentsList({
@@ -23,7 +25,9 @@ export default function CommentsList({
     hasMore: initialHasMore,
     initialLastKey,
     likeComment,
-    postComment
+    postComment,
+    deleteComment,
+    adminPassword
 }: CommentsListProps) {
     const [comments, setComments] = useState(initialComments);
     const [hasMore, setHasMore] = useState(initialHasMore);
@@ -96,6 +100,8 @@ export default function CommentsList({
                                 replies={[]}
                                 likeComment={likeComment}
                                 postComment={postComment}
+                                deleteComment={deleteComment}
+                                adminPassword={adminPassword}
                             />
                             {/* Add divider between comments, but not after the last one */}
                             {index < comments.length - 1 && (

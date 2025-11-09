@@ -2,7 +2,12 @@
 
 import {invalidPrompt} from "@utils/api-constants";
 import {revalidatePath} from "next/cache";
-import {createComment, likeComment as likeCommentService} from "@services/comments-service";
+import {
+    createComment,
+    deleteComment as deleteCommentService,
+    getAdminPassword,
+    likeComment as likeCommentService
+} from "@services/comments-service";
 
 export async function postComment(
     blogId: string,
@@ -44,6 +49,41 @@ export async function postComment(
     } catch (err) {
         console.error('[postComment] Error:', err);
         return {response: undefined, error: 'Failed to post comment'};
+    }
+}
+
+export async function deleteCommentAction(
+    blogId: string,
+    sk: string,
+    adminPassword: string
+): Promise<{success?: boolean, error?: string}> {
+    try {
+        // Fetch actual password from DynamoDB
+        const actualPassword = await getAdminPassword();
+        
+        if (!actualPassword) {
+            return {error: 'Admin authentication not configured'};
+        }
+        
+        // Validate password
+        if (adminPassword !== actualPassword) {
+            return {error: 'Invalid admin password'};
+        }
+        
+        // Delete comment
+        const deleted = await deleteCommentService(blogId, sk);
+        
+        if (!deleted) {
+            return {error: 'Failed to delete comment'};
+        }
+        
+        // Revalidate to show changes
+        revalidatePath(`/blogs/${blogId}`);
+        
+        return {success: true};
+    } catch (error) {
+        console.error('[deleteCommentAction] Error:', error);
+        return {error: 'Failed to delete comment'};
     }
 }
 

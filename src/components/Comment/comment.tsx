@@ -9,6 +9,8 @@ import {Comment} from "@services/comments-service";
 interface CommentBoxProps extends Omit<Comment, 'replies'> {
     likeComment: (blogId: string, commentSk: string) => Promise<{response?: string, error?: string}>;
     postComment: (blogId: string, formData: FormData, parentId?: string | null, parentDepth?: number, parentSk?: string) => Promise<{response?: string, error?: string}>;
+    deleteComment?: (blogId: string, sk: string, adminPassword: string) => Promise<{success?: boolean, error?: string}>;
+    adminPassword?: string | null;
     replies?: Comment[];
 }
 
@@ -21,6 +23,7 @@ export default function CommentBox(comment: CommentBoxProps) {
     const [showReplies, setShowReplies] = useState(false);
     const [loadedReplies, setLoadedReplies] = useState<Comment[]>([]);
     const [isLoadingReplies, setIsLoadingReplies] = useState(false);
+    const [isDeleted, setIsDeleted] = useState(false);
     
     const handleShowReplies = async () => {
         if (loadedReplies.length > 0) {
@@ -65,6 +68,16 @@ export default function CommentBox(comment: CommentBoxProps) {
         });
     };
     
+    if (isDeleted) {
+        return (
+            <div className={`mt-8 ${comment.depth > 0 ? 'ml-8 border-l-2 border-zinc-500 pl-4' : ''}`}>
+                <div className="text-neutral dark:text-slate-400 italic py-4">
+                    [Comment deleted by admin]
+                </div>
+            </div>
+        );
+    }
+    
     return (
         <div className={`mt-8 ${comment.depth > 0 ? 'ml-8 border-l-2 border-zinc-500 pl-4' : ''}`}>
             <div className="text-black dark:text-white border-b-1
@@ -90,6 +103,32 @@ export default function CommentBox(comment: CommentBoxProps) {
                         >
                             {hasLiked ? '❤️' : '🤍'} {optimisticLikes}
                         </button>
+                        
+                        {/* Admin remove button - only show if admin query param present */}
+                        {comment.adminPassword && comment.deleteComment && (
+                            <button
+                                onClick={() => {
+                                    if (!confirm('Delete this comment?')) return;
+                                    startTransition(async () => {
+                                        const result = await comment.deleteComment!(
+                                            comment.blogId,
+                                            comment.sk,
+                                            comment.adminPassword!
+                                        );
+                                        if (result.success) {
+                                            setIsDeleted(true);
+                                        } else {
+                                            alert(result.error || 'Failed to delete comment');
+                                        }
+                                    });
+                                }}
+                                disabled={isPending || isDeleted}
+                                className="text-xs text-red-600 hover:text-red-700 dark:text-red-400
+                                         dark:hover:text-red-300 transition-colors disabled:opacity-50"
+                            >
+                                {isDeleted ? 'Deleted' : 'Remove'}
+                            </button>
+                        )}
                     </div>
                 </div>
 
