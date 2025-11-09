@@ -1,5 +1,5 @@
 'use client';
-import {MPerson} from "../WrappedIcons";
+import {MPerson, MExpandMore} from "../WrappedIcons";
 import {toDateString} from "@utils/parse-date";
 import {useState, useTransition} from "react";
 import CommentSubmission from "../CommentSubmission/comment-submission";
@@ -21,8 +21,6 @@ export default function CommentBox(comment: CommentBoxProps) {
     const [showReplies, setShowReplies] = useState(false);
     const [loadedReplies, setLoadedReplies] = useState<Comment[]>([]);
     const [isLoadingReplies, setIsLoadingReplies] = useState(false);
-    
-    const [triedLoading, setTriedLoading] = useState(false);
     
     const handleShowReplies = async () => {
         if (loadedReplies.length > 0) {
@@ -52,19 +50,25 @@ export default function CommentBox(comment: CommentBoxProps) {
         
         // Server action
         startTransition(async () => {
-            const result = await comment.likeComment(comment.blogId, comment.sk);
-            if (result.error) {
-                // Revert on error
+            try {
+                const result = await comment.likeComment(comment.blogId, comment.sk);
+                if (result.error) {
+                    // Revert on error
+                    setOptimisticLikes(comment.likes);
+                    setHasLiked(false);
+                }
+            } catch (e) {
+                console.error(e)
                 setOptimisticLikes(comment.likes);
-                setHasLiked(false);
             }
+            
         });
     };
     
     return (
         <div className={`mt-8 ${comment.depth > 0 ? 'ml-8 border-l-2 border-zinc-500 pl-4' : ''}`}>
-            <div className="rounded-lg shadow-md hover:shadow-lg transition duration-200 text-black dark:text-white
-                h-auto p-4 flex flex-col bg-transparent">
+            <div className="text-black dark:text-white border-b-1
+                h-auto py-4 pl-4 flex flex-col bg-transparent">
 
                 <div className="flex justify-between items-start">
                     <div className="flex items-center gap-2">
@@ -101,11 +105,6 @@ export default function CommentBox(comment: CommentBoxProps) {
                     >
                         {showReplyForm ? 'Cancel' : 'Reply'}
                     </button>
-                    {comment.replyCount > 0 && (
-                        <span className="text-xs text-neutral dark:text-slate-300">
-                            {comment.replyCount} {comment.replyCount === 1 ? 'reply' : 'replies'}
-                        </span>
-                    )}
                 </div>
                 
                 {/* Reply form (shown when Reply clicked) */}
@@ -134,13 +133,16 @@ export default function CommentBox(comment: CommentBoxProps) {
                     </div>
                 )}
                 
-                {/* Show replies button - ONLY if replyCount > 0 */}
+                {/* Show replies button - Tertiary Button */}
                 {!showReplies && !isLoadingReplies && comment.replyCount > 0 && (
                     <button
                         onClick={handleShowReplies}
-                        className="mt-4 text-xs text-violet-600 dark:text-violet-500 hover:underline"
+                        className="mt-4 text-xs text-brand-tertiary hover:text-brand-tertiary-hover dark:text-brand-tertiary
+                                 dark:hover:text-brand-tertiary-hover hover:underline transition-colors
+                                 flex items-center gap-1"
                     >
                         Show {comment.replyCount} {comment.replyCount === 1 ? 'reply' : 'replies'}
+                        <MExpandMore fontSize="inherit" />
                     </button>
                 )}
                 

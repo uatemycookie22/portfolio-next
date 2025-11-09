@@ -33,8 +33,6 @@ export async function sendEmailToOwner(
 
     let errorReason = ''
 
-    console.log({ senderEmail, message })
-
     try {
         const subject = `New contact submission from ${senderEmail}`
         const htmlBody = `

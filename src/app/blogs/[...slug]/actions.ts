@@ -85,3 +85,27 @@ export async function loadReplies(
     }
 }
 
+export async function loadMoreComments(
+    blogId: string,
+    lastEvaluatedKey?: Record<string, any>
+): Promise<{comments: any[], lastEvaluatedKey?: Record<string, any>, hasMore: boolean}> {
+    try {
+        const {getComments} = await import('@services/comments-service');
+        const result = await getComments({
+            blogId,
+            depth: 0,
+            limit: 10,
+            lastEvaluatedKey
+        });
+        
+        return {
+            comments: result.comments,
+            lastEvaluatedKey: result.lastEvaluatedKey,
+            hasMore: result.hasMore
+        };
+    } catch (err) {
+        console.error('[loadMoreComments] Error:', err);
+        return {comments: [], hasMore: false};
+    }
+}
+
