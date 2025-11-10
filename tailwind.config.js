@@ -49,7 +49,7 @@ module.exports = {
             '--tw-prose-pre-bg': theme('colors.slate[900]'),
             '--tw-prose-th-borders': theme('colors.slate[300]'),
             '--tw-prose-td-borders': theme('colors.slate[200]'),
-            '--tw-prose-invert-body': theme('colors.slate[200]'),
+            '--tw-prose-invert-body': theme('colors.slate[300]'),
             '--tw-prose-invert-headings': theme('colors.white'),
             '--tw-prose-invert-lead': theme('colors.slate[300]'),
             '--tw-prose-invert-links': theme('colors.violet[500]'),
@@ -65,6 +65,39 @@ module.exports = {
             '--tw-prose-invert-pre-bg': 'rgb(0 0 0 / 50%)',
             '--tw-prose-invert-th-borders': theme('colors.slate[600]'),
             '--tw-prose-invert-td-borders': theme('colors.slate[700]'),
+            a: {
+              color: theme('colors.slate[800]'),
+              'text-decoration': 'none',
+              'text-decoration-color': theme('colors.violet[500]'),
+              '&:hover': {
+                color: theme('colors.violet[700]'),
+                'background-position': '0% 100%',
+              },
+
+              'background-image': `linear-gradient(to right, theme('colors.violet[500]') 50%, theme('colors.slate[400]') 50%)`,
+              'background-size': '200% 2px',
+              'background-repeat': 'no-repeat',
+              'background-position': '100% 100%',
+              'transition': 'background-position .3s, color .6s',
+            },
+          },
+        },
+        invert: {
+          css: {
+            a: {
+              color: theme('colors.slate[300]'),
+              'text-decoration': 'none',
+              '&:hover': {
+                color: theme('colors.violet[500]'),
+                'background-position': '0% 100%',
+              },
+
+              'background-image': `linear-gradient(to right, theme('colors.violet[500]') 50%, theme('colors.violet.inactive') 50%)`,
+              'background-size': '200% 2px',
+              'background-repeat': 'no-repeat',
+              'background-position': '100% 100%',
+              'transition': 'background-position .3s, color .6s',
+            },
           },
         },
       }),
@@ -145,6 +178,8 @@ module.exports = {
         500: colors.violet["500"],
         600: colors.violet["600"],
         700: colors.violet["700"],
+        950: colors.violet["950"],
+        inactive: '#4f3680'
       },
       
       // Add global colors
@@ -161,6 +196,7 @@ module.exports = {
       // Keep existing colors for backward compatibility
       slate: {
         300: colors.slate["300"],
+        400: colors.slate["400"],
         800: colors.slate["800"],
       },
       neutral: colors.neutral["500"],
