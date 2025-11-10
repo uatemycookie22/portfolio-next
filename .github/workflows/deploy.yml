@@ -11,7 +11,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY: blogapplicationstack-containerblogrepositorybd4123b3-nallmzmpvnia
+  ECR_REPOSITORY: blogapplicationstack-containerblogrepositorybd4123b3-0glvsv7xfffe
   IMAGE_TAG: ${{ github.sha }}
   LIGHTSAIL_SERVICE_NAME: blog-container-service
   LIGHTSAIL_CONTAINER_NAME: blog
