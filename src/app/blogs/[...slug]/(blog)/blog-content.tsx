@@ -12,7 +12,7 @@ export default async function BlogContent({ children }: BlogContentProps) {
     });
     
     return (
-        <div className="prose prose-violet dark:prose-invert max-w-none w-full">
+        <div className="prose prose-violet prose-sm md:prose-base dark:prose-invert max-w-none w-full">
             {content}
         </div>
     );

@@ -66,7 +66,10 @@ module.exports = {
             '--tw-prose-invert-th-borders': theme('colors.slate[600]'),
             '--tw-prose-invert-td-borders': theme('colors.slate[700]'),
             a: {
-              color: theme('colors.slate[800]'),
+              color: theme('colors.violet[500]'),
+              '@media (min-width: theme("screens.md"))': {
+                color: theme('colors.slate[800]'),
+              },
               'text-decoration': 'none',
               'text-decoration-color': theme('colors.violet[500]'),
               '&:hover': {
@@ -74,7 +77,7 @@ module.exports = {
                 'background-position': '0% 100%',
               },
 
-              'background-image': `linear-gradient(to right, theme('colors.violet[500]') 50%, theme('colors.slate[400]') 50%)`,
+              'background-image': `linear-gradient(to right, theme('colors.violet[500]') 50%, theme('colors.violet[300]') 50%)`,
               'background-size': '200% 2px',
               'background-repeat': 'no-repeat',
               'background-position': '100% 100%',
@@ -85,7 +88,11 @@ module.exports = {
         invert: {
           css: {
             a: {
-              color: theme('colors.slate[300]'),
+              color: theme('colors.violet[500]'),
+              '@media (min-width: theme("screens.md"))': {
+                color: theme('colors.slate[300]'),
+              },
+              
               'text-decoration': 'none',
               '&:hover': {
                 color: theme('colors.violet[500]'),
