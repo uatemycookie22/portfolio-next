@@ -2,8 +2,7 @@
 import {ReactNode} from "react";
 import NavBarComponent from "@components/NavBar/NavBarComponent";
 import Providers from "./main-provider";
-import '../../public/build/tailwind.css';
-import '@styles/globals.scss'
+import '../../styles/input.css';
 import ClientBackground from "@components/ClientBackground/ClientBackground";
 import {Metadata} from "next";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
@@ -35,8 +34,8 @@ export default async function RootLayout({ children }: {
 
 	return (
 		<html lang="en"
-			  className="scroll-smooth bg-zinc-200 dark">
-		<body className="bg-transparent min-w-[330px]">
+			  className="scroll-smooth bg-zinc-200">
+		<body className="bg-transparent min-w-[330px] text-gray-900 dark:text-gray-100">
 		<AppRouterCacheProvider>
 			<Providers>
 				<ClientBackground>

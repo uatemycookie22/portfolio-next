@@ -3,12 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "AWS_PROFILE=personal-website concurrently \"tailwindcss --input ./styles/input.css --output ./public/build/tailwind.css --watch\" \"next dev --turbopack\"",
-    "build": "AWS_PROFILE=personal-website concurrently \"postcss styles/input.css -o public/build/tailwind.css\" \"next build\"",
+    "dev": "AWS_PROFILE=personal-website next dev --turbopack",
+    "build": "AWS_PROFILE=personal-website next build",
     "start": "next start --keepAliveTimeout 70000",
-    "lint": "next lint",
-    "build:css": "postcss styles/input.css -o public/build/tailwind.css",
-    "dev:css": "tailwindcss --input ./styles/input.css --output ./public/build/tailwind.css --watch"
+    "lint": "next lint"
   },
   "dependencies": {
     "@aws-sdk/client-cost-explorer": "^3.926.0",
@@ -37,14 +35,14 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-markdown": "^10.1.0",
-    "sass": "^1.56.2",
     "sharp": "^0.32.1",
-    "tailwindcss": "^3.4.18",
+    "@tailwindcss/postcss": "^4.1.17",
+    "@tailwindcss/typography": "^0.5.16",
+    "tailwindcss": "^4.1.17",
     "typescript": "^5.9.3",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.19",
     "@types/uuid": "^10.0.0",
     "concurrently": "^7.6.0"
   }

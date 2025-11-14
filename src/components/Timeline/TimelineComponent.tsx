@@ -9,7 +9,6 @@ import {
 	Stepper,
 	Typography
 } from "@mui/material";
-import styles from './TimelineComponent.module.scss';
 import ColorlibConnector from "../ColorlibConnector/ColorlibConnectorComponent";
 import CareerStepIcon from "../ColorstepIcon/CareerStepIconComponent";
 import {IntersectionRefsContext} from "../../context/intersection-refs";
@@ -66,7 +65,7 @@ export default function TimelineComponent({timelineItems}: TimelineProps) {
 	return (<>
 		<Box color="secondary" sx={{ maxWidth: 200, maxHeight: 1500, position: 'absolute' }}>
 
-		<Stepper orientation="vertical" activeStep={activeStepIndex} className={styles.Stepper} connector={<ColorlibConnector/>}>
+		<Stepper orientation="vertical" activeStep={activeStepIndex} className="mt-[5vh] hidden sm:block" connector={<ColorlibConnector/>}>
 			{timelineComponents}
 		</Stepper>
 

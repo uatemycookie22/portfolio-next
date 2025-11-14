@@ -41,13 +41,13 @@ export default function Hero(props: HeroProps) {
 							<div className="relative top-10 h-16 flex gap-x-3">
 								<a href={props.social.github} target="_blank" rel="noreferrer" aria-label="My GitHub">
 									<MGitHub fontSize='large' className={`text-neutral
-									hover:cursor-pointer transition-duration-300i
+									hover:cursor-pointer transition-all duration-300
 									text-hover-purple
 									`} />
 								</a>
 								<a href={props.social.linkedin} target="_blank" rel="noreferrer" aria-label="My LinkedIn">
 									<MLinkedIn fontSize='large' className={`text-neutral 
-										hover:cursor-pointer transition-duration-300i
+										hover:cursor-pointer transition-all duration-300
 									  text-hover-purple
 									`} />
 								</a>

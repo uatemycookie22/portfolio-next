@@ -15,7 +15,7 @@ export function SendButton(props: Parameters<typeof Button>[0] & { isLoading?: b
 	}
 
 	return <button {...buttonProps} type="submit" className={`self-start flex gap-2 border rounded px-4 py-1
-		text-lg items-center
+		text-lg items-center transition-all duration-300 cursor-pointer
 		text-black dark:text-white border-black dark:border-neutral
 		border-hover-purple text-hover-purple
 	`}>

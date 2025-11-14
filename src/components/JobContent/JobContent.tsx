@@ -7,7 +7,7 @@ import useFirstIntersection from "../../hooks/first-intersection";
 type ImageProps = Parameters<typeof Image>[0]
 type TechnologyProps = Pick<ImageProps, 'src' | 'alt'>
 const Technology = ({src, alt}: TechnologyProps) => (<>
-	<span className="flex flex-col relative group items-center">
+	<span className="flex relative group items-center">
 		<Image width={35} height={35} alt={alt}
 		       className="object-contain rounded-md w-[35px] h-[35px]"
 			   loading="lazy"
@@ -45,10 +45,10 @@ export default function JobContent(props: JobContentProps) {
 		<span className="h-full w-full place-items-start pb-4  grid grid-rows-[0.5fr_0.5fr]">
 
 			<span className="ml-auto left-auto right-0 mt-2 mr-2 absolute">
-				<a className="text-secondary text-left" href={props.companyHref} target="_blank" rel="noreferrer"
+				<a className="text-gray-600 text-left" href={props.companyHref} target="_blank" rel="noreferrer"
 				   aria-label="Company website in new tab"
 				   onClick={e => e.stopPropagation()}>
-					<MNewTabIcon className="text-secondary text-3xl"/>
+					<MNewTabIcon className="text-gray-600 text-3xl"/>
 				</a>
 			</span>
 
@@ -64,19 +64,19 @@ export default function JobContent(props: JobContentProps) {
 			</span>
 			<span className="flex flex-col items-start mb-0 relative rounded-lg h-full w-full">
 
-				<h3 className="text-xl font-bold text-secondary ml-6 mt-10">{props.companyName}</h3>
+				<h3 className="text-xl font-bold text-gray-800 ml-6 mt-10">{props.companyName}</h3>
 				<span className="p-6 block items-start justify-start">
-					<p className="text-secondary text-left">Location: {props.location}</p>
-					<p className="text-secondary text-left">Duration: {props.duration}</p>
-					<p className="text-secondary text-left">Position: {props.position}</p>
+					<p className="text-gray-700 text-left">Location: {props.location}</p>
+					<p className="text-gray-700 text-left">Duration: {props.duration}</p>
+					<p className="text-gray-700 text-left">Position: {props.position}</p>
 				</span>
-				<h3 className={`text-xl font-bold text-secondary ml-6
+				<h3 className={`text-xl font-bold text-gray-800 ml-6
 				${props.technologiesUsed ? '' : 'hidden'} 
 					`}>
 					Technologies used
 				</h3>
 				<span className={`p-6 flex flex-wrap gap-x-4 gap-y-2
-					${workIntersected ? "inline" : "hidden"}
+					${workIntersected ? "" : "hidden"}
 				`}>
 					{technologies}
 				</span>
