@@ -1,6 +1,5 @@
 import Image from "next/image";
 import {ReactNode} from "react";
-import styles from './ImageTextComponent.module.scss'
 
 interface ImageTextProps {
 	src: string,
@@ -9,13 +8,13 @@ interface ImageTextProps {
 
 export default function ImageText({src, children}: ImageTextProps) {
 	return (<>
-		<div className={styles.container}>
+		<div className="flex items-center gap-[10px]">
 			<Image
 				alt="" src={src}
 				width={40}
 				height={40}
 			/>
-			<span>
+			<span className="text-2xl">
 				{children}
 			</span>
 		</div>

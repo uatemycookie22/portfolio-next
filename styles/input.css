@@ -1,72 +1,250 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Custom breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 780px;
+  --breakpoint-lg: 1150px;
+
+  /* Global color definitions */
+  --color-brand-50: oklch(0.98 0.02 292);
+  --color-brand-100: oklch(0.96 0.05 292);
+  --color-brand-200: oklch(0.92 0.09 292);
+  --color-brand-300: oklch(0.85 0.14 292);
+  --color-brand-400: oklch(0.73 0.21 292);
+  --color-brand-500: oklch(0.62 0.25 292);
+  --color-brand-600: oklch(0.51 0.26 292);
+  --color-brand-700: oklch(0.43 0.22 292);
+  --color-brand-800: oklch(0.36 0.18 292);
+  --color-brand-900: oklch(0.30 0.15 292);
+  --color-brand-950: oklch(0.20 0.11 292);
+
+  /* UNT Green */
+  --color-unt-primary: #00853e;
+
+  /* Violet colors for compatibility */
+  --color-violet-300: oklch(0.85 0.14 292);
+  --color-violet-400: oklch(0.73 0.21 292);
+  --color-violet-500: oklch(0.62 0.25 292);
+  --color-violet-600: oklch(0.51 0.26 292);
+  --color-violet-700: oklch(0.43 0.22 292);
+  --color-violet-950: oklch(0.20 0.11 292);
+  --color-violet-inactive: #4f3680;
+
+  /* Emerald */
+  --color-emerald: oklch(0.70 0.17 162);
+
+  /* Semantic background colors */
+  --color-brand-primary: var(--color-brand-600);
+  --color-brand-primary-hover: var(--color-brand-700);
+  --color-brand-secondary: transparent;
+  --color-brand-secondary-hover: transparent;
+  --color-neutral-primary: white;
+  --color-neutral-secondary: oklch(0.985 0.002 247);
+
+  /* Semantic border colors */
+  --color-border-brand-primary: var(--color-brand-600);
+  --color-border-brand-secondary: oklch(0.52 0.015 256);
+  --color-border-brand-secondary-hover: var(--color-brand-600);
+  --color-border-neutral-primary: oklch(0.87 0.013 256);
+  --color-border-neutral-secondary: oklch(0.93 0.008 256);
+  --color-neutral: oklch(0.60 0.013 256);
+
+  /* Semantic text colors */
+  --color-text-brand-onprimary: white;
+  --color-text-brand-onsecondary: black;
+  --color-text-brand-tertiary: var(--color-brand-500);
+  --color-text-brand-tertiary-hover: var(--color-brand-600);
+  --color-text-neutral-primary: oklch(0.18 0.02 256);
+  --color-text-neutral-secondary: oklch(0.52 0.015 256);
+  --color-text-neutral-tertiary: oklch(0.60 0.013 256);
+  --color-text-neutral-emphasis: oklch(0.15 0.02 256);
+  --color-text-success: oklch(0.55 0.15 145);
+  --color-text-error: oklch(0.55 0.22 27);
+  --color-text-warning: oklch(0.65 0.18 85);
+
+  /* Custom animations */
+  --animate-shimmer: shimmer 2s infinite;
+  --animate-pulse: pulse 2s infinite;
+  --animate-blink: blink 1.5s linear infinite;
+
+  /* Transition properties */
+  --transition-size: width, height;
+  --transition-position: left, top, height, right;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
 
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
-.pulse {
-    animation: pulse 2s infinite;
+@keyframes blink {
+  0% { opacity: 0; }
+  50% { opacity: 0.7; }
+  100% { opacity: 0; }
 }
 
-@layer components {
-    .transform-perspective {
-        transform: scale(1.05);
-        backface-visibility: hidden;
-        filter: blur(0px);
-        -webkit-font-smoothing: subpixel-antialiased;
-    }
+/* Custom utility classes */
+@utility transform-perspective {
+  transform: scale(1.05);
+  backface-visibility: hidden;
+  filter: blur(0px);
+  -webkit-font-smoothing: subpixel-antialiased;
+}
 
-    .page-section {
-        @apply py-20 px-4;
-    }
+@utility pulse {
+  animation: pulse 2s infinite;
+}
 
-    .section-heading {
-        @apply text-3xl font-bold mb-8 text-center;
-    }
+@utility page-section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 
-    .transition-duration-300 {
-        @apply transition duration-300 transition-all;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    }
+@utility section-heading {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+}
 
-    .transition-duration-300i {
-        @apply transition duration-300 transition-all !important;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
-    }
+@utility transition-duration-300 {
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    .filter-purple {
-        filter: brightness(40%) sepia(0.4) saturate(25) hue-rotate(238deg);
-    }
+@utility filter-purple {
+  filter: brightness(40%) sepia(0.4) saturate(25) hue-rotate(238deg);
+}
 
-    .text-hover-purple {
-        @apply dark:hover:text-violet-600 hover:text-violet-600;
-    }
+@utility text-hover-purple {
+  transition: color 300ms ease;
+  &:hover {
+    color: var(--color-violet-600);
+  }
+}
 
-    .border-hover-purple {
-        @apply dark:hover:border-violet-600 hover:border-violet-600;
-    }
+@utility border-hover-purple {
+  &:hover {
+    border-color: var(--color-violet-600);
+  }
+}
 
-    .border-hover-fade-purple {
-        @apply dark:hover:border-violet-600/40 dark:border-violet-600/0
-        hover:border-violet-600/40 border-violet-600/0
-        border-b-2;
-    }
+@utility border-hover-fade-purple {
+  border-bottom-width: 2px;
+  border-color: transparent;
+  &:hover {
+    border-color: rgb(124 58 237 / 0.4);
+  }
+}
 
-    .text-whitei {
-        @apply text-white !important;
-    }
+/* Base styles for light and dark mode */
+html {
+  color: oklch(0.18 0.02 256);
+  background-color: #e4e4e7;
 }
 
 html.dark {
-    background-color: #18181b;
+  color: oklch(0.87 0.013 256);
+  background-color: #18181b;
+}
+
+/* Fade in animation classes */
+.fadeIn {
+  opacity: 0;
+  transition: all 1s;
+}
+
+.fadeIn.show {
+  opacity: 1;
+  transition: all 1s;
+}
+
+.blink {
+  animation: blink 1.5s linear infinite;
+}
+
+/* Typography plugin configuration for prose-violet using @utility directive */
+@utility prose-violet {
+  --tw-prose-body: oklch(0.31 0.02 256);
+  --tw-prose-headings: oklch(0.18 0.02 256);
+  --tw-prose-lead: oklch(0.39 0.015 256);
+  --tw-prose-links: var(--color-violet-600);
+  --tw-prose-bold: oklch(0.18 0.02 256);
+  --tw-prose-counters: oklch(0.52 0.015 256);
+  --tw-prose-bullets: oklch(0.69 0.009 256);
+  --tw-prose-hr: oklch(0.87 0.013 256);
+  --tw-prose-quotes: oklch(0.18 0.02 256);
+  --tw-prose-quote-borders: oklch(0.87 0.013 256);
+  --tw-prose-captions: oklch(0.39 0.015 256);
+  --tw-prose-code: var(--color-violet-600);
+  --tw-prose-pre-code: oklch(0.93 0.008 256);
+  --tw-prose-pre-bg: oklch(0.18 0.02 256);
+  --tw-prose-th-borders: oklch(0.87 0.013 256);
+  --tw-prose-td-borders: oklch(0.93 0.008 256);
+  --tw-prose-invert-body: oklch(0.87 0.013 256);
+  --tw-prose-invert-headings: white;
+  --tw-prose-invert-lead: oklch(0.87 0.013 256);
+  --tw-prose-invert-links: var(--color-violet-500);
+  --tw-prose-invert-bold: white;
+  --tw-prose-invert-counters: oklch(0.69 0.009 256);
+  --tw-prose-invert-bullets: oklch(0.52 0.015 256);
+  --tw-prose-invert-hr: oklch(0.39 0.015 256);
+  --tw-prose-invert-quotes: oklch(0.93 0.008 256);
+  --tw-prose-invert-quote-borders: oklch(0.39 0.015 256);
+  --tw-prose-invert-captions: oklch(0.69 0.009 256);
+  --tw-prose-invert-code: var(--color-violet-400);
+  --tw-prose-invert-pre-code: oklch(0.87 0.013 256);
+  --tw-prose-invert-pre-bg: rgb(0 0 0 / 50%);
+  --tw-prose-invert-th-borders: oklch(0.52 0.015 256);
+  --tw-prose-invert-td-borders: oklch(0.39 0.015 256);
+}
+
+.prose-violet a {
+  color: var(--color-violet-500);
+  text-decoration: none;
+  background-image: linear-gradient(to right, var(--color-violet-500) 50%, var(--color-violet-300) 50%);
+  background-size: 200% 2px;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  transition: background-position .3s, color .6s;
+}
+
+@media (min-width: 780px) {
+  .prose-violet a {
+    color: oklch(0.31 0.02 256);
+  }
+}
+
+.prose-violet a:hover {
+  color: var(--color-violet-700);
+  background-position: 0% 100%;
+}
+
+.dark .prose-violet a {
+  color: var(--color-violet-500);
+  background-image: linear-gradient(to right, var(--color-violet-500) 50%, var(--color-violet-inactive) 50%);
+}
+
+@media (min-width: 780px) {
+  .dark .prose-violet a {
+    color: oklch(0.87 0.013 256);
+  }
+}
+
+.dark .prose-violet a:hover {
+  color: var(--color-violet-500);
+  background-position: 0% 100%;
 }

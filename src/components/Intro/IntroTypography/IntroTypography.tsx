@@ -1,12 +1,10 @@
 'use client';
 
 import {Button, ButtonProps, styled, Typography} from "@mui/material";
-import colors from "/styles/colors.module.scss";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import animations from "/styles/animations.module.scss";
 
 const ColorButton = styled(Button)<ButtonProps>(() => ({
-	color: colors.mainTextColor,
+	color: 'white',
 	backgroundColor: 'rgba(255,255,255,0)',
 	'&:hover': {
 		backgroundColor: 'rgba(255,255,255,.04)',
@@ -24,9 +22,9 @@ export default function IntroTypography() {
 
 			<Typography sx={{color: 'text.primary', fontSize: '1.75rem'}} variant="body2" gutterBottom>
 				I am a computer science student at the
-
-				<span style={{color: colors.untPrimary}}> University of North Texas. </span>
-
+	
+				<span style={{color: '#00853e'}}> University of North Texas. </span>
+	
 			</Typography>
 
 			<Typography sx={{color: 'text.primary', fontSize: '1.5rem'}} variant="body2" gutterBottom>
@@ -55,7 +53,7 @@ export default function IntroTypography() {
 					<ArrowDownwardIcon sx={{
 						color: 'secondary.main',
 						fontSize: '3rem',
-					}} className={animations.blink} />
+					}} className="blink" />
 
 				</ColorButton>
 
