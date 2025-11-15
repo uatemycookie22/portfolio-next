@@ -15,7 +15,9 @@ const nextConfig = {
     '@icons': {
       transform: '@icons/{{member}}',
     },
-
+    '@mui/material': {
+      transform: '@mui/material/{{member}}',
+    },
     '@mui/icons-material': {
       transform: '@mui/icons-material/{{member}}',
     }

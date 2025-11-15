@@ -6,7 +6,7 @@ import {toDateString} from "@utils/parse-date";
 import {formatAndEncode} from "@utils/formatters";
 import {calculateReadingTime} from "@utils/reading-time";
 import {listBlogs} from "../../../services/blog-service";
-import {MExpandMore, MVisibility} from "@components/WrappedIcons";
+import {ChevronDown, Eye} from "lucide-react";
 
 // ISR: Revalidate every hour
 export const revalidate = 3600
@@ -91,7 +91,7 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
                         {/* Right: Views + Tag */}
                         <div className="flex items-center gap-3 text-[11px] text-neutral dark:text-slate-400">
                             <span className="flex items-center gap-1">
-                                <MVisibility sx={{fontSize: 14}} />
+                                <Eye size={14} />
                                 {views > 0 ? views : 0}
                             </span>
                             {tags.length > 0 && (

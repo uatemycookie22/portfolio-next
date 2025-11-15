@@ -54,6 +54,11 @@
   100% { opacity: 0; }
 }
 
+@keyframes shrink-width {
+  0% { width: 100%; }
+  100% { width: 0%; }
+}
+
 /* Custom utility classes */
 @utility transform-perspective {
   transform: scale(1.05);
@@ -116,6 +121,10 @@
 
 @utility pulse {
   animation: pulse 2s infinite;
+}
+
+@utility animate-shrink-width {
+  animation: shrink-width linear forwards;
 }
 
 @utility page-section {

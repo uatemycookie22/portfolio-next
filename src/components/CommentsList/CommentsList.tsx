@@ -3,7 +3,7 @@ import { useState, useTransition } from 'react';
 import CommentBox from '@components/Comment/comment';
 import CommentSubmission from '@components/CommentSubmission/comment-submission';
 import CommentSkeleton from '@components/CommentSkeleton/CommentSkeleton';
-import { MExpandMore } from '@components/WrappedIcons';
+import { ChevronDown } from 'lucide-react';
 import { Comment } from '@services/comments-service';
 
 interface CommentsListProps {
@@ -127,7 +127,7 @@ export default function CommentsList({
                                      disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             Read more comments
-                            <MExpandMore fontSize="small" />
+                            <ChevronDown fontSize="small" />
                         </button>
                     </div>
                     

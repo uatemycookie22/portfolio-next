@@ -5,15 +5,22 @@ import { useAtom } from 'jotai';
 import { darkModeAtom } from '../../atoms/dark-mode';
 
 export default function ThemeManager() {
-    const [darkMode] = useAtom(darkModeAtom);
+    const [darkMode, setDarkmode] = useAtom(darkModeAtom);
 
+    // Initialize theme preference on mount
     useEffect(() => {
-        const html = document.documentElement;
-        if (darkMode) {
-            html.classList.add('dark');
+        if (!darkMode || window.matchMedia('(prefers-color-scheme: light)').matches) {
+            document.documentElement.classList.remove('dark');
+            setDarkmode(false);
         } else {
-            html.classList.remove('dark');
+            document.documentElement.classList.add('dark');
+            setDarkmode(true);
         }
+    }, []); // eslint-disable-line
+
+    // Apply theme changes
+    useEffect(() => {
+        document.documentElement.classList.toggle('dark', darkMode);
     }, [darkMode]);
 
     return null;

@@ -2,9 +2,9 @@
 import {TextArea} from "../TextArea/TextArea";
 import {TextField} from "../TextField/TextField";
 import {SendButton} from "../EmailSubmission/SendButton";
-import {Alert, Slide, Snackbar} from "@mui/material";
+import {Toast} from "../Toast/Toast";
 import {ErrorMessage} from "../ErrorMessage/ErrorMessage";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 const successMessage = 'Comment posted successfully!'
 
@@ -21,6 +21,9 @@ export default function CommentSubmission({ recipientEmail, blogId, postComment,
 	const [authorName, setAuthorName] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
 	const [statusMessage, setStatusMessage] = useState('')
+	
+	const handleCloseStatus = useCallback(() => setStatusMessage(''), []);
+	const handleCloseError = useCallback(() => setErrorMessage(''), []);
 
 
 	return (<>
@@ -72,52 +75,22 @@ export default function CommentSubmission({ recipientEmail, blogId, postComment,
 
 					<SendButton isLoading={false}/>
 
-					<Snackbar
-						open={!!statusMessage}
+					<Toast 
+						open={!!statusMessage} 
+						onClose={handleCloseStatus}
+						severity="success"
 						autoHideDuration={6000}
-						anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
-						TransitionComponent={Slide}
-						onClose={() => {
-							setStatusMessage('')
-						}}
 					>
+						{statusMessage}
+					</Toast>
 
-						<Alert
-							severity="success"
-
-							onClose={() => {
-								setStatusMessage('')
-							}}
-						>
-							{statusMessage}
-						</Alert>
-
-
-					</Snackbar>
-
-					<Snackbar
-						open={!!errorMessage}
-						autoHideDuration={5000}
-						anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
-						TransitionComponent={Slide}
-						onClose={() => {
-							setErrorMessage('')
-						}}
+					<Toast 
+						open={!!errorMessage} 
+						onClose={handleCloseError}
+						severity="error"
 					>
-
-						<Alert
-							severity="error"
-
-							onClose={() => {
-								setErrorMessage('')
-							}}
-						>
-							<ErrorMessage errorMessage={errorMessage} recipientEmail={recipientEmail} />
-						</Alert>
-
-
-					</Snackbar>
-
+						<ErrorMessage errorMessage={errorMessage} recipientEmail={recipientEmail} />
+					</Toast>
 
 				</form>
 

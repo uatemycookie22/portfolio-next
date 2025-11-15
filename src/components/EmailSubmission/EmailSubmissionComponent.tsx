@@ -1,12 +1,12 @@
 'use client';
 
-import {useState, useActionState, useEffect} from "react";
-import {Alert, Slide, Snackbar} from "@mui/material";
+import {useState, useActionState, useEffect, useCallback} from "react";
 import {SendButton} from "./SendButton";
 import {TextArea} from "../TextArea/TextArea";
 import {TextField} from "../TextField/TextField";
 import {ErrorMessage} from "../ErrorMessage/ErrorMessage";
 import {sendEmailToOwner} from "src/app/actions";
+import {Toast} from "../Toast/Toast";
 
 const successMessage = 'Email received.'
 
@@ -38,10 +38,12 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 			setStatusMessage('')
 		}
 	}, [state])
+	
+	const handleCloseStatus = useCallback(() => setStatusMessage(''), []);
+	const handleCloseError = useCallback(() => setErrorMessage(''), []);
 
 	return (
 		<>
-
 			<form className="flex flex-col gap-y-8 w-full text-whitei"
 				  name="contact"
 				  action={formAction}
@@ -64,8 +66,6 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 						   aria-label={'Email address'}
 				/>
 
-
-
 				<TextArea value={emailMessage}
 						   onChange={(e) => setMessage(e.target.value)}
 						   id="outlined-multiline-static"
@@ -78,56 +78,25 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 
 				<SendButton isLoading={isPending}/>
 
-				<Snackbar
-					open={!!statusMessage}
+				<Toast 
+					open={!!statusMessage} 
+					onClose={handleCloseStatus}
+					severity="success"
 					autoHideDuration={6000}
-					anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
-					TransitionComponent={Slide}
-					onClose={() => {
-						setStatusMessage('')
-					}}
 				>
+					{statusMessage}
+				</Toast>
 
-					<Alert
-						severity="success"
-
-						onClose={() => {
-							setStatusMessage('')
-						}}
-					>
-						{statusMessage}
-					</Alert>
-
-
-				</Snackbar>
-
-				<Snackbar
-					open={!!errorMessage}
-					autoHideDuration={5000}
-					anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
-					TransitionComponent={Slide}
-					onClose={() => {
-						setErrorMessage('')
-					}}
+				<Toast 
+					open={!!errorMessage} 
+					onClose={handleCloseError}
+					severity="error"
 				>
-
-					<Alert
-						severity="error"
-
-						onClose={() => {
-							setErrorMessage('')
-						}}
-					>
-						<ErrorMessage errorMessage={errorMessage} recipientEmail={recipientEmail} />
-					</Alert>
-
-
-				</Snackbar>
-
+					<ErrorMessage errorMessage={errorMessage} recipientEmail={recipientEmail} />
+				</Toast>
 
 			</form>
-
 		</>
-			)
+	)
 }
 

@@ -3,9 +3,7 @@ import {ReactNode} from "react";
 import NavBarComponent from "@components/NavBar/NavBarComponent";
 import Providers from "./main-provider";
 import '../../styles/input.css';
-import ClientBackground from "@components/ClientBackground/ClientBackground";
 import {Metadata} from "next";
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 
 export const metadata: Metadata = {
 	metadataBase: new URL('https://blog-container-service.vcyrgcw67m07y.us-east-1.cs.amazonlightsail.com'),
@@ -36,22 +34,17 @@ export default async function RootLayout({ children }: {
 		<html lang="en"
 			  className="scroll-smooth bg-zinc-200">
 		<body className="bg-transparent min-w-[330px] text-gray-900 dark:text-gray-100">
-		<AppRouterCacheProvider>
-			<Providers>
-				<ClientBackground>
-					<header>
-						<nav>
-							<NavBarComponent contact={contact} />
-						</nav>
-					</header>
+		<Providers>
+			<header>
+				<nav>
+					<NavBarComponent contact={contact} />
+				</nav>
+			</header>
 
-					<main>
-						{children}
-					</main>
-				</ClientBackground>
-
-			</Providers>
-		</AppRouterCacheProvider>
+			<main>
+				{children}
+			</main>
+		</Providers>
 		</body>
 		</html>
 	);

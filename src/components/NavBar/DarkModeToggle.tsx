@@ -1,6 +1,6 @@
 import {useAtom} from "jotai";
 import {darkModeAtom} from "../../atoms/dark-mode";
-import {MDay, MNight} from "../WrappedIcons";
+import {Sun, Moon} from "lucide-react";
 import {ButtonHTMLAttributes, DetailedHTMLProps} from "react";
 import useLoaded from "../../hooks/loaded";
 
@@ -22,7 +22,7 @@ export default function ToggleDarkmodeButton({onClick, ...rest}: Omit<DarkModeTo
 			onClick={onClick}
 			{...rest}
 		>
-			{darkMode ? <MNight/> : <MDay/>}
+			{darkMode ? <Moon/> : <Sun/>}
 		</button>
 	)
 }
