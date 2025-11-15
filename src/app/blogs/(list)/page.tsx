@@ -42,16 +42,16 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
                           hover:border-violet-500 dark:hover:border-violet-500
                           hover:bg-violet-50/50 dark:hover:bg-violet-950/30
                           transition-all duration-200 rounded-lg">
-            <Link href={`/blogs/${id}/${encodedTitle}`} className="flex gap-4 p-3 group h-[150px]">
+            <Link href={`/blogs/${id}/${encodedTitle}`} className="flex flex-col sm:flex-row gap-4 p-3 group sm:h-[150px]">
                 {/* Cover Image */}
-                <div className="relative w-32 h-32 flex-shrink-0 rounded overflow-hidden 
+                <div className="relative w-full sm:w-32 h-48 sm:h-32 flex-shrink-0 rounded overflow-hidden 
                               bg-zinc-200 dark:bg-zinc-800">
                     <Image 
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                         src={imageUrl}
                         alt={title}
                         fill
-                        sizes="128px"
+                        sizes="(max-width: 640px) 100vw, 128px"
                         quality={75}
                     />
                 </div>
@@ -72,7 +72,7 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
                     </div>
 
                     {/* Bottom row: Author + Metadata */}
-                    <div className="flex items-center justify-between gap-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 mt-3">
                         {/* Left: Author with avatar */}
                         <div className="flex items-center gap-2">
                             <div className="w-6 h-6 rounded-full bg-violet-600 flex items-center justify-center 
@@ -95,7 +95,7 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
                                 {views > 0 ? views : 0}
                             </span>
                             {tags.length > 0 && (
-                                <span className="text-violet-600 dark:text-violet-400 hidden sm:inline">
+                                <span className="text-violet-600 dark:text-violet-400">
                                     {tags[0]}
                                 </span>
                             )}
