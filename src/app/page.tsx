@@ -25,6 +25,13 @@ export default async function HomePage() {
 
 	return (
 		<>
+			<a className="
+			link-underline link-hover-slide dark:link-underline-dark 
+			text-accent hover:text-accent-hover
+			md:text-content md:dark:text-neutral-primary
+			">
+				Fully customizable link
+			</a>
 			<IntroComponent {...content.intro} />
 			<EducationComponents {...content.education} />
 			<Experience {...content.experience} />
