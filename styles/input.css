@@ -237,3 +237,26 @@ html.dark {
 .prose-violet a {
   @apply link-underline link-hover-slide dark:link-underline-dark text-accent hover:text-accent-hover md:text-content md:dark:text-neutral-primary;
 }
+
+.prose code::before,
+.prose code::after {
+  content: "";
+}
+
+.prose code {
+  background-color: theme(colors.neutral.200);
+  color: var(--color-brand-tertiary);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+
+  @variant dark {
+    background-color: theme(colors.zinc.800);
+  }
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+}
