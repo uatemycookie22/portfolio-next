@@ -236,6 +236,20 @@ html.dark {
 
 .prose-violet a {
   @apply link-underline link-hover-slide dark:link-underline-dark text-accent hover:text-accent-hover md:text-content md:dark:text-neutral-primary;
+  background: none;
+}
+
+.prose-violet a > span:first-child {
+  background: linear-gradient(90deg, var(--color-brand-tertiary) 50%, theme(colors.violet.300) 50%) no-repeat 100% 100% / 200% 2px;
+  transition: background-position .3s;
+}
+
+.prose-violet a:hover > span:first-child {
+  background-position: 0% 100%;
+}
+
+.dark .prose-violet a > span:first-child {
+  background-image: linear-gradient(90deg, var(--color-brand-tertiary) 50%, var(--color-brand-muted) 50%);
 }
 
 .prose code::before,
