@@ -32,7 +32,7 @@ export default async function RootLayout({ children }: {
 
 	return (
 		<html lang="en"
-			  className="scroll-smooth bg-zinc-200">
+			  className="scroll-smooth bg-zinc-200 dark">
 		<body className="bg-transparent min-w-[330px] text-gray-900 dark:text-gray-100">
 		<Providers>
 			<header>

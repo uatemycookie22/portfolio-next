@@ -9,13 +9,11 @@ export default function ThemeManager() {
 
     // Initialize theme preference on mount
     useEffect(() => {
-        if (!darkMode || window.matchMedia('(prefers-color-scheme: light)').matches) {
-            document.documentElement.classList.remove('dark');
-            setDarkmode(false);
-        } else {
-            document.documentElement.classList.add('dark');
-            setDarkmode(true);
-        }
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const shouldBeDark = darkMode ?? prefersDark;
+        
+        document.documentElement.classList.toggle('dark', shouldBeDark);
+        setDarkmode(shouldBeDark);
     }, []); // eslint-disable-line
 
     // Apply theme changes

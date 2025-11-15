@@ -9,7 +9,7 @@ export default function BlogsLoading() {
         {[1, 2, 3].map((i) => (
           <article
             key={i}
-            className="border border-zinc-300 dark:border-zinc-700 rounded-lg"
+            className="border border-zinc-400 dark:border-zinc-700 rounded-lg"
           >
             <div className="flex flex-col sm:flex-row gap-4 p-3 sm:h-[150px]">
               {/* Image skeleton */}

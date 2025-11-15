@@ -38,7 +38,7 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
     const encodedTitle = formatAndEncode(title)
 
     return (
-        <article className="border border-zinc-300 dark:border-zinc-700
+        <article className="border border-zinc-400 dark:border-zinc-700
                           hover:border-violet-500 dark:hover:border-violet-500
                           hover:bg-violet-50/50 dark:hover:bg-violet-950/30
                           transition-all duration-200 rounded-lg">
