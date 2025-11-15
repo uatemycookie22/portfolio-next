@@ -7,9 +7,7 @@ import {formatAndEncode} from "@utils/formatters";
 import {calculateReadingTime} from "@utils/reading-time";
 import {listBlogs} from "../../../services/blog-service";
 import {ChevronDown, Eye} from "lucide-react";
-
-// ISR: Revalidate every hour
-export const revalidate = 3600
+import {cacheLife} from "next/cache";
 
 export const metadata: Metadata = {
     title: `Blogs | Lysander H`,
@@ -108,6 +106,9 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
 }
 
 export default async function BlogsPage() {
+    'use cache'
+    cacheLife('hours')
+    
     const blogItems = await listBlogs({limit: 10})
 
     return (
