@@ -1,5 +1,5 @@
 'use client';
-import {MPerson, MExpandMore} from "../WrappedIcons";
+import {User, ChevronDown} from "lucide-react";
 import {toDateString} from "@utils/parse-date";
 import {useState, useTransition} from "react";
 import CommentSubmission from "../CommentSubmission/comment-submission";
@@ -85,7 +85,7 @@ export default function CommentBox(comment: CommentBoxProps) {
 
                 <div className="flex justify-between items-start">
                     <div className="flex items-center gap-2">
-                        <MPerson fontSize={'large'} className="inline" />
+                        <User fontSize={'large'} className="inline" />
                         <div className="flex flex-col">
                             <span className="font-semibold">{comment.authorName}</span>
                             <span className="text-xs text-neutral dark:text-slate-300">{date}</span>
@@ -181,7 +181,7 @@ export default function CommentBox(comment: CommentBoxProps) {
                                  flex items-center gap-1"
                     >
                         Show {comment.replyCount} {comment.replyCount === 1 ? 'reply' : 'replies'}
-                        <MExpandMore fontSize="inherit" />
+                        <ChevronDown fontSize="inherit" />
                     </button>
                 )}
                 

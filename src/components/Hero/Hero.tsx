@@ -1,7 +1,7 @@
 import Image from "next/image";
 import SimpleCard from "../SimpleCard/SimpleCard";
 import {ReactNode} from "react";
-import {MDnsIcon, MEmojiEventsIcon, MAccessTimeIcon, MGitHub, MLinkedIn} from '../WrappedIcons'
+import {Server, Trophy, Clock, Github, Linkedin} from 'lucide-react'
 import PdfButton from "../PdfButton/PdfButton";
 
 const CardHeading = ({ children, heading }: { children?: ReactNode, heading?: string }) => (<>
@@ -40,13 +40,13 @@ export default function Hero(props: HeroProps) {
 							</PdfButton>
 							<div className="relative top-10 h-16 flex gap-x-3">
 								<a href={props.social.github} target="_blank" rel="noreferrer" aria-label="My GitHub">
-									<MGitHub fontSize='large' className={`text-neutral
+									<Github className={`text-black dark:text-white
 									hover:cursor-pointer transition-all duration-300
 									text-hover-purple
 									`} />
 								</a>
 								<a href={props.social.linkedin} target="_blank" rel="noreferrer" aria-label="My LinkedIn">
-									<MLinkedIn fontSize='large' className={`text-neutral 
+									<Linkedin className={`text-black dark:text-white 
 										hover:cursor-pointer transition-all duration-300
 									  text-hover-purple
 									`} />
@@ -82,7 +82,7 @@ export default function Hero(props: HeroProps) {
 										<SimpleCard>
 
 											<CardHeading heading={props.facts[0].heading}>
-												<MAccessTimeIcon className="text-4xl text-black dark:text-white" />
+												<Clock className="text-4xl text-black dark:text-white" />
 											</CardHeading>
 
 											<p className="text-base text-slate-800 dark:text-slate-300">
@@ -94,7 +94,7 @@ export default function Hero(props: HeroProps) {
 										<SimpleCard>
 
 											<CardHeading heading={props.facts[1].heading}>
-												<MDnsIcon className="text-4xl text-black dark:text-white" />
+												<Server className="text-4xl text-black dark:text-white" />
 											</CardHeading>
 
 											<p className="text-slate-800 text-base dark:text-slate-300">
@@ -106,7 +106,7 @@ export default function Hero(props: HeroProps) {
 										<SimpleCard>
 
 											<CardHeading heading={props.facts[2].heading}>
-												<MEmojiEventsIcon className="text-4xl text-black dark:text-white" />
+												<Trophy className="text-4xl text-black dark:text-white" />
 											</CardHeading>
 
 											<p className="text-slate-800 text-base dark:text-slate-300">

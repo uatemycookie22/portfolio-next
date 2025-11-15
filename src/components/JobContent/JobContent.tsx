@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import {MNewTabIcon} from "../WrappedIcons";
+import {ExternalLink} from "lucide-react";
 import useFirstIntersection from "../../hooks/first-intersection";
 
 type ImageProps = Parameters<typeof Image>[0]
@@ -48,7 +48,7 @@ export default function JobContent(props: JobContentProps) {
 				<a className="text-gray-600 text-left" href={props.companyHref} target="_blank" rel="noreferrer"
 				   aria-label="Company website in new tab"
 				   onClick={e => e.stopPropagation()}>
-					<MNewTabIcon className="text-gray-600 text-3xl"/>
+					<ExternalLink className="text-gray-600 text-3xl"/>
 				</a>
 			</span>
 

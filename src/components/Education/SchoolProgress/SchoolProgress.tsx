@@ -1,4 +1,4 @@
-import {MGraduation} from "../../WrappedIcons";
+import {GraduationCap} from "lucide-react";
 import useFirstIntersection from "../../../hooks/first-intersection";
 
 interface SchoolProgressProps {
@@ -18,7 +18,7 @@ const SchoolProgress = ({percentage}: SchoolProgressProps) => {
 					     ref={barRef}>
 					</div>
 				</div>
-				<MGraduation className="text-black dark:text-white"/>
+				<GraduationCap className="text-black dark:text-white"/>
 			</div>
 		</>
 		)

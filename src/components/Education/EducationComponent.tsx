@@ -3,7 +3,7 @@
 import SchoolProgress from "./SchoolProgress/SchoolProgress";
 import useFirstIntersection from "../../hooks/first-intersection";
 import Image from "next/image";
-import {MLocation, MMajor} from "../WrappedIcons";
+import {MapPin, GraduationCap} from "lucide-react";
 
 interface EducationProps {
 	school: string
@@ -46,14 +46,14 @@ export default function EducationComponents({ location, major, school, graduatio
 
 										<ul className="mt-6">
 											<li className="flex gap-2">
-												<MMajor className="inline" />
+												<GraduationCap className="inline" />
 												<p className="inline mb-4">
 													{major}
 												</p>
 											</li>
 
 											<li className="flex gap-2">
-												<MLocation className=" inline" />
+												<MapPin className=" inline" />
 												<p className="mb-4">{location}</p>
 											</li>
 

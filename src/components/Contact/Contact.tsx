@@ -1,5 +1,5 @@
 import EmailSubmission from "../EmailSubmission/EmailSubmissionComponent";
-import {MDocument, MDownload, MEmail} from "../WrappedIcons";
+import {FileText, Download, Mail} from "lucide-react";
 import StaticForm from "../StaticForms/StaticForms";
 import contactjson from "public/contact.json"
 
@@ -23,7 +23,7 @@ export default async function Contact() {
 								</h3>
 
 								<div className="text-black dark:text-white flex gap-2">
-									<MEmail />
+									<Mail />
 									<a href={`mailto:${email}`} className="hover:underline">{email}</a>
 								</div>
 
@@ -43,7 +43,7 @@ export default async function Contact() {
 
 							<div className="flex flex-col gap-2">
 								<div className="text-black dark:text-white flex gap-2">
-									<MDocument />
+									<FileText />
 									<a href={`/assets/files/lh-resume.pdf`}
 									   target="_blank"
 									   className="hover:underline"
@@ -52,7 +52,7 @@ export default async function Contact() {
 										Resume
 									</a>
 									<a href={`/assets/files/lh-resume.pdf`} aria-label={"Lysander's Resume"} download>
-										<MDownload fontSize="small" />
+										<Download size={20} />
 									</a>
 								</div>
 							</div>

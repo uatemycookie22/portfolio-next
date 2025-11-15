@@ -11,7 +11,7 @@ export const ErrorMessage = ({errorMessage, recipientEmail}: { errorMessage: str
         {errorMessage}
 
         &nbsp;If the issue persists, please email me directly at <span>
-				<a className="text-blue-800 underline" href={`mailto:${recipientEmail}`}>
+				<a className="text-gray-900 dark:text-gray-100 underline font-semibold" href={`mailto:${recipientEmail}`}>
 					{recipientEmail}
 				</a>
 			</span>
