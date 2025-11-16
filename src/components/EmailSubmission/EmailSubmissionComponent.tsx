@@ -19,11 +19,17 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 	const [emailMessage, setMessage] = useState('')
 	const [errorMessage, setErrorMessage] = useState('')
 	const [statusMessage, setStatusMessage] = useState('')
+	const [mountTime, setMountTime] = useState(0)
 	
 	const [state, formAction, isPending] = useActionState<{response?: string, error?: string} | null, FormData>(
 		sendEmailToOwner,
 		null
 	)
+	
+	// Capture mount time on client
+	useEffect(() => {
+		setMountTime(Date.now())
+	}, [])
 	
 	// Handle server action response
 	useEffect(() => {
@@ -53,6 +59,26 @@ export default function EmailSubmission({recipientEmail}: EmailSubmissionProps) 
 			>
 
 				<h1 className="text-black dark:text-white font-semibold">Send me a message</h1>
+
+				<input
+					type="text"
+					name="website"
+					autoComplete="off"
+					tabIndex={-1}
+					style={{
+						position: 'absolute',
+						left: '-9999px',
+						width: '1px',
+						height: '1px'
+					}}
+					aria-hidden="true"
+				/>
+
+				<input
+					type="hidden"
+					name="timestamp"
+					value={mountTime}
+				/>
 
 				<TextField value={emailContact}
 						   onChange={(e) => setEmail(e.target.value)}

@@ -30,6 +30,10 @@ export async function sendEmailToOwner(
     const recipientEmail = "hernandezlysander22+lysanderh-contact@gmail.com"
     const senderEmail = formData.get('email') as string
     const message = formData.get('body') as string
+    const honeypot = formData.get('website') as string
+    const timestamp = formData.get('timestamp') as string
+    
+    const timeElapsed = timestamp ? Math.round((Date.now() - parseInt(timestamp)) / 1000) : 'unknown'
 
     let errorReason = ''
 
@@ -40,6 +44,8 @@ export async function sendEmailToOwner(
                 <body>
                     <h2>New Contact Form Submission</h2>
                     <p><strong>From:</strong> ${senderEmail}</p>
+                    <p><strong>Honeypot:</strong> ${honeypot || '(empty)'}</p>
+                    <p><strong>Time (seconds):</strong> ${timeElapsed}</p>
                     <p><strong>Message:</strong></p>
                     <p>${message}</p>
                 </body>
