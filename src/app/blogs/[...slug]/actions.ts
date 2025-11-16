@@ -1,7 +1,7 @@
 'use server';
 
 import {invalidPrompt} from "@utils/api-constants";
-import {revalidatePath} from "next/cache";
+import {revalidatePath, revalidateTag, updateTag} from "next/cache";
 import {
     createComment,
     deleteComment as deleteCommentService,
@@ -43,7 +43,7 @@ export async function postComment(
         });
 
         // Revalidate the blog page to show new comment
-        revalidatePath(`/blogs/${blogId}`);
+        revalidateTag(`comments-${blogId}`, {});
 
         return {response: 'Comment posted successfully', error: undefined};
     } catch (err) {
@@ -77,8 +77,8 @@ export async function deleteCommentAction(
             return {error: 'Failed to delete comment'};
         }
         
-        // Revalidate to show changes
-        revalidatePath(`/blogs/${blogId}`);
+        // Revalidate comments cache to show deletion
+        updateTag(`comments-${blogId}`)
         
         return {success: true};
     } catch (error) {

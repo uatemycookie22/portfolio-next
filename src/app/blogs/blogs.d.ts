@@ -26,6 +26,7 @@ export interface Blog {
     
     // Metrics
     views: number
+    commentCount?: number
 }
 
 export interface BlogListResult {

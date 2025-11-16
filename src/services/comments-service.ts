@@ -37,6 +37,20 @@ export async function deleteComment(blogId: string, sk: string): Promise<boolean
         });
 
         await docClient.send(command);
+        
+        // Decrement blog post's commentCount
+        await docClient.send(new UpdateCommand({
+            TableName: BLOG_POSTS_TABLE,
+            Key: {
+                id: blogId,
+                sk: 'METADATA'
+            },
+            UpdateExpression: 'ADD commentCount :dec',
+            ExpressionAttributeValues: {
+                ':dec': -1
+            }
+        }));
+        
         console.log('[deleteComment] Deleted comment:', {blogId, sk});
         return true;
     } catch (error) {
@@ -115,6 +129,19 @@ export async function createComment(params: {
             Item: {
                 id: blogId,
                 ...comment
+            }
+        }));
+        
+        // Increment blog post's commentCount
+        await docClient.send(new UpdateCommand({
+            TableName: BLOG_POSTS_TABLE,
+            Key: {
+                id: blogId,
+                sk: 'METADATA'
+            },
+            UpdateExpression: 'ADD commentCount :inc',
+            ExpressionAttributeValues: {
+                ':inc': 1
             }
         }));
         

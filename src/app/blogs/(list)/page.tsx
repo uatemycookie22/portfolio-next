@@ -6,7 +6,7 @@ import {toDateString} from "@utils/parse-date";
 import {formatAndEncode} from "@utils/formatters";
 import {calculateReadingTime} from "@utils/reading-time";
 import {listBlogs} from "../../../services/blog-service";
-import {ChevronDown, Eye} from "lucide-react";
+import {ChevronDown, MessageCircle} from "lucide-react";
 import {cacheLife} from "next/cache";
 
 export const metadata: Metadata = {
@@ -25,7 +25,7 @@ export const viewport: Viewport = {
 }
 
 function BlogListing({blogRecord} : { blogRecord: Blog }) {
-    const { title, publishedDate, excerpt, id, coverImage, author, content, tags, views } = blogRecord
+    const { title, publishedDate, excerpt, id, coverImage, author, content, tags, commentCount } = blogRecord
 
     const imageUrl = coverImage
         ? (coverImage.startsWith('https://') ? coverImage : `/assets/${coverImage}`)
@@ -86,11 +86,11 @@ function BlogListing({blogRecord} : { blogRecord: Blog }) {
                             </div>
                         </div>
 
-                        {/* Right: Views + Tag */}
+                        {/* Right: Comments + Tag */}
                         <div className="flex items-center gap-3 text-[11px] text-neutral dark:text-slate-400">
                             <span className="flex items-center gap-1">
-                                <Eye size={14} />
-                                {views > 0 ? views : 0}
+                                <MessageCircle size={14} />
+                                {commentCount || 0}
                             </span>
                             {tags.length > 0 && (
                                 <span className="text-violet-600 dark:text-violet-400">

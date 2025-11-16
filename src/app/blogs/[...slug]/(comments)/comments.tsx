@@ -1,7 +1,7 @@
 import {postComment, likeComment, deleteCommentAction} from "../actions";
 import {getComments} from "@services/comments-service";
 import CommentsList from "@components/CommentsList/CommentsList";
-import {cacheLife} from "next/cache";
+import {cacheLife, cacheTag} from "next/cache";
 
 export interface CommentsProps {
 	blogId: string
@@ -12,6 +12,7 @@ export interface CommentsProps {
 export default async function Comments({ blogId, recipientEmail, adminPassword }: CommentsProps) {
 	'use cache'
 	cacheLife('minutes')
+	cacheTag(`comments-${blogId}`)
 	
 	// Fetch initial batch of top-level comments (depth 0) with pagination
 	const result = await getComments({ blogId, depth: 0, limit: 10 });
