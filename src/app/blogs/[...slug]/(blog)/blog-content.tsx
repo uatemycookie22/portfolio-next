@@ -1,5 +1,12 @@
 import ReactMarkdown, { MarkdownAsync } from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import remarkAlert from 'remark-github-blockquote-alert'
+import rehypeHighlight from 'rehype-highlight'
+import { common } from 'lowlight'
+import dockerfile from 'highlight.js/lib/languages/dockerfile'
 import { ExternalLink } from 'lucide-react'
+import 'remark-github-blockquote-alert/alert.css'
+import 'highlight.js/styles/github-dark.css'
 
 export interface BlogContentProps {
     children: string
@@ -9,6 +16,8 @@ export interface BlogContentProps {
 export default async function BlogContent({ children }: BlogContentProps) {
     // MarkdownAsync returns a Promise<ReactElement> - perfect for Suspense
     const content = await MarkdownAsync({
+        remarkPlugins: [remarkGfm, remarkAlert],
+        rehypePlugins: [[rehypeHighlight, { languages: { ...common, dockerfile } }]],
         children: children.replace(/\\n/g, "\n"),
         components: {
             a: ({ href, children, ...props }) => {
