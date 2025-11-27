@@ -4,6 +4,21 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.lysanderh.com',
+          },
+        ],
+        destination: 'https://lysanderh.com/:path*',
+        permanent: true,
+      },
+    ]
+  },
   reactStrictMode: true,
   cacheComponents: true,
   turbopack: {},
